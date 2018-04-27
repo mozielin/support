@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Request;
+use App\company_industry;
+
+class IndustryController extends Controller
+{
+    
+    public function index(){
+		$industry = company_industry::orderBy('company_industry_id','desc')->paginate(5);
+		
+		return view('company_industry.company_industry_all',['industry' => $industry]);
+	}
+
+	 public function view($company_industry_id){
+                $industry = company_industry::find($company_industry_id);
+                return view('company_industry.company_industry_view',['industry' => $industry]);
+        }
+
+	public function create(){
+		return view('company_industry.company_industry_create');
+	}
+	
+	 protected function validator(array $data)
+        {
+       	    return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        }
+
+	
+
+
+	public function store(Request $request){
+
+	$industry = new company_industry;
+	$industry -> company_industry_name = $request->name;
+	$industry -> save();
+	return redirect()->action('IndustryController@index');
+
+	}
+
+	public function edit($company_industry_id){
+		$industry = company_industry::find($company_industry_id);
+		return view('company_industry.company_industry_edit',['industry' => $industry]);
+	}
+
+	
+	public function update(Request $request,$id){
+	$industry = company_industry::find($id);
+        $industry -> company_industry_name = $request->name;
+        $industry -> save();
+        return redirect()->action('industryController@index');
+
+
+	}
+
+
+	public function delete($id){
+
+		company_industry::destroy($id);
+		return redirect()->action('industryController@index');
+        }
+
+}
