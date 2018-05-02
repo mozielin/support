@@ -706,7 +706,7 @@ return view('license.license_create_by');
         
         $modarray = array();
         //$resultarray[$mac] = array('test'=>'123') ;
-        
+        //return dd($string);
         foreach ($string as $key) {
             //return dd($key);
            $headline = sscanf($key,"%3s",$head); 
@@ -804,6 +804,7 @@ return view('license.license_create_by');
                     ->with('lic_name',$lic_name)
                     ->with('contract',$contract)
                     ->with('start',$start)
+                    ->with('clientlimit',$clientlimit)
                     ->with('end',$end)
                     ->with('test',$test)
                     ->with('filename',$filename)
@@ -887,6 +888,15 @@ return view('license.license_create_by');
         \Session::flash('flash_message', '新增成功!');
 
         return redirect()->action('CompanyController@view',$request->company_id);
+    }
+
+    public function cancel($company_id,$filepath)
+    {
+
+        Storage::delete("/public/license/$filepath");
+
+        return redirect()->action('LicController@upload_by',$company_id);
+
     }
 
 

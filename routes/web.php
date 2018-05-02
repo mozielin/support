@@ -426,6 +426,8 @@ Route::group(['prefix'=>'license','middleware' => ['permission:license_view']], 
 
       Route::post('update/{id}', 'LicController@update')->name('license_update');
 
+      Route::get('cancel/{company_id}/{filepath}', 'LicController@cancel')->name('license_cancel');
+
       Route::name('license_delete')->get('/delete/{id}', 'LicController@delete');
 
       Route::name('license_filedelete')->get('/filedelete/{id}','LicController@filedelete');
