@@ -136,8 +136,7 @@
 
             <label for="lic" class="col-md-2 control-label"></label>
             <div class="col-md-4" style="text-align:center;">
-<<<<<<< HEAD
-=======
+
             @if($clientlimit > $contract->contract_quantity)
               <div class="alert alert-danger ">
                   <ul>
@@ -145,7 +144,7 @@
                   </ul>
               </div>
             @endif
->>>>>>> fe4af8ba627ebc8d9bc529c6f948308f3e7c7efd
+
             <input type="hidden" id="origin_file" name="origin_file" value="{{$filepath}}">
             <input type="hidden" id="builder_id" name="builder_id" value="{{Auth::user()->id}}">
             </div>
@@ -161,11 +160,9 @@
 
             <label for="lic" class="col-md-2 control-label"></label>
             <div class="col-md-4" style="text-align:center;">
-<<<<<<< HEAD
-            <button type="button" class="btn btn-primary" onclick="history.back()">
-=======
+
             <button id="cancel" type="button" class="btn btn-primary" onclick="location.href='{{route('license_cancel',['id' => $company_id, 'filepath' => $filepath ])}}'">
->>>>>>> fe4af8ba627ebc8d9bc529c6f948308f3e7c7efd
+
                 重新上傳
             </button>
             <input type="hidden" id="builder_id" name="builder_id" value="{{Auth::user()->id}}">
@@ -279,17 +276,13 @@
               </div> 
 
               <div class="col-md-3 col-md-offset-5" style="text-align:center;">
-<<<<<<< HEAD
-                <button type="submit" class="btn btn-primary">
-                Submit
-                </button>
-=======
+
               @if($clientlimit <= $contract->contract_quantity)
                 <button type="submit" class="btn btn-primary">
                 Submit
                 </button>
               @endif
->>>>>>> fe4af8ba627ebc8d9bc529c6f948308f3e7c7efd
+
               </div>
             </div>
            
@@ -306,11 +299,7 @@
 
     </div>
   </div>     
-<<<<<<< HEAD
-=======
 
-
->>>>>>> fe4af8ba627ebc8d9bc529c6f948308f3e7c7efd
 <script type="text/javascript">
 $('#company_name').autocomplete({
 source : '{!!URL::route('license_auto') !!}',
@@ -331,8 +320,6 @@ $('#status_name').val(ui.item.status_name);
 </script>
 
 <script type="text/javascript">
-<<<<<<< HEAD
-=======
 
         $('#cancel').on('click',function(){
           $.post('/license/cancel' + {$num}, function(response) {
@@ -341,8 +328,6 @@ $('#status_name').val(ui.item.status_name);
           })
         })
 
-
->>>>>>> fe4af8ba627ebc8d9bc529c6f948308f3e7c7efd
        $().ready(function () {
        //radio點擊2次取消
            //請幫radioButton加入checkSelect='N' 的屬性，若是已被選取的加上checkSelect='Y'
