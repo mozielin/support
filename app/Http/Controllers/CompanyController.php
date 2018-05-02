@@ -65,16 +65,13 @@ class CompanyController extends Controller
 		$auth = Auth::user()->id;
 
 		$manager = manager::where('user_id','=',$auth)
-						  ->where('company_id','=',$company_id)->get();
+						  ->where('company_id','=',$company_id)->first();
 
-		//return dd($manager);
+		//return dd($manager->user_id);
 
-		if($manager->isEmpty()){
-			\Session::flash('flash_message', '權限不足!');
-        	return view('denied');
-		}
-        elseif(Entrust::hasRole('admin') || Entrust::hasRole('devenlope')) {
-			$company = company::join('plan','company.com_plan_id','=','plan.id')
+		if($manager != null || Entrust::hasRole('admin') || Entrust::hasRole('devenlope')){
+
+      $company = company::join('plan','company.com_plan_id','=','plan.id')
               ->join('company_types','company.com_type_id','=','company_types.id')
               ->join('company_area','company.company_area','=','company_area.id')
               ->join('company_industry','company.com_industry_id','=','company_industry.id')
@@ -84,44 +81,47 @@ class CompanyController extends Controller
               ->find($company_id);
 
               $sales = company::join('users','company.com_sales_id','=','users.id')
-              					->select('users.name','users.id')
-              					->find($company_id);
+                        ->select('users.name','users.id')
+                        ->find($company_id);
 
               $applicantnum = applicant::where('company_id','=',$company_id)->count();
               $applicant = applicant::where('company_id','=',$company_id)
-              						  ->orderBy('company_applicant.id','DESC')->get();
+                            ->orderBy('company_applicant.id','DESC')->get();
 
               $licensenum = license::where('company_id','=',$company_id)->count();
               $license = license::join('status','license.status_id','=','status.id')
                           ->select('license.*','status.status_name')
-              					  ->where('company_id','=',$company_id)
-              					  ->orderBy('license.id','DESC')->get();
+                          ->where('company_id','=',$company_id)
+                          ->orderBy('license.id','DESC')->get();
+
 
               $contractnum = contract::where('company_contract','=',$company_id)->count();
 
               $contract = contract::where('company_contract','=',$company_id)
-              					->join('plan','company_contract.contract_plan','=','plan.id')
+                        ->join('plan','company_contract.contract_plan','=','plan.id')
                                 ->join('status','company_contract.contract_status','=','status.id')
                                 ->select('company_contract.*','plan.plan_name','status.status_name')
                                 ->orderBy('company_contract.id','desc')->get();
-                                						
+                                            
               $contract_plan = contract::where('company_contract','=',$company_id)
-              						->join('plan','company_contract.contract_plan','=','plan.id')
-              						->orderBy('company_contract.contract_plan','DESC')->first();
-              		if($contract_plan==null){
-              			$contractplan = '尚未建立合約';
-              			
-              		}
-              		else{
-						        $contractplan = $contract_plan->plan_name;
-              		}
+                          ->join('plan','company_contract.contract_plan','=','plan.id')
+                          ->orderBy('company_contract.contract_plan','DESC')->first();
+                  if($contract_plan==null){
+                    $contractplan = '尚未建立合約';
+                    
+                  }
+                  else{
+                    $contractplan = $contract_plan->plan_name;
+                  }
+
 
 
               //return dd($contractplan);
 
               $servernum = server::where('company_server','=',$company_id)->count();
               $server = server::where('company_server','=',$company_id)
-              					->orderBy('company_server_info.id','DESC')->get();
+                        ->orderBy('company_server_info.id','DESC')->get();
+
 
               $managernum = manager::where('company_id','=',$company_id)->count();
               $manager = manager::where('company_id','=',$company_id)
@@ -131,19 +131,25 @@ class CompanyController extends Controller
 
            //return dd($company); 
            return view('company.company_view')
-           				->with('data',$company)
-           				->with('applicantnum',$applicantnum)
-           				->with('applicant',$applicant)
-           				->with('contract',$contract)
-           				->with('contractplan',$contractplan)
-           				->with('contractnum',$contractnum)
-           				->with('servernum',$servernum)
-           				->with('server',$server)
-           				->with('sales',$sales)
-           				->with('license',$license)
-           				->with('licensenum',$licensenum)
-                  		->with('manager',$manager)
-                  		->with('managernum',$managernum);
+                  ->with('data',$company)
+                  ->with('applicantnum',$applicantnum)
+                  ->with('applicant',$applicant)
+                  ->with('contract',$contract)
+                  ->with('contractplan',$contractplan)
+                  ->with('contractnum',$contractnum)
+                  ->with('servernum',$servernum)
+                  ->with('server',$server)
+                  ->with('sales',$sales)
+                  ->with('license',$license)
+                  ->with('licensenum',$licensenum)
+                      ->with('manager',$manager)
+                      ->with('managernum',$managernum);
+			
+		}
+    else{
+    			\Session::flash('flash_message', '權限不足!');
+              return view('denied');
+
         }
         
     }

@@ -212,9 +212,6 @@
             {{$applicantnum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             聯絡人列表</label>
-              @role('admin')
-              <a href="{{route('applicant_create_by',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>    
-              @endrole           
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -303,9 +300,6 @@
             {{$contractnum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             合約一覽</label>
-              @role('admin')
-              <a href="{{route('contract_create_by',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>    
-              @endrole           
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -393,9 +387,6 @@
             {{$licensenum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             Lic一覽</label>
-              @role('admin')
-              <a href="{{route('license_create_by',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>    
-              @endrole           
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -486,9 +477,6 @@
             {{$servernum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             Server一覽</label>
-              @role('admin') 
-              <a href="{{route('server_create_by',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>    
-              @endrole           
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -573,9 +561,6 @@
             {{$managernum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             相關人員一覽</label>
-               @role('admin') 
-              <a href="{{route('manager_edit',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-pencil"></i> 編輯 </button></a>    
-              @endrole
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
