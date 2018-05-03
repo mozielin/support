@@ -62,7 +62,7 @@
 				<div class="col-md-5 col-md-offset-1 right-side">
 				<!--右邊的新增區塊-->
 					@role('devenlope')
-						<button type="button"  class="btn btn-primary" style="float: left;" onclick="location.href='{{route('seadmin_lic')}}'"><i class="glyphicon glyphicon-info"></i> Lic分析 </button>
+						<button type="button"  class="btn btn-primary" style="float: left;" onclick="location.href='{{route('seadmin_uploadlic')}}'"><i class="glyphicon glyphicon-info"></i> Lic分析 </button>
 					@endrole
 
 					@role('devenlope')

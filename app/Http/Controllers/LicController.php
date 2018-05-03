@@ -770,10 +770,6 @@ return view('license.license_create_by');
                                 ->where('company_contract','=',$company_id)
                                 ->select('company_contract.*','plan.plan_name','status.status_name')
                                 ->orderBy('id','DESC')->first();
-      
-                $class = "Lic";
-                $status = status::where('status_class','=',$class)->get();
-                $function = functions::all();
                    
                 $plandata = plan::all();
                 $class = "Lic";

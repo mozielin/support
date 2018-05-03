@@ -323,7 +323,11 @@ Route::group(['prefix'=>'seadmin','middleware' => ['permission:seadmin_view']], 
 
       Route::name('tlcalert')->get('/tlcalert','ScheduleController@tlcalert');
 
-      Route::name('seadmin_lic')->get('/licscan','SeController@licscan'); 
+      Route::name('seadmin_lic')->post('/licscan','SeController@licscan'); 
+
+      Route::name('seadmin_uploadlic')->get('/uploadlic','SeController@uploadlic');
+
+      Route::name('seadmin_cancel')->get('/cancellic/{filepath}','SeController@cancellic');
       
       });
 

@@ -19,6 +19,7 @@ use App\seadmin;
 use View;
 
 use App\license;
+use App\functions;
 
 class SeController extends Controller
 {
@@ -345,5 +346,112 @@ class SeController extends Controller
     	
 
 	}
+
+	public function uploadlic(){
+		return view('seadmin.seadmin_uploadlic');
+	}
+
+	public function licscan(Request $request){
+
+        if ($request->hasFile('lic')){
+            //取得附件檔名
+            $filename = $request->lic->getClientOriginalName();
+                 
+            //附件檔名儲存
+         
+            $store = $request->file('lic')->store('public/license');
+            
+            $path = sscanf($store,'public/license/%s',$num1);
+
+            //return dd($num1);
+            
+        }
+
+        //測試用
+        $filepath = '../storage/app/public/license/lic.tpls';
+        $samplepath = '../storage/app/public/license/sample.tpls';
+        $sample2path = '../storage/app/public/license/sample2.tpls';
+
+        $file = file_get_contents('../storage/app/public/license/'.$num1);
+
+        //return dd($file);
+        $sample = file_get_contents($samplepath);
+        $sample2 = file_get_contents($sample2path);
+        $string = explode("><", $file);
+        $mac = 0;
+        $avmod = 0;
+        $servermac = array();
+        $modarray = array();
+
+        foreach ($string as $key) {
+            //return dd($key);
+           $headline = sscanf($key,"%3s",$head); 
+           //return dd($head);
+           
+            switch ($head) {
+                case 'All':
+                    $mac++;
+                    $server = sscanf($key,"%*[^>]>%[^<]",${'serverMac'.$mac});
+                    //return dd($serverMac1);
+
+                    //array_push($servermac,${'serverMac'.$mac});'
+                    $address['server'.$mac] =  ${'serverMac'.$mac};           
+                    break;
+
+                case 'Cli':
+                    $limit = sscanf($key,"%*[^>]>%[^<]",$clientlimit);
+                    //return dd($clientlimit);
+                    break;
+
+                case 'Beg':
+                    $begin = sscanf($key,"%*[^>]>%[^ ]",$start);
+                    //return dd($start);
+                    break;
+
+                case 'End':
+                    $stop = sscanf($key,"%*[^>]>%[^ ]",$end);
+                    //return dd($end);
+                    break;
+
+                case 'Ava':
+                    $avmod++;
+                    $mod = sscanf($key,$sample,${'modnum'.$avmod},${'start_mod'.$avmod},$nouse,${'end_mod'.$avmod});
+                    //return dd(${'modnum'.$avmod},${'start_mod'.$avmod},$nouse,${'end_mod'.$avmod});
+                    //array_push($modarray,${'modnum'.$avmod},${'start_mod'.$avmod},$nouse,${'end_mod'.$avmod});
+                    $modarray[] = array('mod'=>${'modnum'.$avmod},${'start_mod'.$avmod},${'end_mod'.$avmod});
+                    break;
+
+                default:
+                   
+                    break;
+           }    
+        }
+
+                $request->session()->put($num1, $address);
+                $function = functions::all();
+
+                sscanf($filename,"%[^.]",$lic_name);
+                //return($address);
+                return view('seadmin.seadmin_lic')
+                    ->with('function',$function)
+                    ->with('address',$address)
+                    ->with('modarray',$modarray)
+                    ->with('servermac',$servermac)
+                    ->with('lic_name',$lic_name)
+                    ->with('start',$start)
+                    ->with('clientlimit',$clientlimit)
+                    ->with('end',$end)
+                    ->with('filename',$filename)
+                    ->with('filepath',$num1);   
+    }
+
+    public function cancellic($filepath)
+    {
+
+        Storage::delete("/public/license/$filepath");
+
+        return redirect()->action('SeController@uploadlic');
+
+    }
 
 }
