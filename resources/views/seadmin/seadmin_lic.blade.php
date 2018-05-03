@@ -61,12 +61,12 @@
 
             <label for="start_at" class="col-md-2 control-label" style="text-align:right;">開始日期:</label>
               <div class="col-md-4">
-                <input type="text" id="start_at" name="start_at" class=" col-md-4 form-control" style="width: 100%;text-align: center;padding-left:0px;" value="{{$start}}" placeholder="請選擇開始日期" required readonly="">               
+                <input type="text" id="start_at" name="start_at" class=" col-md-4 form-control" style="width: 100%;text-align: center;padding-left:0px;" value="{{$start}}" placeholder="請選擇開始日期" required readonly>               
               </div>
             
             <label for="expir_at" class="col-md-2 control-label" style="text-align:right;">結束日期:</label>
               <div class="col-md-4">
-                <input type="text" id="expir_at" name="expir_at" class=" col-md-4 form-control" style="width: 100%;text-align: center;padding-left:0px;" value="{{$end}}" placeholder="請選擇結束日期" required readonly="">           
+                <input type="text" id="expir_at" name="expir_at" class=" col-md-4 form-control" style="width: 100%;text-align: center;padding-left:0px;" value="{{$end}}" placeholder="請選擇結束日期" required readonly>           
               </div>
 
           </div>
@@ -280,32 +280,7 @@ $('#status_name').val(ui.item.status_name);
 
        });
 
-        $(function(){
-            var today = new Date();
-            var tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
-
-            
-            $('#expir_at').datepicker();
-            $('#company_tlc_end').datepicker();
-
-            $('#company_tlc_start').datepicker({
-            //minDate: 0, //從今天後日期才可選
-              minDate: tomorrow, //從明天日期才可選
-                onSelect: function (dat, inst) {
-                  $('#company_tlc_end').datepicker('option', 'minDate', dat);
-                }
-            });
-
-            $('#start_at').datepicker({
-            //minDate: 0, //從今天後日期才可選
-              minDate: tomorrow, //從明天日期才可選
-                onSelect: function (dat, inst) {
-                  $('#expir_at').datepicker('option', 'minDate', dat);
-                }
-            });
-        });
-
-        $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' }); //全局設置日期格式
+      
 
 </script>
 

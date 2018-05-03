@@ -49,7 +49,7 @@
               <div class="form-group col-md-12 form-horizontal">         
               <label for="user_group_name" class="col-md-4 control-label" style="text-align:right;">用戶組別:</label>
               <div class="col-md-8">
-              <select name="user_group" class="form-control" style="width: 100%;text-align: center;padding-left:85px " required>
+              <select name="user_group" class="form-control" style="width: 100%;text-align: center;padding-left:95px " required>
                             @foreach ($user_group as $group)
                                 @if($group->id == $user->user_group)
                                     //如果迴圈的PLANID符合公司PLANID則預設選取
