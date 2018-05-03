@@ -91,6 +91,7 @@
              </div>
 
           </div>
+
     
           <div class="form-group col-md-12 form-horizontal" @if($clientlimit > $contract->contract_quantity){
           style="text-align:right;background-color:red;"
@@ -108,6 +109,7 @@
              </div>
 
           </div>
+
           
           <div class="form-group col-md-12 form-horizontal">
 
@@ -134,6 +136,7 @@
 
             <label for="lic" class="col-md-2 control-label"></label>
             <div class="col-md-4" style="text-align:center;">
+
             @if($clientlimit > $contract->contract_quantity)
               <div class="alert alert-danger ">
                   <ul>
@@ -141,6 +144,7 @@
                   </ul>
               </div>
             @endif
+
             <input type="hidden" id="origin_file" name="origin_file" value="{{$filepath}}">
             <input type="hidden" id="builder_id" name="builder_id" value="{{Auth::user()->id}}">
             </div>
@@ -156,7 +160,9 @@
 
             <label for="lic" class="col-md-2 control-label"></label>
             <div class="col-md-4" style="text-align:center;">
+
             <button id="cancel" type="button" class="btn btn-primary" onclick="location.href='{{route('license_cancel',['id' => $company_id, 'filepath' => $filepath ])}}'">
+
                 重新上傳
             </button>
             <input type="hidden" id="builder_id" name="builder_id" value="{{Auth::user()->id}}">
@@ -270,11 +276,13 @@
               </div> 
 
               <div class="col-md-3 col-md-offset-5" style="text-align:center;">
+
               @if($clientlimit <= $contract->contract_quantity)
                 <button type="submit" class="btn btn-primary">
                 Submit
                 </button>
               @endif
+
               </div>
             </div>
            
@@ -291,7 +299,6 @@
 
     </div>
   </div>     
-
 
 <script type="text/javascript">
 $('#company_name').autocomplete({
@@ -320,7 +327,6 @@ $('#status_name').val(ui.item.status_name);
             console.log(response);
           })
         })
-
 
        $().ready(function () {
        //radio點擊2次取消

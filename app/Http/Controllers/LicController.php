@@ -706,7 +706,7 @@ return view('license.license_create_by');
         
         $modarray = array();
         //$resultarray[$mac] = array('test'=>'123') ;
-        //return dd($string);
+
         foreach ($string as $key) {
             //return dd($key);
            $headline = sscanf($key,"%3s",$head); 
@@ -890,6 +890,7 @@ return view('license.license_create_by');
         return redirect()->action('CompanyController@view',$request->company_id);
     }
 
+
     public function cancel($company_id,$filepath)
     {
 
@@ -898,6 +899,7 @@ return view('license.license_create_by');
         return redirect()->action('LicController@upload_by',$company_id);
 
     }
+
 
 
 }//結束符號

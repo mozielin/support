@@ -122,6 +122,7 @@ class BulletinController extends Controller
 				foreach($customers as $key => $customer)
 				{
 					$output.=
+
 					'<div class= " panel panel-default test " style="cursor:pointer; width:100%;"'.'onclick="location.href=\'../bulletin/view/'.$customer->id.'\' ">'.
 
 						'<div class="panel-heading " style="height:100%;">'.				

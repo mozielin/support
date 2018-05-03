@@ -94,6 +94,7 @@ class CompanyController extends Controller
                           ->where('company_id','=',$company_id)
                           ->orderBy('license.id','DESC')->get();
 
+
               $contractnum = contract::where('company_contract','=',$company_id)->count();
 
               $contract = contract::where('company_contract','=',$company_id)
@@ -114,11 +115,13 @@ class CompanyController extends Controller
                   }
 
 
+
               //return dd($contractplan);
 
               $servernum = server::where('company_server','=',$company_id)->count();
               $server = server::where('company_server','=',$company_id)
                         ->orderBy('company_server_info.id','DESC')->get();
+
 
               $managernum = manager::where('company_id','=',$company_id)->count();
               $manager = manager::where('company_id','=',$company_id)
@@ -146,6 +149,7 @@ class CompanyController extends Controller
     else{
     			\Session::flash('flash_message', '權限不足!');
               return view('denied');
+
         }
         
     }

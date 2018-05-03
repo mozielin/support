@@ -212,7 +212,6 @@
             {{$applicantnum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             聯絡人列表</label>
-                       
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -300,7 +299,7 @@
           <label for="id" class="col-md-3" style="text-align:left; padding-top:10px">Total:
             {{$contractnum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
-            合約一覽</label>        
+            合約一覽</label>
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -387,7 +386,7 @@
           <label for="id" class="col-md-3" style="text-align:left; padding-top:10px">Total:
             {{$licensenum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
-            Lic一覽</label>         
+            Lic一覽</label>
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -477,7 +476,7 @@
           <label for="id" class="col-md-3" style="text-align:left; padding-top:10px;">Total:
             {{$servernum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
-            Server一覽</label>         
+            Server一覽</label>
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
