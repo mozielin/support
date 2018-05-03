@@ -60,10 +60,15 @@
     			</div>
 				</div>
 				<div class="col-md-5 col-md-offset-1 right-side">
-				<!--右邊的新增區塊-->	
+				<!--右邊的新增區塊-->
 					@role('devenlope')
-						<button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('tlcalert')}}'"><i class="glyphicon glyphicon-info"></i> test </button>
+						<button type="button"  class="btn btn-primary" style="float: left;" onclick="location.href='{{route('seadmin_lic')}}'"><i class="glyphicon glyphicon-info"></i> Lic分析 </button>
 					@endrole
+
+					@role('devenlope')
+						<button type="button"  class="btn btn-primary" onclick="location.href='{{route('tlcalert')}}'"><i class="glyphicon glyphicon-info"></i> test </button>
+					@endrole
+
 					<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='{{route('seadmin_create')}}'">
 					<i class="glyphicon glyphicon-plus"></i>
                 		新增

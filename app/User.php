@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Presenter\UserPresenter;
 
 
 class User extends Authenticatable
@@ -14,8 +15,11 @@ class User extends Authenticatable
     use Notifiable;
     use EntrustUserTrait; 
     use LogsActivity;
+  
 
     protected $table = 'users';
+
+    protected $presenter = 'App\Presenter\UserPresenter';
 
      //protected static $logOnlyDirty = true;
 

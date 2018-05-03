@@ -48,18 +48,13 @@
 
               <div class="form-group col-md-12 form-horizontal">         
               <label for="user_group_name" class="col-md-4 control-label" style="text-align:right;">用戶組別:</label>
-              <div class="col-md-8">
+              <div class="col-md-8">{{$user->getFull}}
               <select name="user_group" class="form-control" style="width: 100%;text-align:center;padding-left:82px " required>
+                            
                             @foreach ($user_group as $group)
-                                @if($group->id == $user->user_group)
-                                    //如果迴圈的PLANID符合公司PLANID則預設選取
-                                    <option selected="true" style="text-align:center;" value="{{$group->id}}">{{$group->user_group_name}}</option>
-                                @else
-                                    //如果不符合就跑一般選項
-                                    <option value="{{$group->id}}">{{$group->user_group_name}}</option>
-                                @endif                                 
+                                <h2></h2>                             
                             @endforeach
-                            </select>            
+              </select>            
               </div>
               </div>
 
