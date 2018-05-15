@@ -263,7 +263,7 @@
           <div class="container" style="width:100%;height:100%;margin-right:218px;">
             @foreach($applicant as $adata)
             <div class="panel panel-default test" style="cursor:pointer;" onclick="location.href='{{route('applicant_view', $adata->id)}}'">
-    <div class="panel-heading " style="height:100%;">       
+    <div class="panel-heading " style="height:100%;@if($adata->vip == '1')background-color: #4db1f3;@endif">       
       <div class="row" style="text-align:center;">
         <div class="col-md-1" style="border-right:1px solid black;border-left:1px solid black;">  
           {{$adata->id}}

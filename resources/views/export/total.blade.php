@@ -3,30 +3,38 @@
 	<table>
 		<tr>
 		    <!-- Headings -->
-		    <td><h1>Big title</h1></td>
-
+		    <td>序號</td>
+		    <td>公司方案</td>
+		    <td>建檔</td>
+		    <td>申請日</td>
+		    <td>客戶名稱</td>
+		    <td>所在地</td>
+		    <td>申請人姓名email</td>
+		    <td>公司產業別</td>
+		    <td>案件狀態</td>
 		    <!--  Bold -->
-		    <td><b>Bold cell</b></td>
-		    <td><strong>Bold cell</strong></td>
-
-		    <!-- Italic -->
-		    <td><i>Italic cell</i></td>
+		   
 	    </tr>
 
 	    @foreach($company as $cdata)
 	    	<tr>
 		    <!-- Headings -->
-			    <td><h1>{{$cdata->id}}</h1></td>
-
-			    <!--  Bold -->
-			    <td><b>{{$cdata->status_name}}</b></td>
-
-			    <td><strong>{{$cdata->created_at}}</strong></td>
-
+		    	<td>{{$cdata->id}}</td>
+		    	<td>{{$cdata->plan_name}}</td>
+			    <td>{{$cdata->name}}</td>
+			    <td>{{$cdata->company_create}}</td>
+			    <td>{{$cdata->company_name}}</td>
+			    <td>{{$cdata->area_name}}</td>
 			    <!-- Italic -->
-			    <td><i>{{$cdata->updated_at}}</i></td>
-
-			   
+			    <td>
+			    @foreach($applicant as $adata)
+			    	@if($adata->company_id == $cdata->id)		    	
+						{{$adata->applicant_name}}:{{$adata->company_applicant_email}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
+			    	@endif
+				@endforeach
+			   	</td>
+			   	<td>{{$cdata->company_industry_name}}</td>
+			   	<td>{{$cdata->status_name}}</td>
 		    </tr>
 	    @endforeach
 

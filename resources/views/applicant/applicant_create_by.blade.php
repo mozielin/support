@@ -96,14 +96,15 @@
 
         <div class="form-group col-md-12 form-horizontal">
 
-            <label for="company_applicant_email" class="col-md-2 control-label" style="text-align:right;"></label>
+            <label for="vip" class="col-md-2 control-label" style="text-align:right;">很重要嗎?</label>
             <div class="col-md-4">
-                 
+            <label for="vip" class="col-md-2 control-label" style="text-align:right;">YES</label>  
+              <input type="radio" name="vip" id="vip" class=" col-md-2 form-control ColorOrange" style="text-align: center; width:60%;"  value="1">    
             </div>
 
             <label for="applicant_note" class="col-md-2 control-label" style="text-align:right;">備註:</label>
             <div class="col-md-4">
-            <input type="textarea" name="applicant_note" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="" placeholder="有需要紀錄?" >                
+              <input type="textarea" name="applicant_note" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="" placeholder="有需要紀錄?" >                
             </div>
 
         </div>
@@ -152,5 +153,22 @@ $('#company_EIN').val(ui.item.EIN);
 
 }
 });
+
+      $().ready(function () {
+          //radio點擊2次取消
+           //請幫radioButton加入checkSelect='N' 的屬性，若是已被選取的加上checkSelect='Y'
+           $('input[type=radio]').click(function () {
+               
+               if ($(this).attr('checkSelect') == 'Y') {
+                   $(this).attr('checked', false);
+                   $(this).attr('checkSelect', 'N');
+               }
+               else {
+                   $(this).attr('checked', true);
+                   $(this).attr('checkSelect', 'Y');
+               }
+           });
+
+       });
 </script>
 @endsection

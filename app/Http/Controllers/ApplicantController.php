@@ -26,7 +26,8 @@ class ApplicantController extends Controller
 		$applicant = applicant::join('company','company_applicant.company_id','=','company.id')
 								->select('company_applicant.*','company.company_name')
 								->orderBy('company_applicant.id','desc')->paginate(5);
-		return view('applicant.applicant_all',['applicant' => $applicant]); 
+        $vip = 0;
+		return view('applicant.applicant_all',['applicant' => $applicant,'vip' => $vip]); 
 	}
 
 	public function view($id){
@@ -122,6 +123,9 @@ class ApplicantController extends Controller
             }
             if ($request->has('applicant_note')) {
                 $data->applicant_note = $request->applicant_note;
+            }
+            if ($request->has('vip')) {
+                $data->vip = $request->vip;
             }
             $data->save();
 
@@ -232,7 +236,87 @@ class ApplicantController extends Controller
                         '</div>'.       
                     '</div>';
                                      
-                }
+                }   
+                    
+                    return Response($output);
+                    
+            }else
+            {
+                
+                    $output.="No Data";
+
+                        return Response($output);
+                //return dd("NO");
+                //return Response()->json(['no'=>'Not found']);
+            }   
+        }
+    } 
+
+    public function vip(Request $request){
+
+        if($request->ajax())
+        {
+            $output="";
+
+            //$customers=patch::all()->paginate(10);
+
+            $auth = Auth::id();
+
+            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope')){
+
+                    $customers = applicant::join('company', 'company_applicant.company_id','=', 'company.id')
+                                  ->select('company_applicant.*','company.company_name')
+                                  ->where('company_applicant.vip','=','1')
+                                  ->orderBy('company_applicant.id','desc')
+                                  ->get();
+            }
+            else{
+
+                    $customers = applicant::join('company', 'company_applicant.company_id','=', 'company.id')
+                                  ->join('company_user','company_user.company_id','=','company.id')
+                                  ->where('company_user.user_id','=',$auth)
+                                  ->where('company_applicant.vip','=','1')
+                                  ->select('company_applicant.*','company.company_name')
+                                  ->orderBy('company_applicant.id','desc')
+                                  ->get();
+            }
+                            //return dd($customers);                 
+            if($customers)
+            {
+                foreach($customers as $key => $customer)
+                {
+                    $output.=
+
+                    '<div class= " panel panel-default test " style="cursor:pointer; width:100%;"'.'onclick="location.href=\'../applicant/views/'.$customer->id.'\' ">'.
+
+                        '<div class="panel-heading " style="height:100%;">'.                
+                            '<div class="row" style="text-align:center;">'.
+
+                            '<div class="col-md-1" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                                 $customer->id.
+                                '</div>'.
+                            
+                            '<div class="col-md-4" style="border-right:1px solid black;">'. 
+                                $customer->company_name.
+                                '</div>'.   
+
+                            '<div class="col-md-2">'.   
+                                    $customer->applicant_name.
+                                '</div>'.   
+
+                            '<div class="col-md-2" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                                    $customer->company_applicant_phone.
+                            '</div>'.
+
+                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                                    $customer->company_applicant_email.
+                            '</div>'.
+                                    
+                            '</div>'.                           
+                        '</div>'.       
+                    '</div>';
+                                     
+                }    
                     return Response($output);
                     
             }else
@@ -256,6 +340,7 @@ class ApplicantController extends Controller
             //$customers=patch::all()->paginate(10);
 
              $auth = Auth::id();
+
             if($request->applicantsearch == null){
             $customers = applicant::join('company', 'company_applicant.company_id','=', 'company.id')
                           ->join('company_user','company_user.company_id','=','company.id')
@@ -322,7 +407,8 @@ class ApplicantController extends Controller
                         '</div>'.       
                     '</div>';
                                      
-                }
+                }   
+                    
                     return Response($output);
                     
             }else

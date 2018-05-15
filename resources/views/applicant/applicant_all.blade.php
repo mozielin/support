@@ -52,8 +52,11 @@
 		@endif
 		<!--右邊的新增區塊-->
 		<div class="right-side" style="width:360px;height:57px;float:right;margin-top:3px;">
-			@role('admin')
+			@role('devenlope')
 			<a href="{{route('applicant_create')}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>
+			@endrole
+			@role('devenlope')
+			<button type="submit" class="btn btn-primary" id="vip" checkSelect="N" style="float:left;">V.I.P</button>
 			@endrole
 		</div>
 		<!--中間的線-->
@@ -124,6 +127,38 @@ $('#searchBTN').on('click',function(){
 		$('tbody').html(data);
 		}		
 	})
+})
+
+$('#vip').on('click',function(){
+	$value = $('#applicantsearch').val();
+	if ($(this).attr('checkSelect') == 'N') {
+        document.getElementById('vip').innerText = "A.L.L";
+        $(this).attr('checkSelect', 'Y');
+        $.ajax({
+		type : 'get',
+		url : '{{ URL::to('/applicant/vip') }}',
+		data : {'applicantsearch' : $value},
+		success : function(data){
+		console.log(data);
+		$('tbody').html(data);
+		}		
+	})
+    }
+    else {
+        document.getElementById('vip').innerText = "V.I.P";
+        $(this).attr('checkSelect', 'N');
+        $value='1';
+		$.ajax({
+			type : 'get',
+			url : '{{ URL::to('/applicant/loadapplicant') }}',
+			data : {'applicantsearch' : $value},
+			success : function(data){
+				console.log(data);
+				document.getElementById("applicantsearch").value="";
+				$('tbody').html(data);
+			}
+		})
+    }                                  
 })
 
 $('#applicantsearch').on('click',function(){

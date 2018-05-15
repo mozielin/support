@@ -336,6 +336,8 @@ Route::group(['prefix'=>'applicant','middleware' => ['permission:applicant_view'
 
       Route::name('applicant_index')->get('/', 'ApplicantController@index');
 
+      Route::name('applicant_vip')->get('/vip', 'ApplicantController@vip');
+
       Route::name('applicant_view')->get('/view/{id}','ApplicantController@view');
 
       Route::name('applicant_views')->get('/views/{id}','ApplicantController@views');

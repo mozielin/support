@@ -63,17 +63,19 @@ class ExportController extends Controller
               ->join('company_industry','company.com_industry_id','=','company_industry.id')
               ->join('users','company.com_builder_id','=','users.id')
               ->join('status','company.company_status','=','status.id')
-              
               ->select('company.*','company_types.company_type_name','company_industry.company_industry_name','users.name','plan.plan_name','status.status_name','company_area.area_name')
+              ->get();
 
-              ->get()->toArray();
+              $applicant = applicant::orderBy('company_applicant.id','DESC')->get();
 
-              $applicant = applicant::orderBy('company_applicant.id','DESC')->get()->toArray();
-            
               
-                 	
-              
-              return dd($company,  $applicant);
+				
+				 
+				// or we can also do this $newMediaProjects->toBase()->merge($filmProjects);
+				 
+				//return dd($company,$applicant);
+				                 	
+             // return dd($newMediaProjects->toArray());
               /*負責業務資料
               $sales = company::join('users','company.com_sales_id','=','users.id')
               					->select('users.name','users.id')
@@ -114,13 +116,14 @@ class ExportController extends Controller
 
            
 
-			\Excel::create('總表_'.$time, function($excel)use($company) {
+			\Excel::create('總表_'.$time, function($excel)use($company,$applicant) {
 
-	    	$excel->sheet('Company_sheet', function($sheet)use($company) {
+	    	$excel->sheet('Company_sheet', function($sheet)use($company,$applicant) {
 
 	        $sheet->loadView('export.total')
 
-	        		->with('company',$company);
+	        		->with('company',$company)
+	        		->with('applicant',$applicant);
 
 	    	})->export('xls');
 
