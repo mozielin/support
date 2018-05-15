@@ -74,21 +74,17 @@
 		<div class="panel panel-default" >
 			<div class="panel-heading " style="height:100%;">
 				<div class="row" style="text-align:center;">
-					<div class="col-md-1" style="border-right:1px solid black; border-left:1px solid black;">
-						ID
-					</div>
-					
-					<div class="col-md-4" style="border-right:1px solid black;">
+					<div class="col-md-3" style="border-right:1px solid black;">
 						公司名稱
 					</div>
 					<div class="col-md-2" style="border-right:1px solid black;">
 						聯絡人
 					</div>
-					<div class="col-md-2" style="border-right:1px solid black;">
+					<div class="col-md-3" style="border-right:1px solid black;">
 						聯絡電話
 					</div>
 					
-					<div class="col-md-3" style="border-right:1px solid black;">
+					<div class="col-md-4" style="border-right:1px solid black;">
 						Email
 					</div>
 					

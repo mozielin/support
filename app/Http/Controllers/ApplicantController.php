@@ -214,12 +214,8 @@ class ApplicantController extends Controller
 
                         '<div class="panel-heading " style="height:100%;">'.                
                             '<div class="row" style="text-align:center;">'.
-
-                            '<div class="col-md-1" style="border-right:1px solid black; border-left:1px solid black;">'.    
-                                 $customer->id.
-                                '</div>'.
-                            
-                            '<div class="col-md-4" style="border-right:1px solid black;">'. 
+ 
+                            '<div class="col-md-3" style="border-right:1px solid black;">'. 
                                 $customer->company_name.
                                 '</div>'.   
 
@@ -227,11 +223,11 @@ class ApplicantController extends Controller
                                     $customer->applicant_name.
                                 '</div>'.   
 
-                            '<div class="col-md-2" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
                                     $customer->company_applicant_phone.
                             '</div>'.
 
-                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                            '<div class="col-md-4" style="border-right:1px solid black; border-left:1px solid black;">'.    
                                     $customer->company_applicant_email.
                             '</div>'.
                                     
@@ -294,12 +290,8 @@ class ApplicantController extends Controller
 
                         '<div class="panel-heading " style="height:100%;">'.                
                             '<div class="row" style="text-align:center;">'.
-
-                            '<div class="col-md-1" style="border-right:1px solid black; border-left:1px solid black;">'.    
-                                 $customer->id.
-                                '</div>'.
-                            
-                            '<div class="col-md-4" style="border-right:1px solid black;">'. 
+    
+                            '<div class="col-md-3" style="border-right:1px solid black;">'. 
                                 $customer->company_name.
                                 '</div>'.   
 
@@ -307,11 +299,11 @@ class ApplicantController extends Controller
                                     $customer->applicant_name.
                                 '</div>'.   
 
-                            '<div class="col-md-2" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
                                     $customer->company_applicant_phone.
                             '</div>'.
 
-                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                            '<div class="col-md-4" style="border-right:1px solid black; border-left:1px solid black;">'.    
                                     $customer->company_applicant_email.
                             '</div>'.
                                     
@@ -385,12 +377,8 @@ class ApplicantController extends Controller
 
                         '<div class="panel-heading " style="height:100%;">'.                
                             '<div class="row" style="text-align:center;">'.
-
-                            '<div class="col-md-1" style="border-right:1px solid black; border-left:1px solid black;">'.    
-                                 $customer->id.
-                                '</div>'.
-                            
-                            '<div class="col-md-4" style="border-right:1px solid black;">'. 
+            
+                            '<div class="col-md-3" style="border-right:1px solid black;">'. 
                                 $customer->company_name.
                                 '</div>'.   
 
@@ -398,11 +386,11 @@ class ApplicantController extends Controller
                                     $customer->applicant_name.
                                 '</div>'.   
 
-                            '<div class="col-md-2" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
                                     $customer->company_applicant_phone.
                             '</div>'.
 
-                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                            '<div class="col-md-4" style="border-right:1px solid black; border-left:1px solid black;">'.    
                                     $customer->company_applicant_email.
                             '</div>'.
                                     
