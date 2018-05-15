@@ -155,12 +155,15 @@ class ApplicantController extends Controller
         if ($request->has('company_applicant_phone')) {
                 $data->company_applicant_phone = $request->company_applicant_phone;
             }
-            if ($request->has('company_applicant_mobile')) {
+        if ($request->has('company_applicant_mobile')) {
                 $data->company_applicant_mobile = $request->company_applicant_mobile;
             }
-            if ($request->has('applicant_note')) {
+        if ($request->has('applicant_note')) {
                 $data->applicant_note = $request->applicant_note;
             }  
+        if ($request->has('vip')) {
+                $data->vip = $request->vip;
+            }
         $data -> save();
 
         return redirect()->action('ApplicantController@view',$data->id);
