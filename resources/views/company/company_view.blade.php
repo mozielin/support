@@ -511,7 +511,7 @@
                 <div class="panel-heading" style="height:100%;">        
                   <div class="row" style="text-align:center;"">
 
-                    <div class="col-md-3" style="border-right:1px solid black;">  
+                    <div class="col-md-4" style="border-right:1px solid black;">  
                         主機名稱
                       </div>
                     
@@ -523,8 +523,8 @@
                         主機MAC
                       </div>
 
-                    <div class="col-md-3" style="border-right:1px solid black;">  
-                        主機內網IP
+                    <div class="col-md-2" style="border-right:1px solid black;">  
+                        Sync版號
                       </div>                 
                 </div>                      
               </div>    
@@ -536,7 +536,7 @@
               <div class="panel-heading " style="height:100%;">       
                 <div class="row" style="text-align:center;">
 
-                  <div class="col-md-3">  
+                  <div class="col-md-4">  
                     {{$sedata->server_name}}
                   </div>
 
@@ -548,8 +548,8 @@
                     {{$sedata->company_server_mac}}  
                   </div>
 
-                  <div class="col-md-3">  
-                    {{$sedata->company_server_interip}}  
+                  <div class="col-md-2">  
+                    {{$sedata->sync_ver}}  
                   </div>
 
                 </div>                      
