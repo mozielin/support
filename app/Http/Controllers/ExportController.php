@@ -65,6 +65,7 @@ class ExportController extends Controller
               ->join('company_industry','company.com_industry_id','=','company_industry.id')
               ->join('status','company.company_status','=','status.id')
               ->select('company.*','company_types.company_type_name','company_industry.company_industry_name','plan.plan_name','status.status_name','company_area.area_name')
+              ->orderBy('company.id','DESC')
               ->get();
 
               $applicant = applicant::join('company','company_applicant.company_id','=','company.id')
