@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-<h2 style="margin-top: 2px">檔案管理</h2>
+<h2 style="margin-top: 2px">匯出管理</h2>
 @endsection
 @section('contentm')
 <!--中間選單-->

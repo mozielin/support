@@ -12,6 +12,7 @@
 		    <td>申請人姓名email</td>
 		    <td>公司產業別</td>
 		    <td>案件狀態</td>
+		    
 		    <!--  Bold -->
 		   
 	    </tr>
@@ -35,6 +36,7 @@
 			   	</td>
 			   	<td>{{$cdata->company_industry_name}}</td>
 			   	<td>{{$cdata->status_name}}</td>
+			   	
 		    </tr>
 	    @endforeach
 
