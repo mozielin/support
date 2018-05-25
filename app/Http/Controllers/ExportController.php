@@ -71,6 +71,9 @@ class ExportController extends Controller
               $applicant = applicant::join('company','company_applicant.company_id','=','company.id')
               							->select('company_applicant.*','company.company_name')
               							->orderBy('company_applicant.id','DESC')->get();
+
+            $manager = manager::join('company','company_user.company_id','=','company.id')
+              							->select('company_user.*','company.company_name')->get();
 			 
 				// or we can also do this $newMediaProjects->toBase()->merge($filmProjects);
 				 
@@ -97,6 +100,8 @@ class ExportController extends Controller
               						->join('status','company_contract.contract_status','=','status.id')
               						->select('company_contract.*','company.company_name','status.status_name','plan.plan_name')
               						->orderBy('company_contract.id','DESC')->get();
+
+          
               //server資料		
               //$servernum = server::where('company_server','=',$company_id)->count();
               $server = server::join('company','company_server_info.company_server','company.id')
@@ -109,14 +114,18 @@ class ExportController extends Controller
 
 			
 
-			\Excel::create('總表_'.$time, function($excel)use($company,$applicant,$users,$contract,$license,$server,$tlc) {
+			\Excel::create('總表_'.$time, function($excel)use($company,$applicant,$users,$contract,$license,$server,$tlc,$manager) {
 
-	    	$excel->sheet('Company', function($sheet)use($company,$applicant,$users) {
-
+	    	$excel->sheet('Company', function($sheet)use($company,$applicant,$users,$contract,$license,$manager) {
+	    		//return dd($contract);
+	    		//return dd($company,$applicant,$users,$contract,$license);
 	        $sheet->loadView('export.total')
 	        		->with('company',$company)
 	        		->with('applicant',$applicant)
-	        		->with('users',$users);
+	        		->with('users',$users)
+	        		->with('license',$license)
+	        		->with('contract',$contract)
+	        		->with('manager',$manager);
 	    	});
 
 	    	$excel->sheet('Contract', function($sheet)use($contract,$users) {
@@ -180,5 +189,32 @@ class ExportController extends Controller
 	    });
 
 	}
+
+	public function upload_cloud(Request $request){
+
+		if ($request->hasFile('excel')){
+	        //取得附件檔名
+	        $filename = $request->excel->getClientOriginalName();           
+	        //附件檔名儲存      
+	        $store = $request->file('excel')->store('public/excel');
+	        $path = $request->file('excel')->getRealPath();
+			
+	        \Excel::load($path, function($reader) {
+								
+				foreach ($reader->toArray() as $row) {
+					
+	              
+	            }
+				
+			});
+
+		}
+
+	}
+
+
+
+
+
 
 }

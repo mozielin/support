@@ -21,8 +21,13 @@
 		    	<td>{{$tdata->company_name}}</td>
 			    <td>{{$tdata->company_tlc_start}}</td>
 			    <td>{{$tdata->company_tlc_end}}</td>
-			    <td>{{$tdata->builder}}</td>
-			   	
+			    <td>
+			    @foreach($users as $udata)
+			    	@if($udata->id == $tdata->builder)		    	
+						{{$udata->name}}
+			    	@endif
+				@endforeach
+			   	</td>
 		    </tr>
 	    @endforeach
 

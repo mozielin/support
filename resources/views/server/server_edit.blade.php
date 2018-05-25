@@ -119,6 +119,9 @@
                 @elseif($data->build_type == '私有雲代管')
                 <option value="自備伺服器">自備伺服器</option>
                 <option selected="true" value="私有雲代管">私有雲代管</option>
+                @else
+                <option value="私有雲代管">私有雲代管</option>
+                <option value="自備伺服器">自備伺服器</option>
                 @endif
               </select>               
             </div>
@@ -126,7 +129,7 @@
 
           <div class="form-group col-md-12 form-horizontal">
 
-            <label for="URL" class="col-md-2 control-label" style="text-align:right;">URL:</label>
+            <label for="URL" class="col-md-2 control-label" style="text-align:right;">站台位置:</label>
             <div class="col-md-10">
               <input type="text" name="URL" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="{{$data->URL}}" >               
             </div>

@@ -307,7 +307,7 @@ class ScheduleController extends Controller
             
             $sdata = string($apidata);
 
-             //檔案上傳API
+             /*檔案上傳API
                 $client = new Client();
                 $res = $client->request('POST', 'http://192.168.1.25/API/IMService.ashx?ask=uploadFile', [
                     'form_params' => [
@@ -356,7 +356,7 @@ class ScheduleController extends Controller
                 $body = $res->getBody();
                 $stringbody = string($body);
                 $body = json_decode($res->getBody());
-                //return dd($body);
+                //return dd($body);*/
              return redirect()->action('ServerController@index');
         
     }

@@ -102,10 +102,22 @@ class CompanyController extends Controller
                                 ->join('status','company_contract.contract_status','=','status.id')
                                 ->select('company_contract.*','plan.plan_name','status.status_name')
                                 ->orderBy('company_contract.id','desc')->get();
+
+              $contract_status = contract::where('company_contract','=',$company_id)
+                          ->join('status','company_contract.contract_status','=','status.id')
+                          ->orderBy('company_contract.id','desc')->first();
+                  if($contract_status==null){
+                    $contractstatus = '尚未簽約';
+                    
+                  }
+                  else{
+                    $contractstatus = $contract_status->status_name;
+                  }
+
                                             
               $contract_plan = contract::where('company_contract','=',$company_id)
                           ->join('plan','company_contract.contract_plan','=','plan.id')
-                          ->orderBy('company_contract.contract_plan','DESC')->first();
+                          ->orderBy('company_contract.id','desc')->first();
                   if($contract_plan==null){
                     $contractplan = '尚未建立合約';
                     
@@ -136,6 +148,7 @@ class CompanyController extends Controller
                   ->with('applicant',$applicant)
                   ->with('contract',$contract)
                   ->with('contractplan',$contractplan)
+                  ->with('contractstatus',$contractstatus)
                   ->with('contractnum',$contractnum)
                   ->with('servernum',$servernum)
                   ->with('server',$server)

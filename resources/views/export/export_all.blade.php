@@ -46,23 +46,22 @@
               	<div class="form-group col-md-12 form-horizontal"> 
               	</div>
 
-              	<div class="form-group col-md-12 form-horizontal"> 
-                	<div class="col-md-4" style="text-align: center;">
-                  		<img src="/storage/excel.png/" style="width:100px;height:100px;"  />
-                  		
-                  		<label for="company_EIN" class="col-md-12 control-label" style="text-align:center;"></label>
-                	</div>  
-                	
-                	<div class="col-md-4" style="text-align: center;">
-                  		<img src="/storage/excel.png/" style="width:100px;height:100px;"  /> 
-                  		<label for="company_EIN" class="col-md-12 control-label" style="text-align:center;"></label>
-                	</div>
-                	
-                	<div class="col-md-4" style="text-align: center;">
-                  		<img src="/storage/excel.png/" style="width:100px;height:100px;"  />
-                  		<label for="company_EIN" class="col-md-12 control-label" style="text-align:center;"></label>
-                	</div>
-              	</div>
+              	<form class="form-horizontal" method="POST" enctype="multipart/form-data" onsubmit="return Confirm();" action="/export/upload_cloud" >
+                {{ csrf_field() }}
+
+        <div class="form-group col-md-12 form-horizontal">
+            
+            <label for="excel" class="col-md-2 control-label">上傳附件:</label>
+            <div class="col-md-8">
+            <input type="file" multiple class="form-control" id="excel" name='excel' placeholder="上傳excel" accept=".xlsx" value="Upload" >
+           
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Submit
+                </button>
+        </div>
+        </form>
 
 			</div>
 			</div>

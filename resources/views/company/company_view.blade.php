@@ -52,11 +52,10 @@
                   <input type="date" name="company_create" style="padding-left:50px;" class=" col-md-4 form-control" value="{{$data->company_create}}" readonly >   
                 </div>
 
-                <label for="plan_name" class="col-md-2 control-label" style="text-align:right;">申請方案:</label>
+                <label for="company_business" class="col-md-2 control-label" style="text-align:right;">負責業務:</label>
                 <div class="col-md-4">
-                  <input type="text" name="plan_name" class=" col-md-4 form-control" value="{{$data->plan_name}}" readonly >   
+                  <input type="text" name="company_business" class=" col-md-4 form-control" value="{{$sales->name}}" readonly >   
                 </div>
-
 
               </div>
 
@@ -74,7 +73,7 @@
               </div> 
               
               <div class="form-group col-md-12 form-horizontal"> 
-                <label for="company_industry_name" class="col-md-2 control-label" style="text-align:right;">公司型態:</label>
+                <label for="company_industry_name" class="col-md-2 control-label" style="text-align:right;">公司產業:</label>
                 <div class="col-md-4">
                   <input type="text" name="company_industry_name" class=" col-md-4 form-control" value="{{$data->company_industry_name}}" readonly >
                 </div>  
@@ -91,9 +90,9 @@
                   <input type="text" name="company_cel" class=" col-md-4 form-control" value="{{$data->company_cel}}" readonly >
                 </div>  
                         
-                <label for="company_business" class="col-md-2 control-label" style="text-align:right;">負責業務:</label>
+                <label for="status_name" class="col-md-2 control-label" style="text-align:right;">合約狀態:</label>
                 <div class="col-md-4">
-                  <input type="text" name="company_business" class=" col-md-4 form-control" value="{{$sales->name}}" readonly >   
+                  <input type="text" name="status_name" class=" col-md-4 form-control" value="{{$contractstatus}}" readonly >   
                 </div>
               </div> 
 

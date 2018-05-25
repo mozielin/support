@@ -117,7 +117,7 @@
 
                         <div class="form-group col-md-12 form-horizontal">
 
-                            <label for="URL" class="col-md-2 control-label" style="text-align:right;">URL:</label>
+                            <label for="URL" class="col-md-2 control-label" style="text-align:right;">站台位置:</label>
                             <div class="col-md-10">
                                 <input type="text" name="URL" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="" >               
                             </div>

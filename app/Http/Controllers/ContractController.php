@@ -401,7 +401,7 @@ class ContractController extends Controller
                                 '</div>'.   
 
                             '<div class="col-md-2" style="border-right:1px solid black;">'.   
-                                    $customer->company_contract_date.
+                                    $customer->contract_quantity.
                                 '</div>'.  
                             '<div class="col-md-2">'.   
                                     $customer->company_contract_end.

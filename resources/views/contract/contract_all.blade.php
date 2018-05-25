@@ -100,7 +100,7 @@
 				</div>	
 
 			<div class="col-md-2" style="border-right:1px solid black;">	
-					簽約日期
+					授權人數
 				</div>
 
 			<div class="col-md-2" style="border-right:1px solid black;">	

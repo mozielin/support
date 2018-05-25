@@ -514,6 +514,8 @@ Route::group(['prefix'=>'export','middleware' => ['role:admin|devenlope']], func
 
       Route::name('export_total')->get('/total', 'ExportController@total');
 
+      Route::name('upload_cloud')->post('/upload_cloud','ExportController@upload_cloud');
+
       Route::name('download_total')->get('/download_total', 'ExportController@download_total');
 
 });

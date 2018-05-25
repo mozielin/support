@@ -75,20 +75,17 @@
 <div class="panel panel-default">
 	<div class="panel-heading" style="height:100%;">
 		<div class="row" style="text-align:center;"">
-			<div class="col-md-1 " style="border-right:1px solid black;">
-				<span>ID</span>
-			</div>
-			<div class="col-md-3" style="border-right:1px solid black;">
-				<span>Name</span>
-			</div>
 			<div class="col-md-2" style="border-right:1px solid black;">
 				<span>Type</span>
 			</div>
-			<div class="col-md-3" style="border-right:1px solid black;">
-				<span>內網IP</span>
+			<div class="col-md-2" style="border-right:1px solid black;">
+				<span>公司名稱</span>
 			</div>
-			<div class="col-md-3" style="border-right:1px solid black;">
-				<span>外部IP</span>
+			<div class="col-md-6" style="border-right:1px solid black;">
+				<span>站台位置</span>
+			</div>
+			<div class="col-md-2" style="border-right:1px solid black;">
+				<span>Sync版號</span>
 			</div>
 		</div>
 	</div>

@@ -199,24 +199,20 @@ class ServerController extends Controller
                         '<div class="panel-heading " style="height:100%;">'.                
                             '<div class="row" style="text-align:center;">'.
 
-                            '<div class="col-md-1" style="border-right:1px solid black; border-left:1px solid black;">'.    
-                                 $data->id.
+                            '<div class="col-md-2" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                                 $data->company_server_type.
                                 '</div>'.
                             
-                            '<div class="col-md-3" style="border-right:1px solid black;">'. 
+                            '<div class="col-md-2" style="border-right:1px solid black;">'. 
                                 $data->server_name.
                                 '</div>'.   
 
-                            '<div class="col-md-2">'.   
-                                    $data->company_server_type.
+                            '<div class="col-md-6">'.   
+                                    $data->URL.
                                 '</div>'.   
 
-                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
-                                    $data->company_server_interip.
-                            '</div>'.
-
-                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
-                                    $data->company_server_extip.
+                            '<div class="col-md-2" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                                    $data->sync_ver.
                             '</div>'.
                                     
                             '</div>'.                           
@@ -287,24 +283,20 @@ class ServerController extends Controller
                         '<div class="panel-heading " style="height:100%;">'.                
                             '<div class="row" style="text-align:center;">'.
 
-                            '<div class="col-md-1" style="border-right:1px solid black; border-left:1px solid black;">'.    
-                                 $data->id.
+                            '<div class="col-md-2" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                                 $data->company_server_type.
                                 '</div>'.
                             
-                            '<div class="col-md-3" style="border-right:1px solid black;">'. 
+                            '<div class="col-md-2" style="border-right:1px solid black;">'. 
                                 $data->server_name.
                                 '</div>'.   
 
-                            '<div class="col-md-2">'.   
-                                    $data->company_server_type.
+                            '<div class="col-md-6">'.   
+                                    $data->URL.
                                 '</div>'.   
 
-                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
-                                    $data->company_server_interip.
-                            '</div>'.
-
-                            '<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.    
-                                    $data->company_server_extip.
+                            '<div class="col-md-2" style="border-right:1px solid black; border-left:1px solid black;">'.    
+                                    $data->sync_ver.
                             '</div>'.
                                     
                             '</div>'.                           
