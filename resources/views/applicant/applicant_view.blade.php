@@ -110,7 +110,7 @@
               </div>
 
               <div class="col-md-2 col-md-offset-3" style="text-align:center;">
-                <button type="button" class="btn btn-primary" onclick="location.href='{{route('applicant_index')}}'">
+                <button type="button" class="btn btn-primary" onclick="location.href='{{route('company_view',$data->company_id)}}'">
                 <i class="glyphicon glyphicon-backward"></i>
                 返回
                 </button>
