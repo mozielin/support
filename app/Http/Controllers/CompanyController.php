@@ -315,10 +315,12 @@ class CompanyController extends Controller
 			$data -> save();
 
       //新增預設相關人員(Doris/Betty/Kiki)
-      
-      $data->manager()->attach('3');
-      $data->manager()->attach('6');
-      $data->manager()->attach('7');
+
+      $suupport = User::where('user_group','=','3')->get();
+     // return dd($suupport);
+      foreach ($suupport as $udata) {
+        $data->manager()->attach($udata->id);
+      }
 
       $data->manager()->detach($data->com_sales_id);
       $data->manager()->attach($data->com_sales_id);

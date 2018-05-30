@@ -108,36 +108,48 @@
                 </div> 
               </div>
 
+              <div class="form-group col-md-12 form-horizontal">
+                <label for="company_btn" class="col-md-2 control-label" style="text-align:right;">公司地區:</label>
+                <div class="col-md-4">
+                  <input type="text" name="company_area" class=" col-md-4 form-control" value="{{$data->area_name.$data->company_area2}}" readonly>
+                </div>
+
+                <label for="contract_plan" class="col-md-2 control-label" style="text-align:right;">申請方案:</label>
+                <div class="col-md-4">               
+                  <input type="text" name="contract_plan" class=" col-md-4 form-control" value="{{$data->plan_name}}" readonly>
+                </div> 
+              </div>
+
               <div class="form-group col-md-12 form-horizontal" style="height:36px;">
                 
-                  <label for="company_btn" class="col-md-2 control-label" style="text-align:right;">公司地區:</label>
+                  <label for="" class="col-md-2 control-label" style="text-align:right;"></label>
                   <div class="col-md-4">
-                    <input type="text" name="company_area" class=" col-md-4 form-control" value="{{$data->area_name.$data->company_area2}}" readonly>
-                  </div>
-                @permission('none')
-                <div id="accordion" class="col-md-6" style="width:223px;text-align:left;z-index:1;">
-                <h3 style="text-align:center;margin-left:0px!important;margin-top:3px!important;overflow: visible;">進階</h3>
-                  <div class="col-md-12" style="padding-left:0px!important;padding-right:0px!important;overflow: visible;">
-                    <div class="col-md-6" style="text-align:center;float:left;">
-                      @permission('company_delete')
-                      <button type="button" class="btn btn-primary" onclick="return Confirm();">
-                      <i class="glyphicon glyphicon-trash"></i>
-                      刪除
-                      </button>
-                      @endpermission
+                     @permission('none')
+                  <div id="accordion" class="col-md-6" style="width:223px;text-align:left;z-index:1;">
+                  <h3 style="text-align:center;margin-left:0px!important;margin-top:3px!important;overflow: visible;">進階</h3>
+                    <div class="col-md-12" style="padding-left:0px!important;padding-right:0px!important;overflow: visible;">
+                      <div class="col-md-6" style="text-align:center;float:left;">
+                        @permission('company_delete')
+                        <button type="button" class="btn btn-primary" onclick="return Confirm();">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        刪除
+                        </button>
+                        @endpermission
+                      </div>
+                
+                      <div class="col-md-6" style="text-align:center;">
+                        <button type="button" class="btn btn-primary" onclick="location.href='{{route('company_edit', $data->id)}}'">
+                        @permission('company_edit')
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        修改
+                        </button>
+                        @endpermission
+                      </div>
                     </div>
-              
-                    <div class="col-md-6" style="text-align:center;">
-                      <button type="button" class="btn btn-primary" onclick="location.href='{{route('company_edit', $data->id)}}'">
-                      @permission('company_edit')
-                      <i class="glyphicon glyphicon-pencil"></i>
-                      修改
-                      </button>
-                      @endpermission
                     </div>
+                    @endpermission
                   </div>
-                  </div>
-                  @endpermission
+                
                 
                 <label for="company_status" class="col-md-2 control-label" style="text-align:right;">案件狀態:</label>
                 <div class="col-md-4">

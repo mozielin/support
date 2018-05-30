@@ -16,7 +16,7 @@ use App\applicant;
 use DB;
 use App\license;
 use App\seadmin;
-
+use App\temp;
 use App\manager;
 use App\company_area;
 
@@ -186,7 +186,7 @@ class ExportController extends Controller
 
 	    	})->export('xls');
 
-	    });
+	    	});
 
 	}
 
@@ -198,18 +198,56 @@ class ExportController extends Controller
 	        //附件檔名儲存      
 	        $store = $request->file('excel')->store('public/excel');
 	        $path = $request->file('excel')->getRealPath();
+	        $del = temp::truncate();
+
 			
 	        \Excel::load($path, function($reader) {
 								
 				foreach ($reader->toArray() as $row) {
-					
-	              
+					//return dd($row,$row['公司名稱'],$row['企業代碼'],$row['ServerName'],$row['ServerUrl'],$row['License Key']);
+					if ($row['公司名稱']) {
+						$data = new temp;
+						$data -> company_name = $row['公司名稱'];
+						$data -> teampluscode = $row['企業代碼'];
+						$data -> server_name = $row['ServerName'];
+						$data -> url = $row['ServerUrl'];
+						$data -> licensekey = $row['License Key'];
+						$data -> save();
+					}
+					else{
+						break;
+					}
 	            }
-				
 			});
 
-		}
+			$temp = temp::join('company_server_info','company_server_info.company_business_code','=','temp.teampluscode')
+						->join('company','company_server_info.company_server','=','company.id')
+						->select('company_server_info.*','company.company_name');
 
+			$server = server::join('company','company_server_info.company_server','company.id')
+              						->select('company_server_info.company_business_code','company.*')
+              						->orderBy('company.id','DESC')->get();
+
+            $manager = manager::join('company','company_user.company_id','=','company.id')
+              							->select('company_user.*','company.company_name')->get(); 
+
+			\Excel::create('發版_'.$time, function($excel)use($temp,$server,$manager) {
+
+	    	$excel->sheet('Company_sheet', function($sheet)use($temp,$server,$manager) {
+
+	        $sheet->loadView('export.special')
+
+	        	  ->with('temp',$temp)
+	        	  ->with('server',$server);
+
+	    	})->export('xls');
+
+	    	});
+
+
+			
+		}
+		return view('export.export_all');
 	}
 
 

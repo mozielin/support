@@ -79,7 +79,7 @@
 				<span>公司名稱</span>
 			</div>
 			<div class="col-md-2" style="border-right:1px solid black;">
-				<span>公司方案</span>
+				<span>申請方案</span>
 			</div>
 			<div class="col-md-2" style="border-right:1px solid black;">
 				<span>案件狀態</span>
