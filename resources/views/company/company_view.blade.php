@@ -90,9 +90,9 @@
                   <input type="text" name="company_cel" class=" col-md-4 form-control" value="{{$data->company_cel}}" readonly >
                 </div>  
                         
-                <label for="status_name" class="col-md-2 control-label" style="text-align:right;">合約狀態:</label>
-                <div class="col-md-4">
-                  <input type="text" name="status_name" class=" col-md-4 form-control" value="{{$contractstatus}}" readonly >   
+                <label for="contract_plan" class="col-md-2 control-label" style="text-align:right;">合約方案:</label>
+                <div class="col-md-4">               
+                  <input type="text" name="contract_plan" class=" col-md-4 form-control" value="{{$contractplan}}" readonly>
                 </div>
               </div> 
 
@@ -102,9 +102,9 @@
                   <input type="text" name="company_url" class=" col-md-4 form-control" value="{{$data->company_url}}" readonly >
                 </div>
 
-                <label for="contract_plan" class="col-md-2 control-label" style="text-align:right;">合約方案:</label>
-                <div class="col-md-4">               
-                  <input type="text" name="contract_plan" class=" col-md-4 form-control" value="{{$contractplan}}" readonly>
+                 <label for="status_name" class="col-md-2 control-label" style="text-align:right;">合約狀態:</label>
+                <div class="col-md-4">
+                  <input type="text" name="status_name" class=" col-md-4 form-control" value="{{$contractstatus}}" readonly >   
                 </div> 
               </div>
 
