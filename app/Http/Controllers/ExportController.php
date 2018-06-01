@@ -225,7 +225,7 @@ class ExportController extends Controller
 
 			$temp = temp::join('company_server_info','company_server_info.company_business_code','=','temp.teampluscode')
 						->join('company','company_server_info.company_server','=','company.id')
-						->select('company_server_info.*','company.company_name','temp.licensekey')
+						->select('company_server_info.*','company.company_name','temp.licensekey','company.com_sales_id')
 						->get();
 			//
 
