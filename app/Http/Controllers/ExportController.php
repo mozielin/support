@@ -241,14 +241,16 @@ class ExportController extends Controller
             $applicant = applicant::join('company','company_applicant.company_id','=','company.id')
               							->select('company_applicant.*')
               							->orderBy('company_applicant.id','DESC')->get();
+
+            $k = k_value::orderBy('id','DESC')->first();
 			//return dd($manager);
             $time = Carbon::now()->toDateString(); 
 
             $users = User::orderBy('users.id','DESC')->get();
 
-			\Excel::create('發版_'.$time, function($excel)use($temp,$server,$manager,$users,$applicant) {
+			\Excel::create('發版_'.$time, function($excel)use($temp,$server,$manager,$users,$applicant,$k) {
 
-	    	$excel->sheet('Company_sheet', function($sheet)use($temp,$server,$manager,$users,$applicant) {
+	    	$excel->sheet('Company_sheet', function($sheet)use($temp,$server,$manager,$users,$applicant,$k) {
 
 	        $sheet->loadView('export.special')
 
@@ -256,7 +258,8 @@ class ExportController extends Controller
 	        	  ->with('server',$server)
 	        	  ->with('manager',$manager)
 	        	  ->with('applicant',$applicant)
-	        	  ->with('users',$users);
+	        	  ->with('users',$users)
+	        	  ->with('k',$k);
 
 	    	})->export('xls');
 
