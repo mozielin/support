@@ -207,7 +207,7 @@ class ExportController extends Controller
 	        \Excel::load($path, function($reader) {
 								
 				foreach ($reader->toArray() as $row) {
-					return dd($row);
+					//return dd($row);
 					if ($row['公司名稱']) {
 						$data = new temp;
 						$data -> company_name = $row['公司名稱'];
