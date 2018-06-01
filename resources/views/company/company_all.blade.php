@@ -39,7 +39,7 @@
     		</div>
 			@endif
 			@if (Session::has('flash_message'))
-				<div class="alert alert-success fade in" style="width:250px;position:absolute;right:350px;top:154px;text-align:center;z-index:99;">
+				<div class="alert alert-success fade in" style="width:250px;position:absolute;right:380px;top:265px;text-align:center;z-index:99;">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;
 					</button>
 					{{ Session::get('flash_message') }}

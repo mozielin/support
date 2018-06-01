@@ -19,6 +19,7 @@ use App\seadmin;
 use App\temp;
 use App\manager;
 use App\company_area;
+use App\k_value;
 
 class ExportController extends Controller
 {
@@ -29,9 +30,11 @@ class ExportController extends Controller
 	}
 	
 	public function index(){
-		  
+
+			$k = k_value::orderBy('id','DESC')->first();
 		
-		   return view('export.export_all');
+		   return view('export.export_all')
+		   			->with('k',$k);
 	}
 
 	public function export(){
@@ -222,23 +225,38 @@ class ExportController extends Controller
 
 			$temp = temp::join('company_server_info','company_server_info.company_business_code','=','temp.teampluscode')
 						->join('company','company_server_info.company_server','=','company.id')
-						->select('company_server_info.*','company.company_name');
+						->select('company_server_info.*','company.company_name','temp.licensekey')
+						->get();
+			//
 
 			$server = server::join('company','company_server_info.company_server','company.id')
               						->select('company_server_info.company_business_code','company.*')
               						->orderBy('company.id','DESC')->get();
 
             $manager = manager::join('company','company_user.company_id','=','company.id')
-              							->select('company_user.*','company.company_name')->get(); 
+            				  ->join('users','company_user.user_id','=','users.id')
+            				  ->where('users.user_group','=','3')
+              				  ->select('company_user.*','company.company_name','users.email')->get(); 
 
-			\Excel::create('發版_'.$time, function($excel)use($temp,$server,$manager) {
+            $applicant = applicant::join('company','company_applicant.company_id','=','company.id')
+              							->select('company_applicant.*')
+              							->orderBy('company_applicant.id','DESC')->get();
+			//return dd($manager);
+            $time = Carbon::now()->toDateString(); 
 
-	    	$excel->sheet('Company_sheet', function($sheet)use($temp,$server,$manager) {
+            $users = User::orderBy('users.id','DESC')->get();
+
+			\Excel::create('發版_'.$time, function($excel)use($temp,$server,$manager,$users,$applicant) {
+
+	    	$excel->sheet('Company_sheet', function($sheet)use($temp,$server,$manager,$users,$applicant) {
 
 	        $sheet->loadView('export.special')
 
 	        	  ->with('temp',$temp)
-	        	  ->with('server',$server);
+	        	  ->with('server',$server)
+	        	  ->with('manager',$manager)
+	        	  ->with('applicant',$applicant)
+	        	  ->with('users',$users);
 
 	    	})->export('xls');
 
@@ -250,7 +268,15 @@ class ExportController extends Controller
 		return view('export.export_all');
 	}
 
+	public function export_k(Request $request){
 
+
+			$data = new k_value;
+			$data -> value = $request->k;
+			$data -> save();
+	    \Session::flash('flash_message', '新增成功! 請上傳私有雲名單產出發版參數~');
+		return redirect()->action('ExportController@index');
+	}
 
 
 
