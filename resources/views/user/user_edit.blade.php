@@ -49,7 +49,7 @@
               <div class="form-group col-md-12 form-horizontal">         
               <label for="title" class="col-md-4 control-label" style="text-align:right;">職務名稱:</label>
               <div class="col-md-8">
-              <input type="text" name="title" class=" col-md-8 form-control" style="width: 100%;text-align: center" value="{{$user->title}}" required>            
+              <input type="text" name="title" class=" col-md-8 form-control" style="width: 100%;text-align: center" value="{{$user->title}}" >            
               </div>
               </div>
 
@@ -99,15 +99,15 @@
               <div class="form-group col-md-12 form-horizontal">         
               <label for="phone" class="col-md-4 control-label" style="text-align:right;">聯絡電話:</label>
               <div class="col-md-8">
-              <input type="text" name="phone" class=" col-md-8 form-control" style="width: 70%;text-align: center" value="{{$user->phone}}" required>
-              <input type="text" name="ext" class=" col-md-2 form-control" style="width: 25%;text-align: center;left: 10px;" value="{{$user->ext}}" required>             
+              <input type="text" name="phone" class=" col-md-8 form-control" style="width: 70%;text-align: center" value="{{$user->phone}}" >
+              <input type="text" name="ext" class=" col-md-2 form-control" style="width: 25%;text-align: center;left: 10px;" value="{{$user->ext}}" >             
               </div>
               </div>
 
               <div class="form-group col-md-12 form-horizontal">         
               <label for="mobile" class="col-md-4 control-label" style="text-align:right;">手機電話:</label>
               <div class="col-md-8">
-              <input type="text" name="mobile" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="{{$user->mobile}}" required>                    
+              <input type="text" name="mobile" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="{{$user->mobile}}" >                    
               </div>
               </div>
 
