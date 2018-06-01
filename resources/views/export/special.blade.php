@@ -42,7 +42,7 @@
 				</td>
 			    <td>
 			    @foreach($users as $udata)
-			    	@if($udata->id == $tdata->company_sales_id)
+			    	@if($udata->id == $tdata->com_sales_id)
 			    		{{$udata->title}}：{{$udata->name}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
 						聯絡電話：{{$udata->phone}} 分機 {{$udata->ext}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
 						手機號碼：{{$udata->mobile}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
