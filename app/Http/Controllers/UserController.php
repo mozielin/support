@@ -221,9 +221,20 @@ class UserController extends Controller
 		$user = User::find($id);
         $user -> name = $request->name;
         $user -> email = $request->email;
+        if($request->title){
+            $user-> title = $request->title;
+        }
+        if($request->phone){
+            $user-> phone = $request->phone;
+        }
+        if($request->ext){
+            $user-> ext = $request->ext;
+        }
+        if($request->mobile){
+            $user-> mobile = $request->mobile;
+        }
 
         if(Entrust::hasRole('admin') or Entrust::hasRole('devenlope')){
-
 
         $user -> user_group = $request->user_group;       
         //先刪除舊Role關聯
