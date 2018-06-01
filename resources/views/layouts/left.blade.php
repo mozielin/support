@@ -56,7 +56,7 @@
         @role('devenlope' || 'admin')
         <li><a href="/activity"><i class="glyphicon glyphicon-user" style="margin-right:10px;"></i> 系統日誌</a></li>
         @endrole
-        @role('devenlope')
+        @role('devenlope' || 'admin')
         <li><a href="/export"><i class="glyphicon glyphicon-cloud-download" style="margin-right:10px;"></i> 匯出管理</a></li>
         @endrole
     </ul>
