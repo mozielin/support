@@ -43,9 +43,9 @@
 			    <td>
 			    @foreach($users as $udata)
 			    	@if($udata->id == $tdata->company_server_builder)
-			    		業務經理：{{$udata->name}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
-						聯絡電話：(02)89131559 分機 321<br style='mso-data-placement:same-cell;wrap-text: true;'/>
-						手機號碼：0920-909-963<br style='mso-data-placement:same-cell;wrap-text: true;'/>
+			    		{{$udata->title}}：{{$udata->name}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
+						聯絡電話：{{$udata->phone}} 分機 {{$udata->ext}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
+						手機號碼：{{$udata->mobile}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
 						Email：{{$udata->email}}		    	
 						
 			    	@endif

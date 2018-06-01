@@ -15,8 +15,8 @@
     <div class="panel-heading" style="height:40px;display:flex;justify-content:center;text-align:center;">
           <p>User Info</p>
     </div>    
-      <div class="panel-body" style="height:440px;" >
-        <div class="upper-content" style="height:330px;width:auto;">
+      <div class="panel-body" style="height:500px;" >
+        <div class="upper-content" style="height:420px;width:auto;">
           <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}" style="height:360px;width:325px;text-align:center;float:left;margin-bottom:0px !important;">
             <div class="hexa">
               <div class="hex1">
@@ -45,6 +45,13 @@
               <div class="form-group form-horizontal">
               <form class="form-horizontal" method="POST" onsubmit="return Confirm();" action="{{ route('user_update',$user->id) }}">
                         {{ csrf_field() }}
+
+              <div class="form-group col-md-12 form-horizontal">         
+              <label for="title" class="col-md-4 control-label" style="text-align:right;">職務名稱:</label>
+              <div class="col-md-8">
+              <input type="text" name="title" class=" col-md-8 form-control" style="width: 100%;text-align: center" value="{{$user->title}}" required>            
+              </div>
+              </div>
 
               <div class="form-group col-md-12 form-horizontal">         
               <label for="user_group_name" class="col-md-4 control-label" style="text-align:right;">用戶組別:</label>
@@ -86,6 +93,21 @@
                                 @endforeach
                             @endforeach
                             </select>            
+              </div>
+              </div>
+
+              <div class="form-group col-md-12 form-horizontal">         
+              <label for="phone" class="col-md-4 control-label" style="text-align:right;">聯絡電話:</label>
+              <div class="col-md-8">
+              <input type="text" name="phone" class=" col-md-8 form-control" style="width: 70%;text-align: center" value="{{$user->phone}}" required>
+              <input type="text" name="ext" class=" col-md-2 form-control" style="width: 25%;text-align: center;left: 10px;" value="{{$user->ext}}" required>             
+              </div>
+              </div>
+
+              <div class="form-group col-md-12 form-horizontal">         
+              <label for="mobile" class="col-md-4 control-label" style="text-align:right;">手機電話:</label>
+              <div class="col-md-8">
+              <input type="text" name="mobile" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="{{$user->mobile}}" required>                    
               </div>
               </div>
 
