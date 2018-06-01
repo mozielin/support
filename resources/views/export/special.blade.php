@@ -38,11 +38,11 @@
 				@endforeach
 				</td>
 			    <td>{{$tdata->company_name}}</td>
-			    <td>https://cloud.teamplus.com.tw/enterprise/download.aspx?q={{$tdata->licensekey}}&k=d5f2d6s9-dfs5-ef35-df53-v86proupdate
+			    <td>https://cloud.teamplus.com.tw/enterprise/download.aspx?q={{$tdata->licensekey}}&k={{$k->value}}
 				</td>
 			    <td>
 			    @foreach($users as $udata)
-			    	@if($udata->id == $tdata->company_server_builder)
+			    	@if($udata->id == $tdata->company_sales_id)
 			    		{{$udata->title}}：{{$udata->name}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
 						聯絡電話：{{$udata->phone}} 分機 {{$udata->ext}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
 						手機號碼：{{$udata->mobile}}<br style='mso-data-placement:same-cell;wrap-text: true;'/>
