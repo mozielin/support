@@ -25,7 +25,7 @@
 		    </td>
 		    	<td>
 		    	@foreach($users as $udata)
-			    	@if($udata->id == $tdata->company_server_builder)
+			    	@if($udata->id == $tdata->com_sales_id)
 			    		{{$udata->email}}		    		
 			    	@endif
 				@endforeach
