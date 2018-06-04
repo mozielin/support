@@ -53,7 +53,7 @@
 			    <td>{{$cdata->company_cel}}</td>
 			    <td>
 			    @foreach($users as $udata)
-			    	@if($udata->id == $cdata->company_contract_builder)		    	
+			    	@if($udata->id == $cdata->com_sales_id)		    	
 						{{$udata->name}}
 			    	@endif
 				@endforeach
@@ -85,13 +85,29 @@
 					    <td>{{$ccdata->status_name}}</td>
 					    <td>{{$ccdata->note}}</td>
 			    		@break
+			    	@else
+			    		<td></td>
+					    <td></td>
+					    <td></td>
+					    <td></td>
+					    <td></td>
+					    <td></td>
+					    <td></td>
+					    <td></td>
+					    <td></td>
+					    @break
 			    	@endif
+
 				@endforeach
 				@foreach($license as $ldata)
 			    	@if($ldata->company_id == $cdata->id)		    	
 						<td>{{$ldata->start_at}}</td>
 						<td>{{$ldata->expir_at}}</td>
 						@break
+					@else
+						<td></td>
+					    <td></td>
+					    @break
 			    	@endif
 				@endforeach
 				 <td>

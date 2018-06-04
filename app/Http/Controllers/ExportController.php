@@ -104,6 +104,12 @@ class ExportController extends Controller
               						->select('company_contract.*','company.company_name','status.status_name','plan.plan_name')
               						->orderBy('company_contract.id','DESC')->get();
 
+              $contractf = contract::join('plan','company_contract.contract_plan','=','plan.id')
+              						->join('company','company_contract.company_contract','company.id')
+              						->join('status','company_contract.contract_status','=','status.id')
+              						->select('company_contract.*','company.company_name','status.status_name','plan.plan_name')
+              						->orderBy('company_contract.id','DESC')->first();
+
           
               //server資料		
               //$servernum = server::where('company_server','=',$company_id)->count();
@@ -117,7 +123,7 @@ class ExportController extends Controller
 
 			
 
-			\Excel::create('總表_'.$time, function($excel)use($company,$applicant,$users,$contract,$license,$server,$tlc,$manager) {
+			\Excel::create('總表_'.$time, function($excel)use($company,$applicant,$users,$contract,$license,$server,$tlc,$manager,$contractf) {
 
 	    	$excel->sheet('Company', function($sheet)use($company,$applicant,$users,$contract,$license,$manager) {
 	    		//return dd($contract);
