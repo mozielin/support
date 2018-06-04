@@ -17,8 +17,8 @@
           <!--區塊標題-->
           <label for="id" class="col-md-2" style="text-align:left;">ID:
           {{$data->id}}</label>
-          <label for="company_name" class="col-md-8 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; ">
-          {{$data->lic_name}}</label>
+          <label for="company_name" class="col-md-8 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; "><a href="{{route('company_view',$data->company_id)}}">
+                    {{$data->company_name}}</a></label>
           <label for="nothing" class="col-md-2" style="text-align:right;">Createby_{{$data->name}}</label>
         </div>
         <!--區塊內容-->
@@ -154,7 +154,7 @@
               </div>
 
               <div class="col-md-2 col-md-offset-3" style="text-align:center;">
-                <button type="button" class="btn btn-primary" onclick="location.href='{{route('license_index')}}'">
+                <button type="button" class="btn btn-primary" onclick="location.href='{{route('company_view',$data->company_id)}}'">
                 <i class="glyphicon glyphicon-backward"></i>
                 返回
                 </button>

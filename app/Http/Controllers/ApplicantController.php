@@ -23,6 +23,10 @@ class ApplicantController extends Controller
 	}
 
 	public function index(){
+
+        //$ip = \Request()->ip();
+
+        //return dd($ip);
 		$applicant = applicant::join('company','company_applicant.company_id','=','company.id')
 								->select('company_applicant.*','company.company_name')
 								->orderBy('company_applicant.id','desc')->paginate(5);
