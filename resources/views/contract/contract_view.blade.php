@@ -15,7 +15,7 @@
       <div class="panel panel-default" >
         <div class="panel-heading" style="text-align:center; height:40px">
           <!--區塊標題-->
-          <label for="id" class="col-md-2" style="text-align:left;">合約編號:
+          <label for="id" class="col-md-2" style="text-align:left;">ID:
           {{$data->id}}</label>
           <label for="company_name" class="col-md-8 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; ">
           {{$data->contract_title}}</label>
