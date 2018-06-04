@@ -30,7 +30,10 @@ class ContractController extends Controller
 
 	public function index(){
 
-        return view('contract.contract_all'); 
+        $count = contract::count();
+
+        return view('contract.contract_all')
+                ->with('count',$count); 
 	}	
 
     public function view($id){

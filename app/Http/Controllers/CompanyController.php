@@ -50,8 +50,11 @@ class CompanyController extends Controller
 	
 
 	public function index(){
+
+    $count = company::count();
 	
-		return view('company.company_all');
+		return view('company.company_all')
+            ->with('count',$count);
 		}	
 
   public function companytrash(){

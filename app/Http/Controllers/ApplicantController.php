@@ -27,7 +27,10 @@ class ApplicantController extends Controller
 								->select('company_applicant.*','company.company_name')
 								->orderBy('company_applicant.id','desc')->paginate(5);
         $vip = 0;
-		return view('applicant.applicant_all',['applicant' => $applicant,'vip' => $vip]); 
+
+        $count = applicant::count();
+		return view('applicant.applicant_all',['applicant' => $applicant,'vip' => $vip])
+                ->with('count',$count); 
 	}
 
 	public function view($id){

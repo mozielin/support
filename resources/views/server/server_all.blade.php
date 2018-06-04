@@ -1,6 +1,11 @@
 @extends('layouts.master')
 @section('title')
+<div class="col-md-6">
 <h2 style="margin-top: 2px;">Server列表</h2>
+</div>
+<div class="col-md-6">
+<p style="float: right;">總數:{{$count}}</p>
+</div>
 @endsection
 @section('contentm')
 <!--中間選單-->

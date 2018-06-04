@@ -10,7 +10,7 @@
 </div>
 <div class="container" style="width:780px;min-height:250px;height:100%;margin-right:218px;">
 	<div class="panel panel-default">
-		<div class="panel-heading" style="height:100%;">
+		<div class="panel-heading" style="height:400px;">
 		    <div class="panel-body" style="height:100%">
         	<div class="form-horizontal" style="height:100%">
 

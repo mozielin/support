@@ -41,11 +41,14 @@ class UserController extends Controller
         //$group = group::where('id','=',Auth::user()->user_group)->first();
         //$Sgroup = $group->user_group_name;
         //\Session::put('group', $Sgroup);
+
+        $count = User::count();
         
         $order = 0;
 	return view('user.user_all')
                 ->with('data',$data)
-                ->with('order',$order);
+                ->with('order',$order)
+                ->with('count',$count);
                 //->with('user_group',$user_group); 
 	}	
 

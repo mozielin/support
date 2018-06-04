@@ -24,7 +24,10 @@ class ServerController extends Controller
 
     public function index(){
 
-		return view('server.server_all'); 
+        $count = server::count();
+
+		return view('server.server_all')
+                ->with('count',$count); 
 	}	
 
  	public function create(){

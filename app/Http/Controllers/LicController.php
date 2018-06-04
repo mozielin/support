@@ -30,8 +30,11 @@ class LicController extends Controller
 	}
 
 	public function index(){
+
+        $count = license::count();
 		
-		return view('license.license_all'); 
+		return view('license.license_all')
+            ->with('count',$count); 
 	}	
 
     public function view($id){

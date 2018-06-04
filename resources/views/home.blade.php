@@ -3,12 +3,12 @@
 
 <div class="container" style="width:780px;height:100%;margin-right:218px;">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading" style="height:500px;">
             <div class="panel-heading">Welcome {{Auth::user()->name}}<p style="float: right;">Login_at: {{$time}}</p>
             </div>
 		        <div class="panel-body">
                     <div class="panel panel-default" >
-        <div class="panel-heading" style="text-align:center; height:40px">
+        <div class="panel-heading" style="text-align:center; height:40px;">
     <!--區塊標題-->
           <label for="id" class="col-md-3" style="text-align:left;"> 公告編號:{{$data->id}}
           </label>

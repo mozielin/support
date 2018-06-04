@@ -44,7 +44,7 @@ Route::group(['prefix'=>'company','middleware' => ['permission:company_view']], 
 
       Route::get('viewtrash/{company_id}', 'CompanyController@viewtrash')->name('company_viewtrash');
 
-      Route::get('create', 'CompanyController@create')->name('company_create');
+      Route::get('create',['middleware' => ['permission:company_create'], 'uses' => 'CompanyController@create'])->name('company_create');
 
       Route::post('store', 'CompanyController@store')->name('company_store');
 
@@ -176,15 +176,15 @@ Route::group(['prefix'=>'user','middleware' => ['permission:user_view']], functi
 
       Route::get('view/{user_id}', 'UserController@view')->name('user_view');
 
-      Route::get('create', 'UserController@create')->name('user_create');
+      Route::get('create',['middleware' => ['permission:user_create'], 'uses' => 'UserController@create'])->name('user_create');
 
-      Route::post('store', 'UserController@store')->name('user_store');
+      Route::post('store',['middleware' => ['permission:user_create'], 'uses' => 'UserController@store'])->name('user_store');
 
-      Route::get('edit/{user_id}', 'UserController@edit')->name('user_edit');
+      Route::get('edit/{user_id}',['middleware' => ['permission:user_edit'], 'uses' => 'UserController@edit'])->name('user_edit');
 
-      Route::post('update/{user_id}', 'UserController@update')->name('user_update');
+      Route::post('update/{user_id}', ['middleware' => ['permission:user_edit'], 'uses' =>'UserController@update'])->name('user_update');
 
-      Route::get('delete/{user_id}', 'UserController@delete')->name('user_delete');
+      Route::get('delete/{user_id}',['middleware' => ['permission:user_delete'], 'uses' => 'UserController@delete'])->name('user_delete');
 
       Route::name('user_upload')->post('/upload/{user_id}','UserController@upload');
 
@@ -194,7 +194,7 @@ Route::group(['prefix'=>'user','middleware' => ['permission:user_view']], functi
 
 });
 
-Route::group(['prefix'=>'group','middleware' => ['permission:user_view']], function(){
+Route::group(['prefix'=>'group','middleware' => ['role:admin|devenlope']], function(){
 
       Route::name('user_group_index')->get('/', 'GroupController@index');
 
@@ -217,23 +217,23 @@ Route::group(['prefix'=>'server','middleware' => ['permission:server_view']], fu
 
       Route::get('view/{server_id}', 'ServerController@view')->name('server_view');
 
-      Route::get('create/', 'ServerController@create')->name('server_create');
+      Route::get('create/',['middleware' => ['permission:server_create'], 'uses' => 'ServerController@create'])->name('server_create');
 
-      Route::get('create_by/{id}', 'ServerController@create_by')->name('server_create_by');
+      Route::get('create_by/{id}', ['middleware' => ['permission:server_create'], 'uses' =>'ServerController@create_by'])->name('server_create_by');
 
-      Route::post('store/', 'ServerController@store')->name('server_store');
+      Route::post('store/', ['middleware' => ['permission:server_create'], 'uses' =>'ServerController@store'])->name('server_store');
 
-      Route::get('edit/{server_id}', 'ServerController@edit')->name('server_edit');
+      Route::get('edit/{server_id}', ['middleware' => ['permission:server_edit'], 'uses' =>'ServerController@edit'])->name('server_edit');
 
-      Route::post('update/{id}', 'ServerController@update')->name('server_update');
+      Route::post('update/{id}',['middleware' => ['permission:server_edit'], 'uses' => 'ServerController@update'])->name('server_update');
 
-      Route::get('delete/{server_id}', 'ServerController@delete')->name('server_delete');
+      Route::get('delete/{server_id}',['middleware' => ['permission:server_delete'], 'uses' => 'ServerController@delete'])->name('server_delete');
 
       Route::name('serversearch')->get('/serversearch','ServerController@serversearch');
 
       Route::name('serverload')->get('/loadserver','ServerController@loadserver');
 
-      Route::name('servercatch')->get('/servercatch','ScheduleController@servercatch');
+      Route::name('servercatch')->get('/servercatch',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@servercatch']);
 });
 
 Route::group(['prefix'=>'contract','middleware' => ['permission:contract_view']], function(){
@@ -244,19 +244,19 @@ Route::group(['prefix'=>'contract','middleware' => ['permission:contract_view']]
 
       Route::name('contract_show')->get('/show/{company_contract_picture}','ContractController@show');
 
-      Route::name('contract_create')->get('create', 'ContractController@create');
+      Route::name('contract_create')->get('create', ['middleware' => ['permission:contract_create'], 'uses' =>'ContractController@create']);
 
-      Route::name('contract_create_by')->get('create_by/{id}', 'ContractController@create_by');
+      Route::name('contract_create_by')->get('create_by/{id}',['middleware' => ['permission:contract_create'], 'uses' => 'ContractController@create_by']);
 
-      Route::post('store', 'ContractController@store')->name('contract_store');
+      Route::post('store',['middleware' => ['permission:contract_create'], 'uses' => 'ContractController@store'])->name('contract_store');
 
-      Route::get('edit/{id}', 'ContractController@edit')->name('contract_edit');
+      Route::get('edit/{id}', ['middleware' => ['permission:contract_edit'], 'uses' =>'ContractController@edit'])->name('contract_edit');
 
       Route::post('upload', 'ContractController@upload')->name('contract_upload');
 
-      Route::post('update/{id}', 'ContractController@update')->name('contract_update');
+      Route::post('update/{id}', ['middleware' => ['permission:contract_edit'], 'uses' =>'ContractController@update'])->name('contract_update');
 
-      Route::name('contract_delete')->get('/delete/{id}', 'ContractController@delete');
+      Route::name('contract_delete')->get('/delete/{id}',['middleware' => ['permission:contract_delete'], 'uses' => 'ContractController@delete']);
 
       Route::name('contract_filedelete')->get('/filedelete/{id}','ContractController@filedelete');
 
@@ -268,9 +268,9 @@ Route::group(['prefix'=>'contract','middleware' => ['permission:contract_view']]
 
       Route::name('contractload')->get('/loadcon','ContractController@loadcon');
 
-      Route::name('contractalert')->post('/contractalert','ScheduleController@contractalert');
+      Route::name('contractalert')->post('/contractalert',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@contractalert']);
 
-      Route::name('contractcheck')->get('/contractcheck','ScheduleController@contractcheck');
+      Route::name('contractcheck')->get('/contractcheck',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@contractcheck']);
       
 
 });
@@ -282,7 +282,7 @@ Route::name('contract_123')->get('/dynamicsearch','VerController@dynamicsearch')
 Route::name('autocomplete')->get('/autocomplete',array('as' =>'autocomplete','uses'=>'VerController@autocomplete'));
 
 
-Route::group(['prefix'=>'function'], function(){
+Route::group(['prefix'=>'function','middleware' => ['role:admin|devenlope']], function(){
 
       Route::name('function_all')->get('/', 'FunctionController@index');
 
@@ -308,20 +308,20 @@ Route::group(['prefix'=>'seadmin','middleware' => ['permission:seadmin_view']], 
 
       Route::name('seadmin_search')->get('/seadminsearch','SeController@seadminsearch');
 
-      Route::name('seadmin_create')->get('create', 'SeController@create');
+      Route::name('seadmin_create')->get('create',['middleware' => ['permission:seadmin_create'], 'uses' => 'SeController@create']);
 
-      Route::name('seadmin_store')->post('store', 'SeController@store');
+      Route::name('seadmin_store')->post('store',['middleware' => ['permission:seadmin_create'], 'uses' => 'SeController@store']);
 
-      Route::name('seadmin_edit')->get('edit/{id}', 'SeController@edit');
+      Route::name('seadmin_edit')->get('edit/{id}',['middleware' => ['permission:seadmin_edit'], 'uses' => 'SeController@edit']);
 
-      Route::name('seadmin_update')->post('update/{id}', 'SeController@update');
+      Route::name('seadmin_update')->post('update/{id}',['middleware' => ['permission:seadmin_edit'], 'uses' => 'SeController@update']);
 
-      Route::name('seadmin_delete')->get('delete/{id}', 'SeController@delete');   
+      Route::name('seadmin_delete')->get('delete/{id}',['middleware' => ['permission:seadmin_delete'], 'uses' => 'SeController@delete']);   
 
       //Route::name('seadmin_tlc')->get('/seadmin_tlc',array('as' =>'seadmin_tlc','uses'=>'SeController@seadmin_tlc'));
       Route::name('seadmin_tlc')->get('/seadmin_tlc','SeController@seadmin_tlc');
 
-      Route::name('tlcalert')->get('/tlcalert','ScheduleController@tlcalert');
+      Route::name('tlcalert')->get('/tlcalert',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@tlcalert']);
 
       Route::name('seadmin_lic')->post('/licscan','SeController@licscan'); 
 
@@ -344,17 +344,17 @@ Route::group(['prefix'=>'applicant','middleware' => ['permission:applicant_view'
 
       Route::name('applicant_show')->get('/show/{company_applicant_picture}','ApplicantController@show');
 
-      Route::name('applicant_create')->get('create', 'ApplicantController@create');
+      Route::name('applicant_create')->get('create',['middleware' => ['permission:applicant_create'], 'uses' => 'ApplicantController@create']);
 
-      Route::name('applicant_create_by')->get('create_by/{id}', 'ApplicantController@create_by');
+      Route::name('applicant_create_by')->get('create_by/{id}', ['middleware' => ['permission:applicant_create'], 'uses' =>'ApplicantController@create_by']);
 
-      Route::post('store', 'ApplicantController@store')->name('applicant_store');
+      Route::post('store',['middleware' => ['permission:applicant_create'], 'uses' => 'ApplicantController@store'])->name('applicant_store');
 
-      Route::get('edit/{id}', 'ApplicantController@edit')->name('applicant_edit');
+      Route::get('edit/{id}', ['middleware' => ['permission:applicant_edit'], 'uses' =>'ApplicantController@edit'])->name('applicant_edit');
 
       Route::post('upload', 'ApplicantController@upload')->name('applicant_upload');
 
-      Route::post('update/{id}', 'ApplicantController@update')->name('applicant_update');
+      Route::post('update/{id}', ['middleware' => ['permission:applicant_edit'], 'uses' =>'ApplicantController@update'])->name('applicant_update');
 
       Route::name('applicant_delete')->get('/delete/{id}', 'ApplicantController@delete');
 
@@ -414,39 +414,39 @@ Route::group(['prefix'=>'license','middleware' => ['permission:license_view']], 
 
       //Route::name('license_show')->get('/show/{lic_picture}','LicController@show');
 
-      Route::name('license_create')->get('create', 'LicController@create');
+      Route::name('license_create')->get('create', ['middleware' => ['permission:license_create'], 'uses' =>'LicController@create']);
 
-      Route::name('license_create_test')->get('create_test', 'LicController@create_test');
+      Route::name('license_create_test')->get('create_test',['middleware' => ['permission:license_create'], 'uses' => 'LicController@create_test']);
 
-      Route::name('upload_by')->get('upload_by/{id}', 'LicController@upload_by');
+      Route::name('upload_by')->get('upload_by/{id}', ['middleware' => ['permission:license_create'], 'uses' =>'LicController@upload_by']);
 
-      Route::post('store', 'LicController@store')->name('license_store');
+      Route::post('store',['middleware' => ['permission:license_create'], 'uses' => 'LicController@store'])->name('license_store');
 
-      Route::get('edit/{id}', 'LicController@edit')->name('license_edit');
+      Route::get('edit/{id}',['middleware' => ['permission:license_edit'], 'uses' => 'LicController@edit'])->name('license_edit');
 
-      Route::post('upload', 'LicController@upload')->name('license_upload');
+      Route::post('upload',['middleware' => ['permission:license_edit'], 'uses' => 'LicController@upload'])->name('license_upload');
 
-      Route::post('upload_store', 'LicController@upload_store')->name('upload_store');
+      Route::post('upload_store', ['middleware' => ['permission:license_edit'], 'uses' =>'LicController@upload_store'])->name('upload_store');
 
-      Route::get('upload_by/{id}', 'LicController@upload_by')->name('upload_by');
+      Route::get('upload_by/{id}', ['middleware' => ['permission:license_edit'], 'uses' =>'LicController@upload_by'])->name('upload_by');
 
-      Route::post('upload_create', 'LicController@upload_create')->name('upload_create');
+      Route::post('upload_create', ['middleware' => ['permission:license_edit'], 'uses' =>'LicController@upload_create'])->name('upload_create');
 
-      Route::post('update/{id}', 'LicController@update')->name('license_update');
+      Route::post('update/{id}', ['middleware' => ['permission:license_edit'], 'uses' =>'LicController@update'])->name('license_update');
 
       Route::get('cancel/{company_id}/{filepath}', 'LicController@cancel')->name('license_cancel');
 
-      Route::name('license_delete')->get('/delete/{id}', 'LicController@delete');
+      Route::name('license_delete')->get('/delete/{id}',['middleware' => ['permission:license_delete'], 'uses' => 'LicController@delete']);
 
-      Route::name('license_filedelete')->get('/filedelete/{id}','LicController@filedelete');
+      Route::name('license_filedelete')->get('/filedelete/{id}',['middleware' => ['permission:license_delete'], 'uses' =>'LicController@filedelete']);
 
       Route::name('license_get')->post('get','LicController@get'); 
 
       Route::name('license_auto')->get('/license_auto',array('as' =>'license_auto','uses'=>'LicController@license_auto'));
 
-      Route::name('licensealert')->get('/licensealert','ScheduleController@licensealert');
+      Route::name('licensealert')->get('/licensealert',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@licensealert']);
 
-      Route::name('licensecheck')->get('/licensecheck','ScheduleController@licensecheck');
+      Route::name('licensecheck')->get('/licensecheck',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@licensecheck']);
 
       Route::name('licsearch')->get('/licsearch','LicController@licsearch');
 
@@ -465,24 +465,24 @@ Route::group(['prefix'=>'bulletin','middleware' => ['permission:bulletin_view']]
 
       Route::name('bulletin_search')->get('/bulletinsearch','BulletinController@bulletinsearch');
 
-      Route::name('bulletin_create')->get('create', 'BulletinController@create');
+      Route::name('bulletin_create')->get('create', ['middleware' => ['permission:bulletin_create'], 'uses' =>'BulletinController@create']);
 
-      Route::name('bulletin_store')->post('store', 'BulletinController@store');
+      Route::name('bulletin_store')->post('store',['middleware' => ['permission:bulletin_create'], 'uses' => 'BulletinController@store']);
 
-      Route::name('bulletin_edit')->get('edit/{id}', 'BulletinController@edit');
+      Route::name('bulletin_edit')->get('edit/{id}', ['middleware' => ['permission:bulletin_edit'], 'uses' =>'BulletinController@edit']);
 
-      Route::name('bulletin_update')->post('update/{id}', 'BulletinController@update');
+      Route::name('bulletin_update')->post('update/{id}', ['middleware' => ['permission:bulletin_edit'], 'uses' =>'BulletinController@update']);
 
-      Route::name('bulletin_delete')->get('delete/{id}', 'BulletinController@delete');   
+      Route::name('bulletin_delete')->get('delete/{id}', ['middleware' => ['permission:bulletin_delete'], 'uses' =>'BulletinController@delete']);   
 });
 
 Route::group(['prefix'=>'manager','middleware' => ['permission:company_view']], function(){
 
-      Route::name('manager_edit')->get('edit/{id}', 'ManagerController@edit');
+      Route::name('manager_edit')->get('edit/{id}', ['middleware' => ['permission:company_edit'], 'uses' =>'ManagerController@edit']);
 
-      Route::name('manager_update')->post('update/{id}', 'ManagerController@update');
+      Route::name('manager_update')->post('update/{id}', ['middleware' => ['permission:company_edit'], 'uses' =>'ManagerController@update']);
 
-      Route::name('manager_delete')->get('delete/{id}', 'ManagerController@delete');   
+      Route::name('manager_delete')->get('delete/{id}',['middleware' => ['permission:company_delete'], 'uses' => 'ManagerController@delete']);   
 });
 
 Route::group(['prefix'=>'activity','middleware' => ['role:admin|devenlope']], function(){
