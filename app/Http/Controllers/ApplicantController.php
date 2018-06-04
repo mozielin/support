@@ -179,8 +179,13 @@ class ApplicantController extends Controller
 
 	public function delete($id){
 
+        $applicant = applicant::find($id);
+
+        $backid = $applicant->company_id;
+
 		applicant::destroy($id);
-		return redirect()->action('ApplicantController@index');
+		//return redirect()->action('ApplicantController@index');
+        return redirect()->route('company_view', [$backid]);
         }
 
 

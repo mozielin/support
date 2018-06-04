@@ -154,8 +154,13 @@ class ServerController extends Controller
 
 	public function delete($id){
 
+        $server = server::find($id);
+
+        $backid = $server->company_server;
+
 		server::destroy($id);
-		return redirect()->action('ServerController@index');
+		//return redirect()->action('ServerController@index');
+        return redirect()->route('company_view', [$backid]);
         }
 
 

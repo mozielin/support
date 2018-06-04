@@ -313,16 +313,22 @@ class ContractController extends Controller
 
         $contract_file = contract_file::where('contract_id','=',$id)->get();
 
+
         foreach ($contract_file as $data) {
             $deletename = $data->file_name;
             Storage::delete("/public/contract/$deletename");
             contract_file::destroy($data->id);
         }
 
+        $contract = contract::find($id);
+
+        $backid = $contract->company_contract;
 
         contract::destroy($id);
 
-        return redirect()->action('ContractController@index');
+        //return redirect()->action('CompanyController@view')->with('company_id',$backid);
+
+        return redirect()->route('company_view', [$backid]);
        
     }
 

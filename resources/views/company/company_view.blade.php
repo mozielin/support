@@ -46,11 +46,11 @@
               </div>
               
               <div class="form-group col-md-12 form-horizontal">
-                
-                <label for="company_create" class="col-md-2 control-label" style="text-align:right;">申請日期:</label>
+
+                <label for="company_cel" class="col-md-2 control-label" style="text-align:right;">公司電話:</label>
                 <div class="col-md-4">
-                  <input type="date" name="company_create" style="padding-left:50px;" class=" col-md-4 form-control" value="{{$data->company_create}}" readonly >   
-                </div>
+                  <input type="text" name="company_cel" class=" col-md-4 form-control" value="{{$data->company_cel}}" readonly >
+                </div> 
 
                 <label for="company_business" class="col-md-2 control-label" style="text-align:right;">負責業務:</label>
                 <div class="col-md-4">
@@ -85,10 +85,10 @@
               </div>
 
               <div class="form-group col-md-12 form-horizontal"> 
-                <label for="company_cel" class="col-md-2 control-label" style="text-align:right;">公司電話:</label>
+                <label for="company_btn" class="col-md-2 control-label" style="text-align:right;">公司地區:</label>
                 <div class="col-md-4">
-                  <input type="text" name="company_cel" class=" col-md-4 form-control" value="{{$data->company_cel}}" readonly >
-                </div>  
+                  <input type="text" name="company_area" class=" col-md-4 form-control" value="{{$data->area_name.$data->company_area2}}" readonly>
+                </div>
                         
                 <label for="contract_plan" class="col-md-2 control-label" style="text-align:right;">合約方案:</label>
                 <div class="col-md-4">               
@@ -97,21 +97,9 @@
               </div> 
 
               <div class="form-group col-md-12 form-horizontal">
-                <label for="company_url" class="col-md-2 control-label" style="text-align:right;">公司網站:</label>
+                 <label for="company_create" class="col-md-2 control-label" style="text-align:right;">申請日期:</label>
                 <div class="col-md-4">
-                  <input type="text" name="company_url" class=" col-md-4 form-control" value="{{$data->company_url}}" readonly >
-                </div>
-
-                 <label for="status_name" class="col-md-2 control-label" style="text-align:right;">合約狀態:</label>
-                <div class="col-md-4">
-                  <input type="text" name="status_name" class=" col-md-4 form-control" value="{{$contractstatus}}" readonly >   
-                </div> 
-              </div>
-
-              <div class="form-group col-md-12 form-horizontal">
-                <label for="company_btn" class="col-md-2 control-label" style="text-align:right;">公司地區:</label>
-                <div class="col-md-4">
-                  <input type="text" name="company_area" class=" col-md-4 form-control" value="{{$data->area_name.$data->company_area2}}" readonly>
+                  <input type="date" name="company_create" style="padding-left:50px;" class=" col-md-4 form-control" value="{{$data->company_create}}" readonly >   
                 </div>
 
                 <label for="contract_plan" class="col-md-2 control-label" style="text-align:right;">申請方案:</label>
@@ -121,10 +109,7 @@
               </div>
 
               <div class="form-group col-md-12 form-horizontal" style="height:36px;">
-                
-                  <label for="" class="col-md-2 control-label" style="text-align:right;"></label>
-                  <div class="col-md-4">
-                     @permission('none')
+                 @permission('none')
                   <div id="accordion" class="col-md-6" style="width:223px;text-align:left;z-index:1;">
                   <h3 style="text-align:center;margin-left:0px!important;margin-top:3px!important;overflow: visible;">進階</h3>
                     <div class="col-md-12" style="padding-left:0px!important;padding-right:0px!important;overflow: visible;">
@@ -148,8 +133,10 @@
                     </div>
                     </div>
                     @endpermission
-                  </div>
-                
+                <label for="company_url" class="col-md-2 control-label" style="text-align:right;">公司網站:</label>
+                <div class="col-md-4">
+                <input type="text" name="company_url" class=" col-md-4 form-control" value="{{$data->company_url}}" readonly >
+                </div>
                 
                 <label for="company_status" class="col-md-2 control-label" style="text-align:right;">案件狀態:</label>
                 <div class="col-md-4">

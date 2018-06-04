@@ -400,11 +400,14 @@ class LicController extends Controller
     public function delete($id){
 
             $data = license::find($id);
+            $backid = $data->company_id;
             $data -> delete(); 
     
             
 
-        return redirect()->action('LicController@index');
+        //return redirect()->action('LicController@index');
+
+        return redirect()->route('company_view', [$backid]);
        
     }
 
