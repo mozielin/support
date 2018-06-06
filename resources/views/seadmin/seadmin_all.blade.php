@@ -61,6 +61,20 @@
 				</div>
 				<div class="col-md-5 col-md-offset-1 right-side">
 				<!--右邊的新增區塊-->
+					@if (Session::has('checkno_message'))
+					<div class="alert alert-info fade in" style="width:250px;position:absolute;right:100px;top:-6px;text-align:center;">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;
+						</button>
+						{{ Session::get('checkno_message') }}
+					</div>
+					@endif
+					@if (Session::has('check_message'))
+				<div class="alert alert-success fade in" style="width:250px;position:absolute;right:100px;top:-6px;text-align:center;">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;
+					</button>
+					{{ Session::get('check_message') }}
+				</div>
+				@endif
 					@role('devenlope')
 						<button type="button"  class="btn btn-primary" style="float: left;" onclick="location.href='{{route('seadmin_uploadlic')}}'"><i class="glyphicon glyphicon-info"></i> Lic分析 </button>
 					@endrole

@@ -498,6 +498,7 @@ class ContractController extends Controller
                     ->select('company_contract.*','company.company_name','plan.plan_name','status.status_name')
                     ->where('company_name','LIKE','%'.$request->contractsearch.'%')
                     ->orWhere('contract_title','LIKE','%'.$request->contractsearch.'%')
+                    ->orWhere('plan_name','LIKE','%'.$request->contractsearch.'%')
                     ->orderBy('company_contract.id','desc')
                     ->get();
             }

@@ -389,12 +389,35 @@ class ScheduleController extends Controller
 
         //return dd($contract);
         foreach ($contract as $udata) {
-                # code...   
+        	//API
+        	 	//return $udata->name;
+        		$account_list = json_encode([$udata->email]);
+        		$content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->contract_title.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！';
+        		//return $array;
+                $client = new Client();
+                $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
+                    'form_params' => [
+                        'ch_sn' => '6104',
+                        'api_key' => '726522eba8654146a7f9588fa0a97dfb',
+                        'content_type' => '1',
+                        'text_content' => $content,
+                        'media_content' => 'API test',
+                        'file_show_name' => '',
+                        'msg_push' => '合約到期通知',
+                        'account_list' => $account_list,
+                    ]
+                ]);
+
+                $body = $res->getBody();
+                $stringbody = string($body);
+                $body = json_decode($res->getBody());
+                //return dd($body);
+                /*mail# code...   
                 $from = ['email'=> 'support@teamplus.com.tw',
                 'name'=>'Team+ Support',
                 'subject'=> '合約到期通知'];
                
-            //mail
+            
                 $to = ['email'=> $udata->email,
                 'name'=> $udata->name];
                 //信件的內容(即表單填寫的資料)
@@ -411,7 +434,7 @@ class ScheduleController extends Controller
                 //$message->from($from['email'], $from['name']);
                 //$message->to($to['email'], $to['name'])->subject($from['subject']);
                 //}); 
-                Mail::to($udata->email)->send(new ContractAlert($content));
+                Mail::to($udata->email)->send(new ContractAlert($content));*/
              
         }
         //return dd("Done");
@@ -445,12 +468,37 @@ class ScheduleController extends Controller
 
         //return dd($license);
         foreach ($license as $udata) {
+
+        		$account_list = json_encode([$udata->email]);
+        		$content = $udata->company_name.'License授權時間將於'.$udata->expir_at.'到期，特發此提醒，如需申請展延，敬請提早洽談續約事宜並預留申請作業時間。預祝您一切順利！';
+        		
+
+
+        		//return $array;
+                $client = new Client();
+                $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
+                    'form_params' => [
+                        'ch_sn' => '6104',
+                        'api_key' => '726522eba8654146a7f9588fa0a97dfb',
+                        'content_type' => '1',
+                        'text_content' => $content,
+                        'media_content' => 'API test',
+                        'file_show_name' => '',
+                        'msg_push' => 'LicenseKey到期通知',
+                        'account_list' => $account_list,
+                    ]
+                ]);
+
+                $body = $res->getBody();
+                $stringbody = string($body);
+                $body = json_decode($res->getBody());
                 # code...   
-                $from = ['email'=> 'support@teamplus.com.tw',
+               
+               
+            /*mail
+            	 $from = ['email'=> 'support@teamplus.com.tw',
                 'name'=>'Team+ Support',
                 'subject'=> 'License到期通知'];
-               
-            //mail
                 $to = ['email'=> $udata->email,
                 'name'=> $udata->name];
                 //信件的內容(即表單填寫的資料)
@@ -473,7 +521,7 @@ class ScheduleController extends Controller
                 //}); 
 
                 Mail::to($udata->email)->send(new LicenseAlert($license));
-
+				*/
              
                }
          \Session::flash('check_message', 'Check Complete!');
@@ -502,53 +550,52 @@ class ScheduleController extends Controller
     public function tlcalert(){
 
         $time = Carbon::now()->toDateString();
-        //----取得系統時間---加減(現在時間3天前)--轉為日期去掉分秒
+        //----取得系統時間---加減(現在時間1天前)--轉為日期去掉分秒
         $alerttime = Carbon::now()->modify('-1 days')->toDateString();
 
         $data = seadmin::where('company_tlc_end','=',$alerttime)
-                         ->join('users','seadmin.builder','=','users.id')
-                         ->select('seadmin.*','users.name')->get();
+                         ->join('company_user','seadmin.text','=','company_user.company_id')
+                         ->join('users','company_user.user_id','=','users.id')
+                         ->select('seadmin.*','users.email','company_user.*')->get();
 
         //View::share('data', $data);
-       // return dd($data);
+        //return dd($data);
+        if(!$data->isEmpty()){
+           foreach ($data as $seadmin) {
+           		//return dd($seadmin);
+				//$cdata = User::where('user_group','=','4')->get();
+				//$se_list = json_encode([$cdata->email]);
+				
+           		$account_list = json_encode([$seadmin->email]);
 
-       
+        		$content = $seadmin->company_name.'「視訊會議」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。';
 
-        foreach ($data as $seadmin) {
-                 //API
+        		//API
                 $client = new Client();
-                $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/TeamService.ashx?ask=postMessage', [
+                $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
                     'form_params' => [
-                        'account' => 'va_6d62ed695ce44d289d',
-                        'api_key' => '518eb5b3-d6cb-4f59-96fa-c991cec520ec',
-                        'team_sn' => '5779',
+                        'ch_sn' => '6104',
+                        'api_key' => '726522eba8654146a7f9588fa0a97dfb',
                         'content_type' => '1',
-                        'text_content' => '視訊會議已到期，'.'請'.$seadmin->name.'馬上關閉'.$seadmin->company_name.'的TLC功能唷!',
+                        'text_content' => $content,
                         'media_content' => 'API test',
-                        'subject' => 'TLC視訊會議關閉提醒',
+                        'file_show_name' => '',
+                        'msg_push' => '視訊會議到期通知',
+                        'account_list' => $account_list,
                     ]
                 ]);
 
                 $body = $res->getBody();
                 $stringbody = string($body);
                 $body = json_decode($res->getBody());
-                //return dd($body);
+				//return dd($body);
 
-        \View::share('seadmin', $seadmin);
-                $from = ['email'=>'notice@teamplus.com.tw',
-                'name'=>'Team+ Support',
-                'subject'=> 'TLC功能關閉提醒'];
-                 $cdata = User::where('user_group','=','4')->get();
-                 $tdata = User::where('user_group','=','3')->get();
-                //mail
-                $to = ['email'=>'ryan@teamplus.com.tw',
-                'name'=>'Ryan'];
-                //信件的內容(即表單填寫的資料)
-                $content = [];
+        		\View::share('seadmin', $seadmin);
+                //$content = [];
                 //$time = Carbon::now();  
 
                 //\View::share('time', $time);
-                //寄出信件
+                /*寄出信件
                 \Mail::send('email.seadmin',$content, function($message) use ($from, $tdata,$cdata) {
 
                 $message->from($from['email'], $from['name']);
@@ -564,7 +611,16 @@ class ScheduleController extends Controller
                 }
                 //->cc('jasper@teamplus.com.tw','Jasper')->cc('henry@teamplus.com.tw','Henry')
                 });
-            }
+                */
+            } 
+
+            \Session::flash('check_message', 'Check Complete!');
+        	return redirect()->action('SeController@index');
+
+        }
+
+        \Session::flash('checkno_message', 'No Expire!');
+        return redirect()->action('SeController@index'); 
     }
 
 

@@ -369,7 +369,7 @@ $('#status_name').val(ui.item.status_name);
 
             $('#company_tlc_start').datepicker({
             //minDate: 0, //從今天後日期才可選
-              minDate: tomorrow, //從明天日期才可選
+              //minDate: 0, //從明天日期才可選
                 onSelect: function (dat, inst) {
                   $('#company_tlc_end').datepicker('option', 'minDate', dat);
                 }

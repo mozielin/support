@@ -211,18 +211,6 @@ class LicController extends Controller
     
     public function upload(Request $request)
     {
-        //return dd($request);
-        $validator = Validator::make($request->all(),[
-            'lic_name' => 'required|max:20',
-            'company_name' => 'required',
-            'company_id' => 'required' ,                
-        ]);
-            //驗證失敗回傳資料及錯誤訊息
-        if ($validator->fails()){
-            return redirect('license/create')
-                ->withErrors($validator)
-                ->withInput();
-        }
 
         $license = new license;
         $license->lic_name = $request->lic_name;
@@ -272,12 +260,14 @@ class LicController extends Controller
                 ['company_name' => $request->tlc_company_name],
                 ['company_tlc_start' => $request->company_tlc_start,
                  'company_tlc_end' => $request->company_tlc_end,
+                 'text' => $request->company_id,
                  'builder' => $request->builder,]
             );
             //return dd($data);
             $data -> company_name = $request->tlc_company_name;
             $data -> company_tlc_start = $request->company_tlc_start;
             $data -> company_tlc_end = $request->company_tlc_end;
+            $data -> text = $request->company_id;
             $data -> builder = $request->builder;
             $data -> save();
         }
@@ -877,12 +867,14 @@ return view('license.license_create_by');
                 ['company_name' => $request->tlc_company_name],
                 ['company_tlc_start' => $request->company_tlc_start,
                  'company_tlc_end' => $request->company_tlc_end,
+                 'text' => $request->company_id,
                  'builder' => $request->builder,]
             );
             //return dd($data);
             $data -> company_name = $request->tlc_company_name;
             $data -> company_tlc_start = $request->company_tlc_start;
             $data -> company_tlc_end = $request->company_tlc_end;
+            $data -> text = $request->company_id; 
             $data -> builder = $request->builder;
             $data -> save();
         }

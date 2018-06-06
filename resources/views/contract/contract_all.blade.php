@@ -64,7 +64,7 @@
 				</div>
 				@endif
 				@if (Session::has('check_message'))
-				<div class="alert alert-info fade in" style="width:250px;position:absolute;left:800px;top:155px;text-align:center;">
+				<div class="alert alert-success fade in" style="width:250px;position:absolute;left:800px;top:155px;text-align:center;">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;
 					</button>
 					{{ Session::get('check_message') }}
