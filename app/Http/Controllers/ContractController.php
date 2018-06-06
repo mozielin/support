@@ -200,9 +200,7 @@ class ContractController extends Controller
             $contract->company_contract_date = $request->company_contract_date;
             $contract->company_contract_start = $request->company_contract_start;
             $contract->company_contract_end = $request->company_contract_end;
-            if($request->company_contract_check != null){
             $contract->company_contract_check = $request->company_contract_check;
-            }
             $contract->company_contract = $request->company_id;
             $contract->company_contract_builder = $request->builder;
             if ($request->has('note')) {
@@ -259,9 +257,7 @@ class ContractController extends Controller
         $contract->company_contract_date = $request->company_contract_date;
         $contract->company_contract_start = $request->company_contract_start;
         $contract->company_contract_end = $request->company_contract_end;
-        if($request->company_contract_check != null){
-        $contract->company_contract_check = $request->company_contract_check;    
-        }
+        $contract->company_contract_check = $request->company_contract_check;
         $contract->contract_update = $request->contract_update;
         $contract->contract_plan = $request->contract_plan;
         if ($request->has('note')) {

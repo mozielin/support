@@ -80,7 +80,7 @@
 					@endrole
 
 					@role('devenlope')
-						<button type="button"  class="btn btn-primary" onclick="location.href='{{route('tlcalert')}}'"><i class="glyphicon glyphicon-info"></i> test </button>
+						<button type="button"  class="btn btn-primary" onclick="location.href='{{route('tlcalert')}}'"><i class="glyphicon glyphicon-info"></i> Scan </button>
 					@endrole
 
 					<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='{{route('seadmin_create')}}'">

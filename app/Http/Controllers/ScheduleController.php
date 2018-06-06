@@ -364,10 +364,10 @@ class ScheduleController extends Controller
     public function contractcheck(){
 
          //29天後到期
-        //$time = Carbon::now()->addDays(29)->toDateString();
+        $time = Carbon::now()->addDays(90)->toDateString();
 
         //今天日期
-        $time = Carbon::now()->toDateString();
+        //$time = Carbon::now()->toDateString();
         //return dd($time);
         $contract = contract::join('company','company.id','=','company_contract.company_contract')
                             ->join('company_user','company_user.company_id','=','company.id')
@@ -443,10 +443,10 @@ class ScheduleController extends Controller
     }
 
     public function licensecheck(){
-        //29天後到期
-        //$time = Carbon::now()->addDays(30)->toDateString();
+        //30天後到期
+        $time = Carbon::now()->addDays(30)->toDateString();
         //今天到期
-        $time = Carbon::now()->toDateString();
+        //$time = Carbon::now()->toDateString();
                 //return dd($time);
         $license = license::join('company','company.id','=','license.company_id')
                             ->join('company_user','company_user.company_id','=','company.id')
@@ -551,7 +551,7 @@ class ScheduleController extends Controller
 
         $time = Carbon::now()->toDateString();
         //----取得系統時間---加減(現在時間1天前)--轉為日期去掉分秒
-        $alerttime = Carbon::now()->modify('-1 days')->toDateString();
+        $alerttime = Carbon::now()->modify('-14 days')->toDateString();
 
         $data = seadmin::where('company_tlc_end','=',$alerttime)
                          ->join('company_user','seadmin.text','=','company_user.company_id')
@@ -563,7 +563,7 @@ class ScheduleController extends Controller
         if(!$data->isEmpty()){
            foreach ($data as $seadmin) {
            		//return dd($seadmin);
-				//$cdata = User::where('user_group','=','4')->get();
+				$cdata = User::where('user_group','=','4')->get();
 				//$se_list = json_encode([$cdata->email]);
 				
            		$account_list = json_encode([$seadmin->email]);
@@ -595,23 +595,23 @@ class ScheduleController extends Controller
                 //$time = Carbon::now();  
 
                 //\View::share('time', $time);
-                /*寄出信件
-                \Mail::send('email.seadmin',$content, function($message) use ($from, $tdata,$cdata) {
+                //寄出信件
+                \Mail::send('email.seadmin',$content, function($message) use ($from,$cdata) {
 
                 $message->from($from['email'], $from['name']);
 
                 $message->subject($from['subject']);
 
-                foreach ($tdata as $to) {
-                    $message->to($to['email'], $to['name']); 
-                }
+                //foreach ($tdata as $to) {
+                //    $message->to($to['email'], $to['name']); 
+                //}
                 
                 foreach ($cdata as $cc) {
                     $message->cc($cc['email'],$cc['name']);
                 }
                 //->cc('jasper@teamplus.com.tw','Jasper')->cc('henry@teamplus.com.tw','Henry')
                 });
-                */
+                
             } 
 
             \Session::flash('check_message', 'Check Complete!');

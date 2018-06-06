@@ -62,7 +62,7 @@
 		<!--右邊的新增區塊-->
 		<div class="right-side" style="width:360px;height:57px;margin-top:3px;">
 			@role('devenlope')
-			<button type="button" style="float:left;" class="btn btn-primary" onclick="location.href='{{route('servercatch')}}'"><i class="glyphicon glyphicon-info"></i> test </button>
+			<button type="button" style="float:left;" class="btn btn-primary" onclick="location.href='{{route('servercatch')}}'"><i class="glyphicon glyphicon-info"></i> Scan </button>
 			@endrole
 			@permission('devenlope')
 			<button type="button" style="float:right;" class="btn btn-primary" onclick="location.href='{{route('server_create')}}'"><i class="glyphicon glyphicon-plus"></i> 新增Server </button>

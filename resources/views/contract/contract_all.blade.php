@@ -71,7 +71,7 @@
 				</div>
 				@endif
 				@role('devenlope')
-				<button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('contractcheck')}}'"><i class="glyphicon glyphicon-info"></i> test </button>	  
+				<button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('contractcheck')}}'"><i class="glyphicon glyphicon-info"></i> Scan </button>	  
 				@endrole
 				@permission('contract_create')
 				<a href="{{route('contract_create')}}"><button type="submit" class="btn btn-primary" style="float:right;" >

@@ -60,7 +60,7 @@
 			<!--右邊的新增區塊-->
 			<div class="right-side" style="width:360px;height:57px;margin-top:3px;float:right;">
 				@role('devenlope')
-				<button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('licensecheck')}}'"><i class="glyphicon glyphicon-info"></i> test </button>
+				<button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('licensecheck')}}'"><i class="glyphicon glyphicon-info"></i> Scan </button>
 				@endrole	  	
 				@permission('license_create_by')
 				<a href="{{route('license_create')}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>
