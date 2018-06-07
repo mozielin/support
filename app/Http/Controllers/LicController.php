@@ -51,7 +51,7 @@ class LicController extends Controller
         //return dd($ldata);
         $tlcdata = seadmin::all()->where('company_name','=',$data->company_name)->first();
         $function = functions::all();
-        //return dd($tlcdata);
+        //return dd($tlcdata,$ldata,$function);
 
        // $license_file = license_file::where('license_id','=',$id)->join('users','license_file.file_builder','=','users.id')->select('license_file.*','users.name')->get();
 

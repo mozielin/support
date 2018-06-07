@@ -133,30 +133,36 @@
                 <div class="col-md-4" style="border-left:1px solid black;">
                    {{$pedata->function_name}}
                 </div>
-                
-                  @if($pedata->select == '1' && $pedata->code == 'F01')
-           
-        
+                @foreach($ldata as $lic)
+                  @if($pedata->select == '1' && $pedata->code == 'F01' && $tlcdata!= null)
+                  
                     <div class="col-md-3" style="text-align:center;border-left:1px solid black;">
                       <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$tlcdata->company_tlc_start}}"  readonly>
                     </div>
                     <div class="col-md-3" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
                       <input id="company_tlc_end" type="text" class="form-control"  name="company_tlc_end" value="{{$tlcdata->company_tlc_end}}"  readonly>
-            
                     </div>
+                    @break
 
-                  @else
-                 
-                   
+                  @elseif($pedata->id == $lic->id)
                         <div class="col-md-3" style="text-align:center;border-left:1px solid black;">
                             <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$data->start_at}}"  readonly>
                         </div>
                         <div class="col-md-3" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
                             <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$data->expir_at}}"  readonly>
                         </div>
-
-                 
-                  @endif                  
+                    @break    
+                  @else
+                      @continue
+                        <div class="col-md-3" style="text-align:center;border-left:1px solid black;">
+                            <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="None"  readonly>
+                        </div>
+                        <div class="col-md-3" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
+                            <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="None"  readonly>
+                        </div>
+                    
+                  @endif
+                @endforeach                  
               </div>
             </div>
           </div>    
