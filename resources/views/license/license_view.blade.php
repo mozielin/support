@@ -90,33 +90,78 @@
           
             <div class="col-md-12" style="border-top:2px solid; border-top-color:#d3e0e9; padding-top:10px;">
 
-        <div class="col-md-12" style="border-bottom: 2px solid;border-bottom-color:#d3e0e9;margin-bottom:10px;">
+        <div class="panel panel-default" >
+          <div class="panel-heading " style="height:100%;">       
+            <div class="row" style="text-align:center;">
+
+              <div class="col-md-2" style=" border-left:1px solid black;"> 
+              啟用
+              </div>
           
-          <label for="display_name" class="col-md-4 control-label" style="text-align:center;">選購功能</label>
-          <label for="tlc_start" class="col-md-4 control-label" style="text-align:center;">開始時間</label>
-          <label for="tlc_end" class="col-md-4 control-label" style="text-align:center;">結束時間</label>
-          </div>
+              <div class="col-md-4" style="border-left:1px solid black;">  
+              名稱
+              </div>  
 
-             @foreach($ldata as $pedata)  
-            <div class="form-group col-md-12 form-horizontal">
-              @if($tlcdata != null && $data->company_name == $tlcdata->company_name)
-              <div class="col-md-4">
-                <input type="text" name="company_name" class=" col-md-4 form-control ColorOrange"  value="{{$pedata->function_name}}" readonly required>  
+              <div class="col-md-3" style="border-left:1px solid black;">  
+              開始日期
               </div>
-              <div class="col-md-4">
-                <input type="text" name="tlc_start" class=" col-md-4 form-control ColorOrange"  value="{{$tlcdata->company_tlc_start}}" readonly required>  
-              </div>
-              <div class="col-md-4">
-                <input type="text" name="tlc_end" class=" col-md-4 form-control ColorOrange"  value="{{$tlcdata->company_tlc_end}}" readonly required>  
-              </div>
-              @else
-                <div class="col-md-4">
-                  <input type="text" name="display_name_{{$pedata->id}}" class=" col-md-4 form-control ColorOrange"  value="{{$pedata->function_name}}" readonly required>  
+
+              <div class="col-md-3" style="border-right:1px solid black;border-left:1px solid black;">  
+              結束日期
+              </div> 
+              
+            </div>                      
+          </div>  
+        </div>   
+       
+
+      <div class="container" style="width:103%;height:100%;margin-right:218px;">
+        @foreach($function as $fkey => $pedata)
+          <div class="panel panel-default test">
+            <div class="panel-heading">
+              <div class="row" style="text-align:center;">
+                <div class="col-md-2" style="border-left:1px solid black;">
+                @foreach($ldata as $lic)
+                  @if($pedata->id == $lic->pivot->function_id)                   
+                    <i class="glyphicon glyphicon-ok-sign" style="margin-right:10px;"></i>
+                    @break
+                  @else
+                    @continue
+                  @endif   
+                @endforeach
                 </div>
-              @endif
-            </div>  
+                <div class="col-md-4" style="border-left:1px solid black;">
+                   {{$pedata->function_name}}
+                </div>
+                
+                  @if($pedata->select == '1' && $pedata->code == 'F01')
+           
+        
+                    <div class="col-md-3" style="text-align:center;border-left:1px solid black;">
+                      <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$tlcdata->company_tlc_start}}"  readonly>
+                    </div>
+                    <div class="col-md-3" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
+                      <input id="company_tlc_end" type="text" class="form-control"  name="company_tlc_end" value="{{$tlcdata->company_tlc_end}}"  readonly>
+            
+                    </div>
 
-          @endforeach
+                  @else
+                 
+                   
+                        <div class="col-md-3" style="text-align:center;border-left:1px solid black;">
+                            <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$data->start_at}}"  readonly>
+                        </div>
+                        <div class="col-md-3" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
+                            <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$data->expir_at}}"  readonly>
+                        </div>
+
+                 
+                  @endif                  
+              </div>
+            </div>
+          </div>    
+        @endforeach
+      </div>
           
             <div class="col-md-12" style="border-top:2px solid; border-top-color:#d3e0e9; padding-top:10px;">
                 <script>//彈出對話框確認 

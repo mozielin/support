@@ -207,6 +207,7 @@
                     @foreach($modarray as $mkey => $modata)
                       @if($modata['mod'] == $pedata->code)
                       {{$modata['mod']}}
+                        <input type="hidden" name="{{$pedata->id}}" id="{{$pedata->id}}" class=" col-md-2 form-control ColorOrange"  value="{{$pedata->id}}">
                         <i class="glyphicon glyphicon-ok-sign" style="margin-right:10px;"></i>
                         @break
                       @else 

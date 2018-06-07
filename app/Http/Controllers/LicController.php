@@ -44,19 +44,20 @@ class LicController extends Controller
                 ->join('status','license.status_id','=','status.id')
                 ->join('company_contract','license.company_id','=','company_contract.company_contract')
                 ->select('license.*','users.name','company.company_name','company.company_EIN','status.status_name','company_contract.contract_plan','company_contract.contract_status')->find($id);
-                //return dd($data);        
+                //return dd($data);  
+
         $update = license::join('users','license.update_id','=','users.id')->select('license.update_id','users.name')->find($id);
         $ldata = license::find($id)->functions;
         //return dd($ldata);
         $tlcdata = seadmin::all()->where('company_name','=',$data->company_name)->first();
-
+        $function = functions::all();
         //return dd($tlcdata);
 
        // $license_file = license_file::where('license_id','=',$id)->join('users','license_file.file_builder','=','users.id')->select('license_file.*','users.name')->get();
 
         //$licensenum = license::where('company_id','=',$id)->count();
 
-        //return dd($update);
+        //return dd($function);
 
         if($update==null){
             $updateby = 'None';
@@ -72,8 +73,8 @@ class LicController extends Controller
                 ->with('updateby',$updateby)
                 ->with('filepath',$filepath)
                 ->with('ldata',$ldata)
-                ->with('tlcdata',$tlcdata);
-                //->with('filenum',$filenum);
+                ->with('tlcdata',$tlcdata)
+                ->with('function',$function);
     }
 
     public function edit($id){

@@ -387,57 +387,102 @@ class ScheduleController extends Controller
 
     public function contractalert($contract){
 
-        //return dd($contract);
-        foreach ($contract as $udata) {
-        	//API
-        	 	//return $udata->name;
-        		$account_list = json_encode([$udata->email]);
-        		$content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->contract_title.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！';
-        		//return $array;
-                $client = new Client();
-                $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
-                    'form_params' => [
-                        'ch_sn' => '6104',
-                        'api_key' => '726522eba8654146a7f9588fa0a97dfb',
-                        'content_type' => '1',
-                        'text_content' => $content,
-                        'media_content' => 'API test',
-                        'file_show_name' => '',
-                        'msg_push' => '合約到期通知',
-                        'account_list' => $account_list,
-                    ]
-                ]);
+    	$switch = switch::firstOrFail();
 
-                $body = $res->getBody();
-                $stringbody = string($body);
-                $body = json_decode($res->getBody());
-                //return dd($body);
-                /*mail# code...   
-                $from = ['email'=> 'support@teamplus.com.tw',
-                'name'=>'Team+ Support',
-                'subject'=> '合約到期通知'];
-               
-            
-                $to = ['email'=> $udata->email,
-                'name'=> $udata->name];
-                //信件的內容(即表單填寫的資料)
-                $content = ['company'=>$udata->company_name,
-                         'contract'=>$udata->company_contract_end   
-                        ];
+    		switch ($switch) {
+                case 'API':
+                	//return dd($contract);
+			        foreach ($contract as $udata) {
+			        	//API
+			        	//return $udata->name;
+			        	$account_list = json_encode([$udata->email]);
+			        	$content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->contract_title.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！';
+			        	//return $array;
+			            $client = new Client();
+			            $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
+			                'form_params' => [
+			                'ch_sn' => '6104',
+			                'api_key' => '726522eba8654146a7f9588fa0a97dfb',
+			                'content_type' => '1',
+			                'text_content' => $content,
+			                'media_content' => 'API test',
+			                'file_show_name' => '',
+			                'msg_push' => '合約到期通知',
+			                'account_list' => $account_list,
+			                ]
+			            ]);
 
-                //return dd($content);
-                //$time = Carbon::now();  
+			            $body = $res->getBody();
+			            $stringbody = string($body);
+			            $body = json_decode($res->getBody());
+			            //return dd($body);    
+			        }
+                             
+                    break;
 
-                //\View::share('time', $time);
-                //寄出信件
-                //\Mail::send('email.contract',$content, function($message) use ($from, $to) {
-                //$message->from($from['email'], $from['name']);
-                //$message->to($to['email'], $to['name'])->subject($from['subject']);
-                //}); 
-                Mail::to($udata->email)->send(new ContractAlert($content));*/
-             
-        }
-        //return dd("Done");
+                case 'Email':
+
+                	foreach ($contract as $udata) {
+			        	
+			            //mail# code...   
+			            $from = ['email'=> 'support@teamplus.com.tw',
+			                'name'=>'Team+ Support',
+			                'subject'=> '合約到期通知'];
+			               
+			            
+			            $to = ['email'=> $udata->email,
+			                'name'=> $udata->name];
+			                //信件的內容(即表單填寫的資料)
+			            $content = $content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->contract_title.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！';
+
+			            Mail::to($udata->email)->send(new ContractAlert($content));          
+			        }
+                    
+                    break;
+
+                case 'Both':
+                	        	//return dd($contract);
+			        foreach ($contract as $udata) {
+			        	//API
+			        	//return $udata->name;
+			        	$account_list = json_encode([$udata->email]);
+			        	//信件的內容(即表單填寫的資料)
+			        	$content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->contract_title.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！';
+			        		//return $array;
+			            $client = new Client();
+			            $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
+			                'form_params' => [
+			                'ch_sn' => '6104',
+			                'api_key' => '726522eba8654146a7f9588fa0a97dfb',
+			                'content_type' => '1',
+			                'text_content' => $content,
+			                'media_content' => 'API test',
+			                'file_show_name' => '',
+			                'msg_push' => '合約到期通知',
+			                'account_list' => $account_list,
+			                ]
+			            ]);
+
+			            $body = $res->getBody();
+			            $stringbody = string($body);
+			            $body = json_decode($res->getBody());
+			            //return dd($body);
+			            //mail# code...   
+			            $from = ['email'=> 'support@teamplus.com.tw',
+			                'name'=>'Team+ Support',
+			                'subject'=> '合約到期通知'];			               
+			            
+			            $to = ['email'=> $udata->email,
+			                'name'=> $udata->name];
+
+			            Mail::to($udata->email)->send(new ContractAlert($content));
+			             
+			        }
+         
+                    break;
+
+            } 
+        
         \Session::flash('check_message', 'Check Complete!');
         return redirect()->action('ContractController@index');
     }
