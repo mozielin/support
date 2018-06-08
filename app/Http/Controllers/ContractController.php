@@ -351,7 +351,7 @@ class ContractController extends Controller
 
             //$customers=patch::all()->paginate(10);
 
-            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope')){
+            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope') || Auth::user()->can('unlimited')){
             
             $customers = contract::join('company','company_contract.company_contract','=','company.id')
                     ->join('plan','company_contract.contract_plan','=','plan.id')
@@ -484,7 +484,7 @@ class ContractController extends Controller
                                     ->get();
                 
             }
-            elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope')){
+            elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope') || Auth::user()->can('unlimited')){
                 $customers = contract::join('company','company_contract.company_contract','=','company.id')
                     ->join('plan','company_contract.contract_plan','=','plan.id')
                     ->join('status','company_contract.contract_status','=','status.id')

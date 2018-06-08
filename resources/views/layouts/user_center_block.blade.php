@@ -6,7 +6,10 @@
 			    </li>
 			    <li><a href="/role">Role</a>
 			    </li>
-			    <li><a href="/permission">Permission</a>
+			    <li>
+			    @role('devenlope')
+			    <a href="/permission">Permission</a>
+			    @endrole
 			    </li>
 			</ul>
 		</div>

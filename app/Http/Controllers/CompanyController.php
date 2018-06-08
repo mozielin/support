@@ -72,7 +72,7 @@ class CompanyController extends Controller
 
 		//return dd($manager->user_id);
 
-		if($manager != null || Entrust::hasRole('admin') || Entrust::hasRole('devenlope')){
+		if($manager != null || Entrust::hasPermission('unlimited')){
 
       $company = company::join('plan','company.com_plan_id','=','plan.id')
               ->join('company_types','company.com_type_id','=','company_types.id')
@@ -477,7 +477,7 @@ class CompanyController extends Controller
             //$customers=patch::all()->paginate(10);
             $auth = Auth::id();
             
-            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope')){
+            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope') || Auth::user()->can('unlimited')){
                 
                $customers = company::join('plan', 'company.com_plan_id','=', 'plan.id')
                 ->join('users','company.com_sales_id','=','users.id')
@@ -485,6 +485,7 @@ class CompanyController extends Controller
                 ->select('company.*','plan.plan_name','users.name','status.status_name')
                 ->orderBy('company.id','desc')
                 ->get();
+                //return dd($customers);
             }
             else{
                 $customers = manager::where('company_user.user_id','=',$auth)

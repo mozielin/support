@@ -53,7 +53,7 @@
 			<!--右邊的新增區塊-->
 			<div class="right-side" style="width:300px;height:57px;display:flex;justify-content:center;text-align:center;margin-top:3px;">	
 					<div class="input-group" style="width:300px;">
-						<input id="companysearch" type="text" class="form-control" name="companysearch" value="{{old('companysearch')}}" placeholder="請輸入查詢內容" required autofocus style="width:240px;margin-left: 40px;">
+						<input id="companysearch" type="text" class="form-control" name="companysearch" value="" placeholder="請輸入查詢內容" required autofocus style="width:240px;margin-left: 40px;">
 						<div class="input-group-btn">
 			        		<button class="btn btn-primary" id="searchBTN" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 			      		</div>

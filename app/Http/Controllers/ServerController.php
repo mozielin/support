@@ -174,7 +174,7 @@ class ServerController extends Controller
 
             $auth = Auth::id();
 
-            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope')){
+            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope') || Auth::user()->can('unlimited')){
 
                 $searchdata = server::orderBy('id','desc')
                                     ->get();
@@ -259,7 +259,7 @@ class ServerController extends Controller
                                 ->orderBy('id','desc')
                                 ->get();
             }
-            elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope')){
+            elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope') || Auth::user()->can('unlimited')){
             $searchdata = server::where('server_name','LIKE','%'.$request->serversearch.'%')
                             ->orWhere('company_server_interip','LIKE','%'.$request->serversearch.'%')
                             ->orWhere('company_server_extip','LIKE','%'.$request->serversearch.'%')

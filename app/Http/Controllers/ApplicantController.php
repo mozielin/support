@@ -118,22 +118,13 @@ class ApplicantController extends Controller
             $data->applicant_name = $request->applicant_name;
             $data->company_applicant_title = $request->company_applicant_title;
             $data->company_applicant_email = $request->company_applicant_email;
-            if ($request->has('company_applicant_email2')) {
-                $data->company_applicant_email2 = $request->company_applicant_email2;
-            }
+            $data->company_applicant_email2 = $request->company_applicant_email2;
             $data->company_applicant_builder = $request->company_applicant_builder;
-            if ($request->has('company_applicant_phone')) {
-                $data->company_applicant_phone = $request->company_applicant_phone;
-            }
-            if ($request->has('company_applicant_mobile')) {
-                $data->company_applicant_mobile = $request->company_applicant_mobile;
-            }
-            if ($request->has('applicant_note')) {
-                $data->applicant_note = $request->applicant_note;
-            }
-            if ($request->has('vip')) {
-                $data->vip = $request->vip;
-            }
+            $data->company_applicant_phone = $request->company_applicant_phone;
+            $data->company_applicant_mobile = $request->company_applicant_mobile;
+            $data->applicant_note = $request->applicant_note;
+            $data->vip = $request->vip;
+            
             $data->save();
 
             if($request->create_by==1){
@@ -156,21 +147,12 @@ class ApplicantController extends Controller
         $data->applicant_name = $request->applicant_name;
         $data->company_applicant_title = $request->company_applicant_title;
         $data->company_applicant_email = $request->company_applicant_email;
-        if ($request->has('company_applicant_email2')) {
-                $data->company_applicant_email2 = $request->company_applicant_email2;
-            }
-        if ($request->has('company_applicant_phone')) {
-                $data->company_applicant_phone = $request->company_applicant_phone;
-            }
-        if ($request->has('company_applicant_mobile')) {
-                $data->company_applicant_mobile = $request->company_applicant_mobile;
-            }
-        if ($request->has('applicant_note')) {
-                $data->applicant_note = $request->applicant_note;
-            }  
-        if ($request->has('vip')) {
-                $data->vip = $request->vip;
-            }
+        $data->company_applicant_email2 = $request->company_applicant_email2;
+        $data->company_applicant_phone = $request->company_applicant_phone;
+        $data->company_applicant_mobile = $request->company_applicant_mobile;
+        $data->applicant_note = $request->applicant_note;
+        $data->vip = $request->vip;
+        
         $data -> save();
 
         return redirect()->action('ApplicantController@view',$data->id);
@@ -199,7 +181,7 @@ class ApplicantController extends Controller
 
             $auth = Auth::id();
 
-            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope')){
+            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope') || Auth::user()->can('unlimited')){
 
                     $customers = applicant::join('company', 'company_applicant.company_id','=', 'company.id')
                                   ->select('company_applicant.*','company.company_name')
@@ -273,7 +255,7 @@ class ApplicantController extends Controller
 
             $auth = Auth::id();
 
-            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope')){
+            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope') || Auth::user()->can('unlimited')){
 
                     $customers = applicant::join('company', 'company_applicant.company_id','=', 'company.id')
                                   ->select('company_applicant.*','company.company_name')
@@ -356,7 +338,7 @@ class ApplicantController extends Controller
                           ->orderBy('company_applicant.id','desc')
                           ->get();
             }
-            elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope')){
+            elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope') || Auth::user()->can('unlimited')){
                 $customers = applicant::join('company', 'company_applicant.company_id','=', 'company.id')
                           ->select('company_applicant.*','company.company_name')
                           ->where('company_name','LIKE','%'.$request->applicantsearch.'%')

@@ -433,7 +433,7 @@ class LicController extends Controller
 
              $auth = Auth::id();
 
-            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope')){
+            if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope') || Auth::user()->can('unlimited')){
 
                     $customers = license::join('status','license.status_id','=','status.id')
                                     ->join('company','license.company_id','=','company.id')
