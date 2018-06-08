@@ -13,7 +13,7 @@ class CreateApimailSwitch extends Migration
      */
     public function up()
     {
-         Schema::create('switch', function (Blueprint $table) {
+         Schema::create('APIswitch', function (Blueprint $table) {
             $table->increments('id');
             $table->string('mode', 20);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateApimailSwitch extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('switch');
+        Schema::dropIfExists('APIswitch');
     }
 }

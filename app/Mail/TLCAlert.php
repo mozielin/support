@@ -7,23 +7,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-use App\License;
-
-class LicenseAlert extends Mailable
+class TLCAlert extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected  $license;
+    protected  $seadmin;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($udata)
+    public function __construct($seadmin)
     {
-        $this->license = $udata;
-
-        
+        $this->seadmin = $seadmin;
     }
 
     /**
@@ -33,10 +30,10 @@ class LicenseAlert extends Mailable
      */
     public function build()
     {   
-        //return dd($this);
-        return $this->view('email.license')
+    //return dd($this);
+        return $this->view('email.tlc')
         ->with([
-            'license' => $this->license,
+            'tlc' => $this->seadmin,
             ]);
     }
 }

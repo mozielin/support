@@ -301,10 +301,11 @@ class UserController extends Controller
             ->paginate(10);        	
             $order = 0;}          
                     
-                    
+         $count = User::count();            
 	return view('user.user_all')
                 ->with('data',$data)
-                ->with('order',$order);
+                ->with('order',$order)
+                ->with('count',$count);
 	}	
 
     public function byname($order){
@@ -328,10 +329,11 @@ class UserController extends Controller
             ->paginate(10);        	
             $order = 0;}          
                     
-                    
+         $count = User::count();            
 	return view('user.user_all')
                 ->with('data',$data)
-                ->with('order',$order);
+                ->with('order',$order)
+                ->with('count',$count);
 	}	
 
 	public function bygroup($order){
@@ -354,10 +356,11 @@ class UserController extends Controller
             ->paginate(10);        	
             $order = 0;}          
                     
-                    
+         $count = User::count();            
 	return view('user.user_all')
                 ->with('data',$data)
-                ->with('order',$order);
+                ->with('order',$order)
+                ->with('count',$count);
 	}	
 
 	public function byrole($order){
@@ -380,10 +383,11 @@ class UserController extends Controller
             ->paginate(10);        	
             $order = 0;}          
                     
-                    
+         $count = User::count();            
 	return view('user.user_all')
                 ->with('data',$data)
-                ->with('order',$order);
+                ->with('order',$order)
+                ->with('count',$count);
 	}	
 
 	public function bylogin($order){
@@ -406,10 +410,11 @@ class UserController extends Controller
             ->paginate(10);        	
             $order = 0;}          
                     
-                    
+         $count = User::count();            
 	return view('user.user_all')
                 ->with('data',$data)
-                ->with('order',$order); 
+                ->with('order',$order)
+                ->with('count',$count); 
 	}
 
 }

@@ -130,13 +130,13 @@
                   @endif   
                 @endforeach
                 </div>
-                <div class="col-md-4" style="border-left:1px solid black;">
+                <div class="col-md-4" style="border-left:1px solid black;border-right:1px solid black;">
                    {{$pedata->function_name}}
                 </div>
                 @foreach($ldata as $lic)
                   @if($pedata->select == '1' && $pedata->code == 'F01' && $tlcdata!= null)
                   
-                    <div class="col-md-3" style="text-align:center;border-left:1px solid black;">
+                    <div class="col-md-3" style="text-align:center;">
                       <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$tlcdata->company_tlc_start}}"  readonly>
                     </div>
                     <div class="col-md-3" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
@@ -145,7 +145,7 @@
                     @break
 
                   @elseif($pedata->id == $lic->id)
-                        <div class="col-md-3" style="text-align:center;border-left:1px solid black;">
+                        <div class="col-md-3" style="text-align:center;">
                             <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$data->start_at}}"  readonly>
                         </div>
                         <div class="col-md-3" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">

@@ -45,7 +45,7 @@
         <li><a href="/server"><i class="glyphicon glyphicon-th" style="margin-right:10px;"></i> Server Info</a></li>
         @endpermission
         @permission('seadmin_view')
-    	<li><a href="/seadmin"><i class="glyphicon glyphicon-wrench" style="margin-right:10px;"></i> Dashboard</a></li> 
+    	<li><a href="/seadmin"><i class="glyphicon glyphicon-facetime-video" style="margin-right:10px;"></i> TLC管理</a></li> 
         @endpermission
         @permission('bulletin_view') 	
         <li><a href="/bulletin"><i class="glyphicon glyphicon-comment" style="margin-right:10px;"></i> 公告</a></li>
@@ -59,6 +59,10 @@
         @role('devenlope' || 'admin')
         <li><a href="/export"><i class="glyphicon glyphicon-cloud-download" style="margin-right:10px;"></i> 匯出管理</a></li>
         @endrole
+        @permission('toolbox')
+        <li><a href="/tool"><i class="glyphicon glyphicon-wrench" style="margin-right:10px;"></i> Dashboard</a></li>
+        @endpermission
+
     </ul>
 </div>
 

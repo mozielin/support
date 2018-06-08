@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class switch extends Model
+class APIswitch extends Model
 {
-    protected $table = 'switch';
+    protected $table = 'APIswitch';
 
     use LogsActivity;
 

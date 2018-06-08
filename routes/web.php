@@ -321,7 +321,9 @@ Route::group(['prefix'=>'seadmin','middleware' => ['permission:seadmin_view']], 
       //Route::name('seadmin_tlc')->get('/seadmin_tlc',array('as' =>'seadmin_tlc','uses'=>'SeController@seadmin_tlc'));
       Route::name('seadmin_tlc')->get('/seadmin_tlc','SeController@seadmin_tlc');
 
-      Route::name('tlcalert')->get('/tlcalert',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@tlcalert']);
+      Route::name('tlcalert')->post('/tlcalert',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@tlcalert']);
+
+      Route::name('tlccheck')->get('/tlccheck',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@tlccheck']);
 
       Route::name('seadmin_lic')->post('/licscan','SeController@licscan'); 
 
@@ -519,6 +521,15 @@ Route::group(['prefix'=>'export','middleware' => ['role:admin|devenlope']], func
       Route::name('download_total')->get('/download_total', 'ExportController@download_total');
 
       Route::name('export_k')->post('/export_k', 'ExportController@export_k');
+
+});
+
+Route::group(['prefix'=>'tool','middleware' => ['permission:toolbox']], function(){
+
+      Route::name('tool_index')->get('/', 'ToolController@index');
+
+      Route::name('APIswitch')->get('/APIswitch',['middleware' => ['role:admin|devenlope'], 'uses' =>  'ToolController@APIswitch']);
+  
 
 });
 

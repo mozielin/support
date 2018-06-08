@@ -18,9 +18,9 @@ class ContractAlert extends Mailable
      *
      * @return void
      */
-    public function __construct($content)
+    public function __construct($udata)
     {
-        $this->contract = $content;
+        $this->contract = $udata;
     }
 
     /**
@@ -33,8 +33,8 @@ class ContractAlert extends Mailable
         //return dd($this);
         return $this->view('email.contract')
         ->with([
-            'company' => $this->contract['company'],
-            'contract' => $this->contract['contract'],
+            'contract' => $this->contract,
             ]);
+
     }
 }

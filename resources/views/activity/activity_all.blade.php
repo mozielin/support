@@ -54,9 +54,7 @@
 			      		</div>
 				    </div>
 		    </div>
-		    @permission('company_create')
-				<a href="{{route('company_create')}}"><button type="submit" class="btn btn-primary" style="float:right;position:absolute;top:162px;right:255px;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>
-			@endpermission 
+
 		    <!--中間的線-->
 			<div class="line" style="height:30px;border-right:1px solid #D3E0E9;position:absolute;left:783px;top:167px;">
     		</div>

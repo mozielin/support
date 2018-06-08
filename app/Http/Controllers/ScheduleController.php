@@ -21,6 +21,8 @@ use App\company;
 use DB;
 use App\seadmin;
 
+use App\APIswitch;
+
 use GuzzleHttp\Client;
 
 use App\Mail\LicenseAlert;
@@ -28,6 +30,8 @@ use App\Mail\LicenseAlert;
 use App\Mail\ContractAlert;
 
 use App\Mail\SyncDaemonAlert;
+
+use App\Mail\TLCAlert;
 
 
 
@@ -204,22 +208,20 @@ class ScheduleController extends Controller
             //千呼萬喚使出來得SQL
                 //      抓LIC表--結合--LIC&FUN關連表------用LIC表的ID-等於----LIC&FUN關連表---的LID-----
                 $ldata = license::join('license_function','license.id','=','license_function.license_id')
-                               ->join('company','license.company_id','=','company.id')
+                                ->join('company','license.company_id','=','company.id')
                                //->join('company_user','company_user.company_id','=','company.id')
                                //->join('users','company_user.company_id','=','users.id')
-                        //神奇語法-排除重複且最新!
-                           ->whereIn('license.id',function($query){
-                             $query->select(DB::raw('max(id)'))
-                                   ->from('license')
-                                   //排除重複公司
-                                   ->groupBy('company_id'); 
-                             })
+                                //神奇語法-排除重複且最新!
+                                ->whereIn('license.id',function($query){
+                                   $query->select(DB::raw('max(id)'))
+                                         ->from('license')
+                                         //排除重複公司
+                                         ->groupBy('company_id'); 
+                                })
                                 //找出ID=SYNC的
-                            ->where('function_id','=','3')
-
-                            ->select('license.company_id','company.company_name','license_function.*')
-                            
-                            ->get();
+                                ->where('function_id','=','3')
+                                ->select('license.company_id','company.company_name','license_function.*')
+                                ->get();
                 //產出EXCEL(把兩個產出結果分別放入兩張表)
                 Excel::create('DailySyncVer_'.$time, function($excel) use($ldata,$sdata) {
 
@@ -267,10 +269,7 @@ class ScheduleController extends Controller
                //}
 
 
-
-               
-
-            $user = User::where('user_group','=','4')->get();
+            $user = User::where('user_group','=','3')->get();
             //return dd($user);
             foreach ($user as $udata) {
 
@@ -294,7 +293,7 @@ class ScheduleController extends Controller
                 }); 
 
             }
-             \Session::flash('check_message', 'Check Done!');
+             
              //API測試    
 
             $time = Carbon::now()->toDateString();
@@ -357,7 +356,8 @@ class ScheduleController extends Controller
                 $stringbody = string($body);
                 $body = json_decode($res->getBody());
                 //return dd($body);*/
-             return redirect()->action('ServerController@index');
+             \Session::flash('check_message', 'Check Done!');
+            return redirect()->action('ToolController@index');
         
     }
 
@@ -380,23 +380,23 @@ class ScheduleController extends Controller
         }
 
         \Session::flash('checkno_message', 'No Expire!');
-        return redirect()->action('ContractController@index');
+        return redirect()->action('ToolController@index');
 
           
     }
 
     public function contractalert($contract){
 
-    	$switch = switch::firstOrFail();
+    	$APIswitch = APIswitch::first();
 
-    		switch ($switch) {
+    		switch ($APIswitch->mode) {
                 case 'API':
                 	//return dd($contract);
 			        foreach ($contract as $udata) {
 			        	//API
 			        	//return $udata->name;
 			        	$account_list = json_encode([$udata->email]);
-			        	$content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->contract_title.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！';
+			        	$content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->contract_title.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 			        	//return $array;
 			            $client = new Client();
 			            $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
@@ -425,17 +425,7 @@ class ScheduleController extends Controller
                 	foreach ($contract as $udata) {
 			        	
 			            //mail# code...   
-			            $from = ['email'=> 'support@teamplus.com.tw',
-			                'name'=>'Team+ Support',
-			                'subject'=> '合約到期通知'];
-			               
-			            
-			            $to = ['email'=> $udata->email,
-			                'name'=> $udata->name];
-			                //信件的內容(即表單填寫的資料)
-			            $content = $content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->contract_title.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！';
-
-			            Mail::to($udata->email)->send(new ContractAlert($content));          
+			            Mail::to($udata->email)->send(new ContractAlert($udata));          
 			        }
                     
                     break;
@@ -447,7 +437,7 @@ class ScheduleController extends Controller
 			        	//return $udata->name;
 			        	$account_list = json_encode([$udata->email]);
 			        	//信件的內容(即表單填寫的資料)
-			        	$content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->contract_title.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！';
+			        	$content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->company_name.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 			        		//return $array;
 			            $client = new Client();
 			            $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
@@ -468,14 +458,9 @@ class ScheduleController extends Controller
 			            $body = json_decode($res->getBody());
 			            //return dd($body);
 			            //mail# code...   
-			            $from = ['email'=> 'support@teamplus.com.tw',
-			                'name'=>'Team+ Support',
-			                'subject'=> '合約到期通知'];			               
-			            
-			            $to = ['email'=> $udata->email,
-			                'name'=> $udata->name];
+			              //寄出信件
 
-			            Mail::to($udata->email)->send(new ContractAlert($content));
+                		Mail::to($udata->email)->send(new ContractAlert($udata));
 			             
 			        }
          
@@ -484,7 +469,7 @@ class ScheduleController extends Controller
             } 
         
         \Session::flash('check_message', 'Check Complete!');
-        return redirect()->action('ContractController@index');
+        return redirect()->action('ToolController@index');
     }
 
     public function licensecheck(){
@@ -503,7 +488,7 @@ class ScheduleController extends Controller
             return $this->licensealert($license);
         }
         \Session::flash('checkno_message', 'No Expire!');
-        return redirect()->action('LicController@index');
+        return redirect()->action('ToolController@index');
 
     }
 
@@ -511,13 +496,49 @@ class ScheduleController extends Controller
 
     public function licensealert($license){
 
-        //return dd($license);
-        foreach ($license as $udata) {
+    	$APIswitch = APIswitch::first();
+
+    	switch ($APIswitch->mode) {
+    		case 'API':
+    			foreach ($license as $udata) {
 
         		$account_list = json_encode([$udata->email]);
-        		$content = $udata->company_name.'License授權時間將於'.$udata->expir_at.'到期，特發此提醒，如需申請展延，敬請提早洽談續約事宜並預留申請作業時間。預祝您一切順利！';
-        		
+        		$content = $udata->company_name.'License授權時間將於'.$udata->expir_at.'到期，特發此提醒，如需申請展延，敬請提早洽談續約事宜並預留申請作業時間。預祝您一切順利！此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 
+        		//return $array;
+                $client = new Client();
+                $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
+                    'form_params' => [
+                        'ch_sn' => '6104',
+                        'api_key' => '726522eba8654146a7f9588fa0a97dfb',
+                        'content_type' => '1',
+                        'text_content' => $content,
+                        'media_content' => 'API test',
+                        'file_show_name' => '',
+                        'msg_push' => 'LicenseKey到期通知',
+                        'account_list' => $account_list,
+                    ]
+                ]);
+
+                $body = $res->getBody();
+                $stringbody = string($body);
+                $body = json_decode($res->getBody());
+
+               }
+    			break;
+
+    		case 'Email':
+    			foreach ($license as $udata) {
+    				//mail# code...
+    				Mail::to($udata->email)->send(new LicenseAlert($udata));
+    			}
+    			break;
+
+    		case 'Both':
+    			foreach ($license as $udata) {
+
+        		$account_list = json_encode([$udata->email]);
+        		$content = $udata->company_name.'License授權時間將於'.$udata->expir_at.'到期，特發此提醒，如需申請展延，敬請提早洽談續約事宜並預留申請作業時間。預祝您一切順利！此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 
         		//return $array;
                 $client = new Client();
@@ -538,39 +559,17 @@ class ScheduleController extends Controller
                 $stringbody = string($body);
                 $body = json_decode($res->getBody());
                 # code...   
-               
-               
-            /*mail
-            	 $from = ['email'=> 'support@teamplus.com.tw',
-                'name'=>'Team+ Support',
-                'subject'=> 'License到期通知'];
-                $to = ['email'=> $udata->email,
-                'name'=> $udata->name];
-                //信件的內容(即表單填寫的資料)
-                $content = ['company'=>$udata->company_name,
-                         'license'=>$udata->expir_at    
-                        ];
+            //mail
 
-                $license = license::join('company','license.company_id','=','company.id')
-                                    ->select('license.*','company.company_name')
-                                    ->findOrFail($udata->id);
-
-                //return dd($license);
-                //$time = Carbon::now();  
-
-                //\View::share('time', $time);
-                //寄出信件
-                //\Mail::send('email.license',$content, function($message) use ($from, $to) {
-                //$message->from($from['email'], $from['name']);
-                //$message->to($to['email'], $to['name'])->subject($from['subject']);
-                //}); 
-
-                Mail::to($udata->email)->send(new LicenseAlert($license));
-				*/
+                Mail::to($udata->email)->send(new LicenseAlert($udata));
              
                }
-         \Session::flash('check_message', 'Check Complete!');
-        return redirect()->action('LicController@index');
+    			break;
+
+    	}
+
+        \Session::flash('check_message', 'Check Complete!');
+        return redirect()->action('ToolController@index');
 
     }
 
@@ -592,28 +591,81 @@ class ScheduleController extends Controller
 
     }
 
-    public function tlcalert(){
-
+     public function tlccheck(){
+        //30天後到期
         $time = Carbon::now()->toDateString();
         //----取得系統時間---加減(現在時間1天前)--轉為日期去掉分秒
-        $alerttime = Carbon::now()->modify('-14 days')->toDateString();
+        $alerttime = Carbon::now()->addDays(14)->toDateString();
+        //$alerttime = Carbon::now()->modify('14 days')->toDateString();
 
         $data = seadmin::where('company_tlc_end','=',$alerttime)
                          ->join('company_user','seadmin.text','=','company_user.company_id')
                          ->join('users','company_user.user_id','=','users.id')
-                         ->select('seadmin.*','users.email','company_user.*')->get();
-
-        //View::share('data', $data);
+                         ->select('seadmin.*','users.email','users.name','company_user.*')->get();
         //return dd($data);
         if(!$data->isEmpty()){
-           foreach ($data as $seadmin) {
+            return $this->tlcalert($data);
+        }
+        \Session::flash('checkno_message', 'No Expire!');
+        return redirect()->action('ToolController@index');
+
+    }
+
+    public function tlcalert($data){
+
+    	//return dd($data);
+
+    	$APIswitch = APIswitch::first();
+
+    	switch ($APIswitch->mode) {
+    		case 'API':
+    			foreach ($data as $seadmin) {
            		//return dd($seadmin);
 				$cdata = User::where('user_group','=','4')->get();
 				//$se_list = json_encode([$cdata->email]);
 				
            		$account_list = json_encode([$seadmin->email]);
 
-        		$content = $seadmin->company_name.'「視訊會議」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。';
+        		$content = $seadmin->company_name.'「視訊會議」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
+
+        		//API
+                $client = new Client();
+                $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
+                    'form_params' => [
+                        'ch_sn' => '6104',
+                        'api_key' => '726522eba8654146a7f9588fa0a97dfb',
+                        'content_type' => '1',
+                        'text_content' => $content,
+                        'media_content' => 'API test',
+                        'file_show_name' => '',
+                        'msg_push' => '視訊會議到期通知',
+                        'account_list' => $account_list,
+                    ]
+                ]);
+
+                $body = $res->getBody();
+                $stringbody = string($body);
+                $body = json_decode($res->getBody());
+				//return dd($body);
+            	} 
+    			break;
+    		
+    		case 'Email':
+    			foreach ($data as $seadmin) {
+    				//mail# code...
+    				Mail::to($seadmin->email)->send(new TLCAlert($seadmin));
+    			}
+    			break;
+
+    		case 'Both':
+    			foreach ($data as $seadmin) {
+           		//return dd($seadmin);
+				$cdata = User::where('user_group','=','4')->get();
+				//$se_list = json_encode([$cdata->email]);
+				
+           		$account_list = json_encode([$seadmin->email]);
+
+        		$content = $seadmin->company_name.'「視訊會議」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 
         		//API
                 $client = new Client();
@@ -658,14 +710,12 @@ class ScheduleController extends Controller
                 });
                 
             } 
+    			break;
+    	}
 
             \Session::flash('check_message', 'Check Complete!');
-        	return redirect()->action('SeController@index');
+        	return redirect()->action('ToolController@index');
 
-        }
-
-        \Session::flash('checkno_message', 'No Expire!');
-        return redirect()->action('SeController@index'); 
     }
 
 

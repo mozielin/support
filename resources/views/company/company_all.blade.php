@@ -59,8 +59,9 @@
 			      		</div>
 				    </div>
 		    </div>
+		    @role('devenlope')
 				<a href="{{route('companytrash')}}"><button type="submit" class="btn btn-primary" style="float:right;position:absolute;top:162px;right:390px;" ><i class="glyphicon glyphicon-trash"></i> 垃圾桶+ </button></a>
-
+			@endrole
 		    @permission('company_create')
 				<a href="{{route('company_create')}}"><button type="submit" class="btn btn-primary" style="float:right;position:absolute;top:162px;right:255px;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>
 			@endpermission 

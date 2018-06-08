@@ -4,10 +4,16 @@
         <meta charset="utf-8">
     </head>
     <body>
-    	<h2>您好,我是客服小叮噹</h2>
-    	<h4>您負責的 <h3 style="color:#FF0000;">{{$licaler_name}}</h3> license即將到期囉!</h4>
-    	<h4>結束時間為 <h3 style="color:#FF0000;">{{$licaler_expir}}</h3></h4>
-    	<h4>請注意時間唷 噹噹噹</h4>
-    	<h4>FYI~</h4>
+    	<h2>Hi,{{$license->name}}</h2>
+        <font size="4" style="color:#FF6600;">{{$license->company_name}}</font>
+        <font size="4"> License授權時間將於
+        <font size="4" style="color:#0000CC;">{{$license->expir_at}}</font>
+        到期，
+        </font>
+        <P>如需申請展延，敬請提早洽談續約事宜並預留申請作業時間。</P>
+        <P>預祝您一切順利！</P>
+        <P>
+            此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。
+        </P>
     </body>
 </html>
