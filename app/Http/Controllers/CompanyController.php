@@ -17,6 +17,7 @@ use App\status;
 use App\license;
 use App\manager;
 use App\company_area;
+use App\interview;
 use Entrust;
    
 class CompanyController extends Controller
@@ -97,6 +98,15 @@ class CompanyController extends Controller
                           ->where('company_id','=',$company_id)
                           ->orderBy('license.id','DESC')->get();
 
+              $interview = interview::join('users','interview.builder','=','users.id')
+                                    ->join('company','interview.company_id','=','company.id')
+                                    ->where('company_id','=',$company_id)
+                                    ->select('interview.*','users.name')
+                                    ->orderBy('interview.id','DESC')
+                                    ->get();
+
+              $interviewnum = interview::where('company_id','=',$company_id)->count();
+
 
               $contractnum = contract::where('company_contract','=',$company_id)->count();
 
@@ -158,8 +168,10 @@ class CompanyController extends Controller
                   ->with('sales',$sales)
                   ->with('license',$license)
                   ->with('licensenum',$licensenum)
-                      ->with('manager',$manager)
-                      ->with('managernum',$managernum);
+                  ->with('manager',$manager)
+                  ->with('managernum',$managernum)
+                  ->with('interview',$interview)
+                  ->with('interviewnum',$interviewnum);
 			
 		}
     else{
@@ -203,6 +215,16 @@ class CompanyController extends Controller
                           ->where('company_id','=',$company_id)
                           ->withTrashed()
                           ->orderBy('license.id','DESC')->get();
+
+              $interview = interview::join('users','interview.builder','=','users.id')
+                                    ->join('company','interview.company_id','=','company.id')
+                                    ->where('company_id','=',$company_id)
+                                    ->select('interview.*','users.name')
+                                    ->withTrashed()
+                                    ->orderBy('interview.id','DESC')
+                                    ->get();
+
+              $interviewnum = interview::where('company_id','=',$company_id)->withTrashed()->count();
 
               $contractnum = contract::where('company_contract','=',$company_id)->withTrashed()->count();
 
@@ -445,6 +467,15 @@ class CompanyController extends Controller
        }
       }
 
+      $interview = interview::where('company_id','=',$id)->get(); 
+      if ($interview != null) {
+        foreach ($interview as $deldata ) {
+         $deldata -> updater = Auth::id();
+         $deldata ->save();
+         $deldata ->delete();
+       }
+      }
+
       $data -> delete();
  
       //company::delete($id);
@@ -462,6 +493,8 @@ class CompanyController extends Controller
       $license = license::onlyTrashed()->where('company_id','=',$id)->restore();
     
       $server = server::onlyTrashed()->where('company_server','=',$id)->restore();
+
+      $interview = interview::onlyTrashed()->where('company_id','=',$id)->restore();
 
       $data ->restore();
 

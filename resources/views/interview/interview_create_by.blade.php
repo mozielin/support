@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-<h2 style="margin-top:2px;">新增聯絡人</h2>
+<h2 style="margin-top:2px;">新增訪談紀錄</h2>
 @endsection
 @section('contentm')
 <!--中間選單-->
@@ -15,10 +15,10 @@
       <div class="panel panel-default" >
         <div class="panel-heading" style="text-align:center; height:40px">
     <!--區塊標題-->
-          <label for="id" class="col-md-3" style="text-align:left;">聯絡人編號:New
+          <label for="id" class="col-md-3" style="text-align:left;">編號:New
           </label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; ">
-          新增聯絡人</label>
+          新增訪談紀錄</label>
           <label for="nothing" class="col-md-3" style="text-align:right;">Createby_{{Auth::user()->name}}</label>
         </div>
         <!--區塊內容-->
@@ -33,20 +33,29 @@
                       return false;
                   }   
                 </script>
-        <form class="form-horizontal" method="POST"  onsubmit="return Confirm();" action="/applicant/store" >
+        <form class="form-horizontal" method="POST"  onsubmit="return Confirm();" action="/interview/store" >
                 {{ csrf_field() }}
             <div class="form-group col-md-12 form-horizontal">
               <label for="company_name" class="col-md-2 control-label" style="text-align:right;">公司名稱:</label>
                     <div class="col-md-4">
                         <input id="company_name" type="text" class="form-control" name="company_name" style="text-align: center;" value="{{$company->company_name}}" readonly>
                         <input type="hidden" id="company_id" name="company_id" value="{{$company->id}}">
-                        <input type="hidden" id="company_applicant_builder"name="company_applicant_builder" value="{{Auth::user()->id}}">
+                        <input type="hidden" id="company_applicant_builder"name="builder" value="{{Auth::user()->id}}">
                         <input type="hidden" id="create_by" name="create_by" value="1">
                     </div>
             
-              <label for="company_applicant_dep" class="col-md-2 control-label" style="text-align:right;">所屬部門:</label>
+              <label for="text" class="col-md-2 control-label" style="text-align:right;">聯絡方式:</label>
               <div class="col-md-4">
-                <input type="text" id="company_applicant_dep" name="company_applicant_dep" class=" col-md-4 form-control" placeholder="請輸入聯絡人所屬部門" style="width: 100%;text-align: center;" value="" >
+                <select class="form-control" name="text" style="padding-left:65px;" required>
+                  <option value="主動去電">主動去電</option>
+                  <option value="客戶來電">客戶來電</option>
+                  <option value="到府拜訪">到府拜訪</option>
+                  <option value="客戶來訪">客戶來訪</option>
+                  <option value="Email">Email</option>
+                  <option value="Key Message">Key Message</option>
+                  <option value="其他">其他</option>
+                </select>   
+               
                 
              </div>
                 
@@ -54,60 +63,24 @@
 
             <div class="form-group col-md-12 form-horizontal">
                 
-              <label for="applicant_name" class="col-md-2 control-label" style="text-align:right;">聯絡人姓名:</label>
-                <div class="col-md-4">
-                    <input type="text" name="applicant_name" class=" col-md-4 form-control" style="width:100%;text-align:center" value="" placeholder="請輸入聯絡人姓名" required autofocus>
+              <label for="note" class="col-md-2 control-label" style="text-align:right;">聯絡事項:</label>
+                <div class="col-md-10">
+                    <textarea  id="note" type="textarea" class="form-control vresize"   name="note" value="" required>
+                    </textarea>
                 </div>
 
-              <label for="company_applicant_title" class="col-md-2 control-label" style="text-align:right;">聯絡人級職:</label>
-                
-                <div class="col-md-4">
-                  <input type="text" name="company_applicant_title" class=" col-md-4 form-control" style="width:100%;text-align:center" value="" placeholder="請輸入聯絡人級職">
-                </div>
+             
           </div>
           
-          <div class="form-group col-md-12 form-horizontal">
-
-            <label for="company_applicant_phone" class="col-md-2 control-label" style="text-align:right;">公司電話:</label>
-              <div class="col-md-4">
-                <input type="text" name="company_applicant_phone" class=" col-md-4 form-control" style="width:100%;text-align:center" value="" placeholder="請輸入聯絡人電話">               
-              </div>
+          <div class="form-group col-md-12 form-horizontal">            
             
-            <label for="company_applicant_mobile" class="col-md-2 control-label" style="text-align:right;">聯絡手機:</label>
-              <div class="col-md-4">
-                <input type="text" name="company_applicant_mobile" class=" col-md-4 form-control" style="width:100%;text-align:center" value="" placeholder="請輸入聯絡人手機">            
+            <label for="todo" class="col-md-2 control-label" style="text-align:right;">ToDo:</label>
+              <div class="col-md-10">
+                <textarea  id="todo" type="textarea" class="form-control vresize"   name="todo" value="" required>
+                </textarea>         
               </div>
 
           </div>
-
-        <div class="form-group col-md-12 form-horizontal">
-
-            <label for="company_applicant_email" class="col-md-2 control-label" style="text-align:right;">Email:</label>
-            <div class="col-md-4">
-            <input type="text" name="company_applicant_email" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="{{ old('company_applicant_email')}}" placeholder="請輸入聯絡人Email" required>        
-            </div>
-
-            <label for="company_applicant_email2" class="col-md-2 control-label" style="text-align:right;">Email2:</label>
-            <div class="col-md-4">
-            <input type="text" name="company_applicant_email2" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="{{ old('company_applicant_email2')}}" placeholder="請輸入聯絡人Email" >        
-            </div>
-
-        </div>
-
-        <div class="form-group col-md-12 form-horizontal">
-
-            <label for="vip" class="col-md-2 control-label" style="text-align:right;">很重要嗎?</label>
-            <div class="col-md-4">
-            <label for="vip" class="col-md-2 control-label" style="text-align:right;">YES</label>  
-              <input type="radio" name="vip" id="vip" class=" col-md-2 form-control ColorOrange" style="text-align: center; width:60%;"  value="1">    
-            </div>
-
-            <label for="applicant_note" class="col-md-2 control-label" style="text-align:right;">備註:</label>
-            <div class="col-md-4">
-              <input type="textarea" name="applicant_note" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="" placeholder="有需要紀錄?" >                
-            </div>
-
-        </div>
   
             <div class="col-md-12" style="border-top:2px solid; border-top-color:#d3e0e9; padding-top:10px;">
 

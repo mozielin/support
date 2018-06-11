@@ -20,6 +20,7 @@ class CreateInterviewTable extends Migration
             $table->integer('company_id');
             $table->integer('builder');
             $table->integer('updater')->nullable();
+            $table->string('text')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

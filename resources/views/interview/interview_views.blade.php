@@ -15,11 +15,10 @@
       <div class="panel panel-default" >
         <div class="panel-heading" style="text-align:center; height:40px">
     <!--區塊標題-->
-          <label for="id" class="col-md-3" style="text-align:left;">聯絡人編號:{{$data->id}}
+          <label for="id" class="col-md-3" style="text-align:left;">編號:{{$data->id}}
           </label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; "><a href="{{route('company_view',$data->company_id)}}">
-                    {{$data->company_name}}</a>
-          --{{$data->company_applicant_dep}}</label>
+                    {{$data->company_name}}</a></label>
           <label for="nothing" class="col-md-3" style="text-align:right;">Createby_{{Auth::user()->name}}</label>
         </div>
         <!--區塊內容-->
@@ -27,82 +26,69 @@
           <div class="form-horizontal">
 
             <div class="form-group col-md-12 form-horizontal">
+              <label for="company_name" class="col-md-2 control-label" style="text-align:right;">聯繫時間:</label>
+                    <div class="col-md-4">
+                        <input id="company_name" type="text" class="form-control" name="company_name" style="text-align: center;" value="{{$data->created_at}}" readonly>
+                        <input type="hidden" id="company_id" name="company_id" value="{{$data->id}}">
+                        <input type="hidden" id="company_applicant_builder"name="builder" value="{{Auth::user()->id}}">
+                        <input type="hidden" id="create_by" name="create_by" value="1">
+                    </div>
+            
+              <label for="text" class="col-md-2 control-label" style="text-align:right;">聯絡方式:</label>
+              <div class="col-md-4">
+                <input id="text" type="text" class="form-control" name="company_name" style="text-align: center;" value="{{$data->text}}" readonly>  
+               
                 
-              <label for="applicant_name" class="col-md-2 control-label" style="text-align:right;">聯絡人姓名:</label>
-                <div class="col-md-4">
-                    <input type="text" name="applicant_name" class=" col-md-4 form-control ColorOrange"  value="{{$data->applicant_name}}" readonly>
+             </div>
+                
+            </div>
+
+            <div class="form-group col-md-12 form-horizontal">
+                
+              <label for="note" class="col-md-2 control-label" style="text-align:right;">聯絡事項:</label>
+                <div class="col-md-10">
+                    <textarea  id="note" type="textarea" class="form-control vresize"   name="note" readonly>{{$data->note}}
+                    </textarea>
                 </div>
 
-              <label for="company_applicant_title" class="col-md-2 control-label" style="text-align:right;">聯絡人級職:</label>
-                
-                <div class="col-md-4">
-                  <input type="text" name="company_applicant_title" class=" col-md-4 form-control ColorOrange" value="{{$data->company_applicant_title}}" readonly>
-                </div>
+             
           </div>
           
-          <div class="form-group col-md-12 form-horizontal">
-
-            <label for="company_applicant_phone" class="col-md-2 control-label" style="text-align:right;">公司電話:</label>
-              <div class="col-md-4">
-                <input type="text" name="company_applicant_phone" class=" col-md-4 form-control ColorOrange" value="{{$data->company_applicant_phone}}" readonly>               
-              </div>
+          <div class="form-group col-md-12 form-horizontal">            
             
-            <label for="company_applicant_mobile" class="col-md-2 control-label" style="text-align:right;">聯絡手機:</label>
-              <div class="col-md-4">
-                <input type="text" name="company_applicant_mobile" class=" col-md-4 form-control ColorOrange"value="{{$data->company_applicant_mobile}}" readonly>            
+            <label for="todo" class="col-md-2 control-label" style="text-align:right;">ToDo:</label>
+              <div class="col-md-10">
+                <textarea  id="todo" type="textarea" class="form-control vresize"   name="todo" readonly>{{$data->todo}}
+                </textarea>         
               </div>
 
           </div>
-
-        <div class="form-group col-md-12 form-horizontal">
-
-            <label for="company_applicant_email" class="col-md-2 control-label" style="text-align:right;">Email:</label>
-            <div class="col-md-4">
-            <input type="text" name="company_applicant_email" class=" col-md-4 form-control ColorOrange" value="{{$data->company_applicant_email}}" readonly>        
-            </div>
-
-            <label for="company_applicant_email2" class="col-md-2 control-label" style="text-align:right;">Email2:</label>
-            <div class="col-md-4">
-            <input type="text" name="company_applicant_email2" class=" col-md-4 form-control ColorOrange" value="{{$data->company_applicant_email2}}" readonly>        
-            </div>
-
-        </div>
-
-        <div class="form-group col-md-12 form-horizontal">
-
-            <label for="company_applicant_email" class="col-md-2 control-label" style="text-align:right;"></label>
-            <div class="col-md-4">
-                   
-            </div>
-
-            <label for="applicant_note" class="col-md-2 control-label" style="text-align:right;">備註:</label>
-            <div class="col-md-4">
-            <input type="textarea" name="applicant_note" class=" col-md-4 form-control ColorOrange"  value="{{$data->applicant_note}}" readonly>                
-            </div>
-
-        </div>
   
             <div class="col-md-12" style="border-top:2px solid; border-top-color:#d3e0e9; padding-top:10px;">
                 <script>//彈出對話框確認 
                   function Confirm()
                   {
                     if(confirm("確認刪除此資料？")==true)   
-                      window.location="{{URL::route('applicant_delete', $data->id)}}";
+                      window.location="{{URL::route('interview_delete', $data->id)}}";
                     else  
                       return false;
                   }   
 
                 </script>
               <div class="col-md-2" style="text-align:center;">
-                
+                <button type="button" class="btn btn-primary" onclick="return Confirm();">
+                <i class="glyphicon glyphicon-trash"></i>
+                刪除
+                </button>
               </div>
 
               <div class="col-md-2 col-md-offset-3" style="text-align:center;">
+                
                   
               </div>
 
               <div class="col-md-2 col-md-offset-3" style="text-align:center;">
-                <button type="button" class="btn btn-primary" onclick="location.href='{{route('applicant_index')}}'">
+                <button type="button" class="btn btn-primary" onclick="location.href='{{route('company_view',$data->company_id)}}'">
                 <i class="glyphicon glyphicon-backward"></i>
                 返回
                 </button>

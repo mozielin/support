@@ -533,3 +533,25 @@ Route::group(['prefix'=>'tool','middleware' => ['permission:toolbox']], function
 
 });
 
+Route::group(['prefix'=>'interview','middleware' => ['permission:interview_view']], function(){
+
+      Route::name('interview_index')->get('/', 'InterviewController@index');
+
+      Route::name('interview_create')->get('/create/{id}', 'InterviewController@create');
+
+      Route::name('interview_view')->get('view/{id}', 'InterviewController@view');
+
+      Route::post('/store', ['middleware' => ['permission:interview_view'], 'uses' =>'InterviewController@store'])->name('interview_store');
+
+      Route::name('interview_delete')->get('/delete/{id}',['middleware' => ['permission:interview_delete'], 'uses' => 'InterviewController@delete']);
+
+      Route::name('interview_custome')->get('/interviewsearch/{id}', 'InterviewController@custome');
+
+      Route::name('interviewload')->get('/interviewload','InterviewController@interviewload');
+
+      Route::name('interviewsearch')->get('/interviewsearch','InterviewController@interviewsearch');
+
+      Route::name('interviewcustome')->get('/interviewcustome','InterviewController@interviewcustome');
+
+});
+
