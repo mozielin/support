@@ -42,6 +42,7 @@ class ServerController extends Controller
                                  ->where('status_id','=','16')
                                  ->where('company.id','=',$id)
                                  ->select('company.company_name','company.id','license_mac.mac')
+                                 ->groupBy('license_mac.mac')
                                  ->get();
         $company = company::find($id);                  
         //return dd($macaddress);
