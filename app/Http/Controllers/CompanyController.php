@@ -72,7 +72,7 @@ class CompanyController extends Controller
 
 		//return dd($manager->user_id);
 
-		if($manager != null || Entrust::hasPermission('unlimited')){
+		if($manager != null || Entrust::can('unlimited') || Entrust::hasRole('admin') || Entrust::hasRole('devenlope') ){
 
       $company = company::join('plan','company.com_plan_id','=','plan.id')
               ->join('company_types','company.com_type_id','=','company_types.id')

@@ -70,7 +70,7 @@
 
             <label for="company_version_num" class="col-md-2 control-label" style="text-align:right;">安裝版號:</label>
             <div class="col-md-4">
-              <input type="text" name="company_version_num" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="{{$data->company_version_num}}" required>                
+              <input type="text" name="company_version_num" class=" col-md-4 form-control" style="width: 100%;text-align: center" value="{{$data->company_version_num}}" >                
             </div>
 
           </div>

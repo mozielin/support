@@ -87,17 +87,17 @@ class ServerController extends Controller
 						->withInput();
 			}*/
 		
-            //儲存
+            /*儲存
             $validator = Validator::make($request->all(),[
                         'server_name' => 'required|max:20', 
-                        'company_version_num' => 'required|integer'                  
+                        'company_version_num' => 'integer'                  
                                 ]);
                             //驗證失敗回傳資料及錯誤訊息
                             if ($validator->fails()){
-                                return redirect('server/create')
+                                return redirect('server/create_by')
                                         ->withErrors($validator)
                                         ->withInput();
-                            }
+                            }*/
 			$data = new server;
             $data -> server_name = $request->server_name;
 			$data -> company_business_code = $request->company_business_code;
