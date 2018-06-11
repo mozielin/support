@@ -68,6 +68,27 @@
 
             </div>
 
+            <div class="form-group col-md-12 form-horizontal" style="border-top:2px solid; border-top-color:#d3e0e9; padding-top:10px;"> 
+
+                  <div class="col-md-3" style="text-align: center;">
+                  @role('admin' || 'devenlope')
+                    <button type="button"  class="btn btn-primary"  onclick="location.href='{{route('version_index')}}'"><i class="glyphicon glyphicon-send"></i> 版號管理 </button>
+                  @endrole
+                  </div>
+                  @role('admin' || 'devenlope')
+                  <div class="col-md-3" style="text-align: center;">
+                   
+                  </div> 
+                  <div class="col-md-3" style="text-align: center;">
+                    
+                  </div> 
+                  <div class="col-md-3" style="text-align: center;">
+                    
+                  </div>   
+                  @endrole
+
+            </div>
+
             
             
 			  </div>

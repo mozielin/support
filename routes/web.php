@@ -555,3 +555,20 @@ Route::group(['prefix'=>'interview','middleware' => ['permission:interview_view'
 
 });
 
+Route::group(['prefix'=>'version','middleware' => ['role:admin|devenlope']], function(){
+
+      Route::name('version_index')->get('/', 'VerController@index');
+
+      Route::get('view/{version_id}', 'VerController@view')->name('version_view');
+
+      Route::get('create', 'VerController@create')->name('version_create');
+
+      Route::post('store', 'VerController@store')->name('version_store');
+
+      Route::get('edit/{version_id}', 'VerController@edit')->name('version_edit');
+
+      Route::post('update/{id}', 'VerController@update')->name('version_update');
+
+      Route::get('delete/{version_id}', 'VerController@delete')->name('version_delete');
+});
+

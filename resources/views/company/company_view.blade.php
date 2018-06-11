@@ -167,7 +167,7 @@
                   </div>
 
                    <div class="col-md-2" style="text-align:center;float:left;">
-                  @role('admin' || 'devenlope')
+                  @role('admin','devenlope')
                     <button type="button" class="btn btn-primary" onclick="location.href='{{route('activity_custome', $data->id)}}'">
                       <i class="glyphicon glyphicon-stats"></i>
                         Log
@@ -203,6 +203,7 @@
   
 
   <!--第二區塊-->
+  @permission('applicant_view')
   <div id="accordion2"> 
     <h3 style="text-align:left;">
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -224,9 +225,9 @@
             {{$applicantnum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             聯絡人列表</label>
-              @role('devenlope' || 'admin')
+              @permission('applicant_create')
               <a href="{{route('applicant_create_by',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>    
-              @endrole           
+              @endpermission           
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -292,8 +293,10 @@
           </div><!--區塊內容結束-->    
         </div>
   </div><!--第二區塊結束--></div>
+  @endpermission
 
   <!--第3區塊-->
+  @permission('contract_view')
   <div id="accordion3"> 
     <h3 style="text-align:left;">
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -315,9 +318,9 @@
             {{$contractnum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             合約一覽</label>
-              @role('devenlope' || 'admin')
+              @permission('contract_create')
               <a href="{{route('contract_create_by',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>    
-              @endrole           
+              @endpermission           
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -382,8 +385,10 @@
           </div><!--區塊內容結束-->    
         </div>
   </div><!--第3區塊結束--></div>
+  @endpermission
 
   <!--第4區塊-->
+  @permission('license_view')
   <div id="accordion4"> 
     <h3 style="text-align:left;">
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -405,9 +410,9 @@
             {{$licensenum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             Lic一覽</label>
-              @role('devenlope' || 'admin')
+              @permission('license_create')
               <a href="{{route('upload_by',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>    
-              @endrole           
+              @endpermission           
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -473,8 +478,10 @@
           </div><!--區塊內容結束-->    
         </div>
   </div><!--第4區塊結束--></div>
+  @endpermission
 
   <!--第5區塊-->
+  @permission('server_view')
   <div id="accordion5"> 
     <h3 style="text-align:left;">
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -498,9 +505,9 @@
             {{$servernum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             Server一覽</label>
-              @role('devenlope' || 'admin')
+              @permission('server_create')
               <a href="{{route('server_create_by',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-plus"></i> 新增 </button></a>    
-              @endrole           
+              @endpermission          
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -559,6 +566,7 @@
           </div><!--區塊內容結束-->    
         </div>
   </div><!--第5區塊結束--></div><!--收合結束-->
+  @endpermission
 
 
   <!--第6區塊-->
@@ -585,7 +593,7 @@
             {{$managernum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             相關人員一覽</label>
-               @role('devenlope' || 'admin')
+              @role('admin','devenlope')
               <a href="{{route('manager_edit',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-pencil"></i> 編輯 </button></a>    
               @endrole
         </div>
@@ -640,6 +648,7 @@
   </div><!--第6區塊結束--> </div>
 
   <!--第7區塊-->
+  @permission('interview_view')
   <div id="accordion7"> 
     <h3 style="text-align:left;">
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -663,9 +672,9 @@
             {{$interviewnum}}</label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
             訪談紀錄一覽</label>
-               @role('devenlope' || 'admin')
+               @permission('interview_create')
               <a href="{{route('interview_create',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-pencil"></i> 新增 </button></a>    
-              @endrole
+              @endpermission
         </div>
           <!--區塊內容-->
           <div class="panel-body" style="height:100%">
@@ -716,6 +725,7 @@
           </div><!--區塊內容結束-->    
         </div>
   </div><!--第7區塊結束--> </div>
+  @endpermission
 
   </div><!--最外框結束-->
 </div>

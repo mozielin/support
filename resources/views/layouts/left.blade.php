@@ -50,13 +50,13 @@
         @permission('bulletin_view') 	
         <li><a href="/bulletin"><i class="glyphicon glyphicon-comment" style="margin-right:10px;"></i> 公告</a></li>
         @endpermission
-        @permission('user_view')   
+        @role('admin','devenlope')  
         <li><a href="/user"><i class="glyphicon glyphicon-user" style="margin-right:10px;"></i> 使用者</a></li>
-        @endpermission
-        @role('devenlope' || 'admin')
+        @endrole
+        @role('admin','devenlope')
         <li><a href="/activity"><i class="glyphicon glyphicon-gift" style="margin-right:10px;"></i> 系統日誌</a></li>
         @endrole
-        @role('devenlope' || 'admin')
+        @role('admin','devenlope')
         <li><a href="/export"><i class="glyphicon glyphicon-cloud-download" style="margin-right:10px;"></i> 匯出管理</a></li>
         @endrole
         @permission('toolbox')

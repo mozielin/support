@@ -10,6 +10,7 @@ use App\User;
 use View;
 use App\server;
 use App\company;
+use App\version;
 use App\license_mac;
 
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,12 @@ class ServerController extends Controller
     public function index(){
 
         $count = server::count();
+
+         $searchdata = server::join('version','version.vernum','=','company_server_info.sync_ver')
+                ->select('company_server_info.*','version.vernum','version.name')
+                ->orderBy('company_server_info.id','desc')->get();
+
+         //return dd($searchdata);
 
 		return view('server.server_all')
                 ->with('count',$count); 
@@ -177,8 +184,9 @@ class ServerController extends Controller
 
             if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('devenlope') || Auth::user()->can('unlimited')){
 
-                $searchdata = server::orderBy('id','desc')
-                                    ->get();
+                $searchdata = server::join('version','version.vernum','=','company_server_info.sync_ver')
+                ->select('company_server_info.*','version.vernum','version.name')
+                ->orderBy('company_server_info.id','desc')->get();
             }
             else{
 
@@ -221,7 +229,7 @@ class ServerController extends Controller
                                 '</div>'.   
 
                             '<div class="col-md-2" style="border-right:1px solid black; border-left:1px solid black;">'.    
-                                    $data->sync_ver.
+                                    $data->name.
                             '</div>'.
                                     
                             '</div>'.                           

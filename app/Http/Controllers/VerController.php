@@ -15,6 +15,7 @@ use App\server;
 use App\User;
 use App\contract;
 use App\license;
+use App\version;
 
 class VerController extends Controller{
 
@@ -23,6 +24,61 @@ class VerController extends Controller{
     	// 执行 auth 认证
    		$this->middleware('auth');
 	}
+
+	public function index(){
+		   $version = version::orderBy('id','desc')->paginate(5);
+		
+		   return view('version.version_all',['version' => $version]);
+	}
+
+	public function view($id){
+           $version = version::find($id);
+           return view('version.version_view',['version' => $version]);
+        }
+
+	public function create(){
+		   return view('company_type.company_type_create');
+	}
+	
+
+	public function store(Request $request){
+
+
+			$version = new version;
+			$version -> vernum = $request->vernum;
+			$version -> name = $request->name;
+			$version -> save();
+			\Session::flash('flash_message', '新增成功!');
+			return redirect()->action('VerController@index');
+		}
+
+			
+
+	public function edit($id){
+		$version = version::lockForUpdate()->find($id);
+		return view('version.version_edit',['version' => $version]);
+	}
+
+	
+	public function update(Request $request,$id){
+		$version = version::find($id);
+        $version -> vernum = $request->vernum;
+        $version -> name = $request->name;
+        $version -> save();
+        return redirect()->action('VerController@view',['id' => $version->id]);
+
+
+	}
+
+
+	public function delete($id){
+
+		version::destroy($id);
+
+		return redirect()->action('VerController@index');
+        }
+
+
 
 	//autocomplete
 	public function kindex(){
@@ -146,15 +202,6 @@ class VerController extends Controller{
 		}
 	}
 
-	public function index(){
-			//資料搜尋&分頁
-		   //$data = patch::orderBy('id','desc')
-		   //->paginate(50);
-
-			//傳給視圖
-		   return view('patch_all');
-
-	}
 
 	public function loadindex(Request $request){
 
