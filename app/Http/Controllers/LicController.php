@@ -289,8 +289,8 @@ class LicController extends Controller
                         //return dd($file);
                         
                         $validator = Validator::make($request->all(),[
-                        'lic_name' => 'required|max:20',
-                        'company_name' => 'required|max:20',               
+                        'lic_name' => 'required',
+                        'company_name' => 'required',               
                                 ]);
                             //驗證失敗回傳資料及錯誤訊息
                             if ($validator->fails()){

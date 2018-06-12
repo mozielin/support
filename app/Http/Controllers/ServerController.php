@@ -64,6 +64,8 @@ class ServerController extends Controller
                         ->select('company_server_info.*','users.name','company.company_name')->find($id);
         $update = server::join('users','company_server_info.company_server_update','=','users.id')->select('company_server_info.company_server_update','users.name')->find($id);
 
+        $version = version::all();
+
         if($update==null){
             $updateby = 'None';
         }
@@ -75,7 +77,8 @@ class ServerController extends Controller
 
         return view('server.server_view')
                 ->with('data',$data)
-                ->with('updateby',$updateby);                
+                ->with('updateby',$updateby)
+                ->with('version',$version);                
     }
 
     protected function store(Request $request)
@@ -115,6 +118,7 @@ class ServerController extends Controller
 			$data -> company_server_interip = $request->company_server_interip;
 			$data -> company_server_type = $request->company_server_type;		
 			$data -> company_server = $request->company_server;
+            $data -> note = $request->note;
 			$data -> company_server_builder = $request->company_server_builder;
             $data -> build_type = $request->build_type;
             $data -> URL = $request->URL;
@@ -152,6 +156,7 @@ class ServerController extends Controller
         $data -> company_server_interip = $request->company_server_interip;
         $data -> company_server_type = $request->company_server_type;
         $data -> company_server_update = $request->company_server_update;
+        $data -> note = $request->note;
         $data -> build_type = $request->build_type;
         $data -> URL = $request->URL;       
         $data -> save();
@@ -186,12 +191,12 @@ class ServerController extends Controller
 
                 $searchdata = server::join('version','version.vernum','=','company_server_info.sync_ver')
                 ->select('company_server_info.*','version.vernum','version.name')
-                ->orderBy('company_server_info.id','desc')->get();
+                ->orderBy('id','desc')->get();
             }
             else{
 
                 $searchdata = server::join('company_user','company_user.company_id','=','company_server_info.company_server')
-                            ->where('company_user.user_id','=',$auth)
+                                ->where('company_user.user_id','=',$auth)
                                 ->orderBy('id','desc')
                                 ->get();
             }
@@ -208,8 +213,9 @@ class ServerController extends Controller
             if($searchdata)
             {
                 foreach($searchdata as $key => $data)
-                {
-                    $output.=
+                {   
+
+                    $output.= 
 
                     '<div class= " panel panel-default test " style="cursor:pointer; width:100%;"'.'onclick="location.href=\'../server/view/'.$data->id.'\' ">'.
 

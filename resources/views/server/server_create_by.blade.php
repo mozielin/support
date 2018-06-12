@@ -124,6 +124,20 @@
             
                         
                         </div>
+
+                        <div class="form-group col-md-12 form-horizontal" >
+                
+                            <label for="note" class="col-md-2 control-label" style="text-align:right;">備註事項:</label>
+                            <div class="col-md-10">
+
+                              <textarea name="note" style="height:100px;" id="note" class=" col-md-4 form-control noresize " value="" >
+                                  
+                              </textarea>
+                                <script type="text/javascript"> 
+                                             autosize($('#note'));
+                                </script>
+                            </div>
+                        </div>
                         
                         <div class="col-md-12" style="border-top:2px solid; border-top-color:#d3e0e9; padding-top:10px;">
 

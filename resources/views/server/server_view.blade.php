@@ -95,8 +95,13 @@
           </div>
 
            <div class="form-group col-md-12 form-horizontal">
-            <label for="company_version_num" class="col-md-2 control-label" style="text-align:right;"></label>
+            <label for="company_version_num" class="col-md-2 control-label" style="text-align:right;">版本對照:</label>
             <div class="col-md-4">
+            @foreach($version as $vdata)
+            @if($data->sync_ver == $vdata->vernum)
+              <input type="text" name="build_type" class="col-md-4 form-control ColorOrange" value="{{$vdata->name}}" readonly required>
+            @endif
+            @endforeach
                            
             </div>
 
@@ -114,6 +119,18 @@
             </div>
                             
           </div>
+
+          <div class="form-group col-md-12 form-horizontal" >
+        
+                <label for="note" class="col-md-2 control-label" style="text-align:right;">備註事項:</label>
+                <div class="col-md-10">
+
+                  <textarea name="note" style="height:100px;" id="note" class=" col-md-4 form-control noresize " value="" readonly >{{$data->note}}</textarea>
+                     <script type="text/javascript"> 
+                       autosize($('#note'));
+                      </script>
+                </div>
+              </div>
 
           </div>
           
