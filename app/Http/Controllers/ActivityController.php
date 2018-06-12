@@ -245,7 +245,7 @@ class ActivityController extends Controller
                 {
                     $output.=
 
-                    '<div class= " panel panel-default test " style="cursor:pointer; width:100%;"'.'onclick="location.href=\'../activity/view/'.$customer->id.'\' ">'.
+                    '<div class= " panel panel-default test " style="cursor:pointer; width:100%;"'.'onclick="location.href=\'/activity/view/'.$customer->id.'\' ">'.
 
                         '<div class="panel-heading " style="height:100%;">'.                
                             '<div class="row" style="text-align:center;">'.

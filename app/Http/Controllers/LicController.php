@@ -811,7 +811,7 @@ return view('license.license_create_by');
     {
         //return dd($request);
         $validator = Validator::make($request->all(),[
-            'lic_name' => 'required|max:20',
+            'lic_name' => 'required',
             'company_name' => 'required',
             'company_id' => 'required' ,                
         ]);
