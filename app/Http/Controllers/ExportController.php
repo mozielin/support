@@ -237,6 +237,7 @@ class ExportController extends Controller
 
 			$server = server::join('company','company_server_info.company_server','company.id')
               						->select('company_server_info.company_business_code','company.*')
+              						->groupBy('company_business_code')
               						->orderBy('company.id','DESC')->get();
 
             $manager = manager::join('company','company_user.company_id','=','company.id')
@@ -249,7 +250,7 @@ class ExportController extends Controller
               							->orderBy('company_applicant.id','DESC')->get();
 
             $k = k_value::orderBy('id','DESC')->first();
-			//return dd($manager);
+			return dd($temp);
             $time = Carbon::now()->toDateString(); 
 
             $users = User::orderBy('users.id','DESC')->get();

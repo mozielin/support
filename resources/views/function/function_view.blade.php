@@ -21,15 +21,31 @@
         </div>    
         <div class="panel-body">
             <div class="form-group col-md-12 form-horizontal"> 
-                <label for="status_id" class="col-md-1 control-label" style="text-align:right;">ID:</label>
+                <label for="status_id" class="col-md-2 control-label" style="text-align:right;">ID:</label>
                 <div class="col-md-4">
                   <input type="text" name="status_id" class="form-control" value="{{$function->id}}" readonly >
                 </div>
 
-                 <label for="status_class" class="col-md-3 control-label" style="text-align:right;">Name:</label>
+                 <label for="status_class" class="col-md-2 control-label" style="text-align:right;">Name:</label>
                 <div class="col-md-4">
                   <input type="text" name="status_class" class="form-control" value="{{$function->function_name}}" readonly >
                 </div>  
+            </div>
+
+            <div class="form-group col-md-12 form-horizontal"> 
+                <label for="code" class="col-md-2 control-label" style="text-align:right;">代碼:</label>
+                <div class="col-md-4">
+                  <input type="text" name="code" class="form-control" value="{{$function->code}}" required readonly>
+                </div>
+
+                <label for="select" class="col-md-2 control-label">綁定</label>
+                  <div class="col-md-4">
+                  @if($function->select == 0)
+                    <input type="text" name="select" class="form-control" value="是" required readonly>
+                  @else
+                    <input type="text" name="select" class="form-control" value="否" required readonly>   
+                  @endif
+                  </div>
             </div>
             <div class="form-group col-md-12 form-horizontal">
             <div class="col-md-4" style="text-align:center;">

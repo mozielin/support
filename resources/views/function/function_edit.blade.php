@@ -46,6 +46,28 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
+                                <label for="code" class="col-md-2 control-label" style="text-align:right;">代碼:</label>
+                                <div class="col-md-4">
+                                <input type="text" name="code" class="form-control" value="{{$function->code}}" required>
+                                </div>
+
+                                <label for="select" class="col-md-1 control-label">綁定</label>
+                                <div class="col-md-4">
+                                  <select id="status_class" name="status_class" style="width:80px;padding-right:15px;" class="form-control" required placeholder="請選擇">
+                                      
+                                      <option value="0" 
+                                      @if($function->select == 0)selected="true"
+                                      @endif>
+                                      是
+                                      </option>
+                                      <option value="1"
+                                      @if($function->select == 1)selected="true"
+                                      @endif>否</option>
+                                  </select>
+                                    
+                                </div>
+                            </div>
                             <div class="form-group col-md-12 form-horizontal">
                               <div class="col-md-4 col-md-offset-1" style="text-align:center;">
                                   <button type="submit" class="btn btn-primary" style="align:center;">

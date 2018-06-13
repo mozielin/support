@@ -21,7 +21,7 @@
                         <div class="form-group{{ $errors->has('bulletin_name') ? ' has-error' : '' }}">
                             <label for="bulletin_name" class="col-md-3 col-md-offset-1 control-label">公告標題</label>
 
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <input id="bulletin_name" type="text" class="form-control" name="bulletin_name" value="{{ old('bulletin_name') }}" required autofocus>
 
                                 @if ($errors->has('bulletin_name'))
@@ -35,7 +35,7 @@
                         <div class="form-group{{ $errors->has('bulletin_content') ? ' has-error' : '' }}">
                             <label for="bulletin_content" class="col-md-3 col-md-offset-1 control-label">公告內容</label>
 
-                            <div class="col-md-5">
+                            <div class="col-md-12">
                                 <textarea  id="bulletin_content" type="textarea" class="form-control vresize"   name="bulletin_content" value="" required>
                                     
                                 </textarea>

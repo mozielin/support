@@ -40,6 +40,7 @@ class FunctionController extends Controller
 	///	]);
 			$validator = Validator::make($request->all(),[
 				'function_name' => 'required|unique:function|max:45',
+				'code' => 'required|unique:function',
 				]);
 
 			if ($validator->fails()){
@@ -50,6 +51,8 @@ class FunctionController extends Controller
 
 			$function = new functions;
 			$function -> function_name = $request->function_name;
+			$function -> code = $request->code;
+			$function -> select = $request->select;
 			$function -> save();
 			\Session::flash('flash_message', '新增成功!');
 			return redirect()->action('FunctionController@index');
@@ -64,8 +67,22 @@ class FunctionController extends Controller
 
 	
 	public function update(Request $request,$id){
+
+		$validator = Validator::make($request->all(),[
+				'function_name' => 'required|unique:function|max:45',
+				'code' => 'required|unique:function',
+				]);
+
+			if ($validator->fails()){
+				return redirect('function_edit')
+						->withErrors($validator)
+						->withInput();
+			}
+
 		$function = functions::find($id);
         $function -> function_name = $request->function_name;
+        $function -> code = $request->code;
+		$function -> select = $request->select;
         $function -> save();
         return redirect()->action('FunctionController@view',$id);
 

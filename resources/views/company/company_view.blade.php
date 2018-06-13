@@ -167,7 +167,7 @@
                   </div>
 
                    <div class="col-md-2" style="text-align:center;float:left;">
-                  @role('admin','devenlope')
+                  @role('devenlope')
                     <button type="button" class="btn btn-primary" onclick="location.href='{{route('activity_custome', $data->id)}}'">
                       <i class="glyphicon glyphicon-stats"></i>
                         Log

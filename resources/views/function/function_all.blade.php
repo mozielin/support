@@ -35,11 +35,18 @@
 				</div>
 			@endif
 			<!--右邊的新增區塊-->
-			<div class="right-side" style="width:360px;height:57px;float:right;display:flex;justify-content:center;text-align:center;margin-top:3px;">	  	
+			<div class="right-side" style="width:500px;height:57px;float:right;display:flex;justify-content:center;text-align:center;margin-top:3px;">	  	
 				<form class="form-horizontal" method="POST" action="{{ route('function_store') }}">
 					{{ csrf_field() }}
+					<div class="col-md-2">
+						<select id="select" name="select" style="width:80px;padding-right:15px;" class="form-control" required placeholder="是否綁定LIC">
+							<option value="0">是</option>
+							<option value="1">否</option>
+						</select>
+					</div>
 					<div class="input-group{{ $errors->has('function_name') ? ' has-error' : '' }}">
-						<input id="function_name" type="text" class="form-control" name="function_name" value="{{ old('function_name') }}" placeholder="請輸入功能名稱" required autofocus style="width:250px;margin-left:20px;">
+						<input id="function_name" type="text" class="form-control" name="function_name" value="{{ old('function_name') }}" placeholder="請輸入功能名稱" required autofocus style="width:125px;margin-left:20px;">
+						<input id="code" type="text" class="form-control" name="code" value="{{ old('code') }}" placeholder="請輸入功能code" required autofocus style="width:125px;margin-left:20px;">
 						<div class="input-group-btn">			  
 			               <button type="submit" class="btn btn-primary" style="margin-right:20px;"><i class="glyphicon glyphicon-plus"></i> 新增 </button>
 			            </div>              

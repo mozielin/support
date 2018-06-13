@@ -48,7 +48,7 @@
     	<li><a href="/seadmin"><i class="glyphicon glyphicon-facetime-video" style="margin-right:10px;"></i> TLC管理</a></li> 
         @endpermission
         @permission('bulletin_view') 	
-        <li><a href="/bulletin"><i class="glyphicon glyphicon-comment" style="margin-right:10px;"></i> 公告</a></li>
+        <li><a href="/bulletin"><i class="glyphicon glyphicon-bullhorn" style="margin-right:10px;"></i> 公告</a></li>
         @endpermission
         @role('admin','devenlope')  
         <li><a href="/user"><i class="glyphicon glyphicon-user" style="margin-right:10px;"></i> 使用者</a></li>

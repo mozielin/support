@@ -72,7 +72,7 @@
 
                   <div class="col-md-3" style="text-align: center;">
                   @role('admin' || 'devenlope')
-                    <button type="button"  class="btn btn-primary"  onclick="location.href='{{route('version_index')}}'"><i class="glyphicon glyphicon-send"></i> 版號管理 </button>
+                    <button type="button"  class="btn btn-primary"  onclick="location.href='{{route('version_index')}}'"><i class="glyphicon glyphicon-list-alt"></i> 版號管理 </button>
                   @endrole
                   </div>
                   @role('admin' || 'devenlope')

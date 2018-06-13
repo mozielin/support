@@ -772,7 +772,7 @@ return view('license.license_create_by');
                 $class = "Lic";
                 $status = status::where('status_class','=',$class)->get();
                 $test = 0;
-                $function = functions::all();
+                $function = functions::orderBy('select','DESC')->orderBy('id','ASC')->get();
                 //return dd($function);
                 //foreach ($modarray as $moddata ) {
                 //    foreach ($function as $fun) {
