@@ -250,7 +250,7 @@ class ExportController extends Controller
               							->orderBy('company_applicant.id','DESC')->get();
 
             $k = k_value::orderBy('id','DESC')->first();
-			//return dd($temp);
+			//return dd($server);
             $time = Carbon::now()->toDateString(); 
 
             $users = User::orderBy('users.id','DESC')->get();
