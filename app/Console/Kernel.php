@@ -44,16 +44,17 @@ class Kernel extends ConsoleKernel
         ->dailyAt('08:30');
         //$schedule->call('App\Http\Controllers\VerController@dailycatch')
         //->dailyAt('09:30');
+        //
         $schedule->call('App\Http\Controllers\ScheduleController@tlcalert')
-        ->dailyAt('10:30');
-        $schedule->call('App\Http\Controllers\ScheduleController@servercatch')
-        ->dailyAt('09:30');
-        $schedule->call('App\Http\Controllers\ScheduleController@contractalert')
-        ->dailyAt('09:20');
-        $schedule->call('App\Http\Controllers\ScheduleController@licensealert')
-        ->dailyAt('09:10');
-         $schedule->call('App\Http\Controllers\ScheduleController@licenseend')
         ->dailyAt('09:00');
+        $schedule->call('App\Http\Controllers\ScheduleController@servercatch')
+        ->twiceDaily(07,12);
+        $schedule->call('App\Http\Controllers\ScheduleController@contractalert')
+        ->dailyAt('09:00');
+        $schedule->call('App\Http\Controllers\ScheduleController@licensealert')
+        ->dailyAt('09:00');
+         $schedule->call('App\Http\Controllers\ScheduleController@licenseend')
+        ->dailyAt('08:00');
         
     }
 

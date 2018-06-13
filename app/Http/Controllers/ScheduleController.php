@@ -584,9 +584,22 @@ class ScheduleController extends Controller
         //return dd($license);
         foreach ($license as $udata) {
                 # code...   
-                $udata->status_id = "14";
+                $udata->status_id = "17";
                 
                 $udata -> save();
+               }
+
+        $contract = contract::join('company','company.id','=','company_contract.company_contract')
+                            ->join('company_user','company_user.company_id','=','company.id')
+                            ->join('users','users.id','=','company_user.user_id')
+                            ->select('company_contract.*','users.name','users.email','company.company_name')
+                            ->where('company_contract_end','=',$time)->get();
+
+         foreach ($contract as $cdata) {
+                # code...   
+                $cdata->contract_status = "4";
+                
+                $cdata -> save();
                }
 
     }
