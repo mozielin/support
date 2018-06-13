@@ -232,12 +232,13 @@ class ExportController extends Controller
 			$temp = temp::join('company_server_info','company_server_info.company_business_code','=','temp.teampluscode')
 						->join('company','company_server_info.company_server','=','company.id')
 						->select('company_server_info.*','company.company_name','temp.licensekey','company.com_sales_id')
+						->groupBy('company_server_info.company_business_code')
 						->get();
 			//
 
 			$server = server::join('company','company_server_info.company_server','company.id')
               						->select('company_server_info.company_business_code','company.*')
-              						->groupBy('company_business_code')
+              						->groupBy('company_server_info.company_business_code')
               						->orderBy('company.id','DESC')->get();
 
             $manager = manager::join('company','company_user.company_id','=','company.id')
