@@ -34,7 +34,7 @@
             </div>   
 
         		<div class="form-group col-md-12 form-horizontal"> 
-                @role('admin' || 'devenlope')
+                @role('admin','devenlope')
                 	<div class="col-md-3" style="text-align: center;">
                     <button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('contractcheck')}}'"><i class="glyphicon glyphicon-file"></i> 合約-Scan </button>
                 	</div>
@@ -54,7 +54,7 @@
                   <div class="col-md-3" style="text-align: center;">
                     <button type="button"  class="btn btn-primary"  onclick="location.href='{{route('seadmin_uploadlic')}}'"><i class="glyphicon glyphicon-send"></i> Lic分析 </button>
                   </div>
-                  @role('admin' || 'devenlope')
+                  @role('admin','devenlope')
                   <div class="col-md-3" style="text-align: center;">
                     <button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('APIswitch')}}'"><i class="glyphicon glyphicon-refresh"></i> {{$data->mode}} </button>
                   </div> 
@@ -71,11 +71,11 @@
             <div class="form-group col-md-12 form-horizontal" style="border-top:2px solid; border-top-color:#d3e0e9; padding-top:10px;"> 
 
                   <div class="col-md-3" style="text-align: center;">
-                  @role('admin' || 'devenlope')
+                  @role('admin','devenlope')
                     <button type="button"  class="btn btn-primary"  onclick="location.href='{{route('version_index')}}'"><i class="glyphicon glyphicon-list-alt"></i> 版號管理 </button>
                   @endrole
                   </div>
-                  @role('admin' || 'devenlope')
+                  @role('admin','devenlope')
                   <div class="col-md-3" style="text-align: center;">
                    
                   </div> 

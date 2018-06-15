@@ -9,7 +9,7 @@ use App\patch;
 use Excel;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Storage;
 use Response;
 use App\Customer;
 use Input;
@@ -32,6 +32,8 @@ use App\Mail\ContractAlert;
 use App\Mail\SyncDaemonAlert;
 
 use App\Mail\TLCAlert;
+
+use App\version;
 
 
 
@@ -115,7 +117,10 @@ class ScheduleController extends Controller
 
     public function servercatch(){
 
+
+
         $time = Carbon::now()->toDateString();
+
         $server = server::where('company_server_type','=','Team+')->get();
         //return dd($server);
             foreach ($server as $svdata ) {
@@ -222,25 +227,38 @@ class ScheduleController extends Controller
                                 ->where('function_id','=','3')
                                 ->select('license.company_id','company.company_name','license_function.*')
                                 ->get();
-                //產出EXCEL(把兩個產出結果分別放入兩張表)
-                Excel::create('DailySyncVer_'.$time, function($excel) use($ldata,$sdata) {
+
+               //$udata = User::all();
+               //$vdata = version::all();
+                //return dd($sdata,$ldata);
+               /* 產出EXCEL(把兩個產出結果分別放入兩張表)
+                Excel::create('DailySyncVer_'.$time, function($excel) use($ldata,$sdata,$udata,$vdata) {
 
                     //第一張表server資訊
-                    $excel->sheet('Server_Ver', function($sheet) use($sdata) {
+                    $excel->sheet('Server_Ver', function($sheet) use($sdata,$udata,$vdata) {
 
-                    $sheet->fromArray($sdata);
+                    //$sheet->fromArray($sdata);
+                    $sheet->loadView('export.Server_Ver')
+                          ->with('udata',$udata)
+                          ->with('sdata',$sdata)
+                          ->with('vdata',$vdata);
 
                     })->store('xls',storage_path('/app/public/export'));
 
                     //第2張表有SYNCDAMON另外放
-                    $excel->sheet('SyncDaemon', function($sheet) use($ldata) {
+                    $excel->sheet('SyncDaemon', function($sheet) use($ldata,$udata) {
 
-                    $sheet->fromArray($ldata);
+                    //$sheet->fromArray($ldata);
+
+                    $sheet->loadView('export.SyncDaemon')
+                          ->with('udata',$udata)
+                          ->with('ldata',$ldata);
 
                     })->store('xls',storage_path('/app/public/export'));
 
                 });
-
+                */
+               
                 
                 // "200"
                 //echo $res->getHeader('content-type');
@@ -267,7 +285,7 @@ class ScheduleController extends Controller
                // return redirect()->action('SeController@index');
  
                //}
-
+/*
 
             $user = User::where('user_group','=','3')->get();
             //return dd($user);
@@ -283,7 +301,7 @@ class ScheduleController extends Controller
                 //$time = Carbon::now();  
 
                 //\View::share('time', $time);
-                //寄出信件
+                寄出信件
                 \Mail::send('email.test',$content, function($message) use ($from, $to) {
                     $message->from($from['email'], $from['name']);
                     $message->to($to['email'], $to['name'])->subject($from['subject']);
@@ -293,18 +311,20 @@ class ScheduleController extends Controller
                 }); 
 
             }
+
+            \Storage::delete('/public/export/DailySyncVer_'.$time.'.xls');*/
              
              //API測試    
 
-            $time = Carbon::now()->toDateString();
-            $path = storage_path('app/public/export/DailySyncVer_'.$time.'.xls');
+           // $time = Carbon::now()->toDateString();
+            //$path = storage_path('app/public/export/DailySyncVer_'.$time.'.xls');
             //return dd($path);
-            $type = pathinfo($path, PATHINFO_EXTENSION);
+           // $type = pathinfo($path, PATHINFO_EXTENSION);
            // $exportdata = file_get_contents($path);
-            $apidata = base64_encode(file_get_contents($path));
+           // $apidata = base64_encode(file_get_contents($path));
            // $base64 = 'data:image/' . $type . ';base64,' . base64_encode($exportdata);
             
-            $sdata = string($apidata);
+           // $sdata = string($apidata);
 
              /*檔案上傳API
                 $client = new Client();
@@ -580,7 +600,7 @@ class ScheduleController extends Controller
         $license = license::join('company','company.id','=','license.company_id')
                             ->join('users','company.com_sales_id','=','users.id')
                             ->select('license.*','users.name','users.email','company.company_name') 
-                            ->where('expir_at','=',$time)->get();
+                            ->where('expir_at','<',$time)->get();
         //return dd($license);
         foreach ($license as $udata) {
                 # code...   
@@ -593,7 +613,7 @@ class ScheduleController extends Controller
                             ->join('company_user','company_user.company_id','=','company.id')
                             ->join('users','users.id','=','company_user.user_id')
                             ->select('company_contract.*','users.name','users.email','company.company_name')
-                            ->where('company_contract_end','=',$time)->get();
+                            ->where('company_contract_end','<',$time)->get();
 
          foreach ($contract as $cdata) {
                 # code...   

@@ -81,3 +81,13 @@
 </div>
 @endsection
 
+<script>//彈出對話框確認
+  function Confirm(){
+    if(confirm("確認修改此筆資料？")==true)   
+      return true;
+    else  
+      return history.back();
+  }   
+
+</script>
+

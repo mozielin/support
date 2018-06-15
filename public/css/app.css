@@ -9197,5 +9197,11 @@ textarea {
   resize: vertical; 
 }
 
+.spinner {
+    position: fixed;
+    top:50%;
+    left:50%;
+}
+
 @charset "UTF-8";.moreLoadingBox{padding:10px;background-color:#fff;opacity:.7;filter:alpha(Opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";z-index:100;text-align:center}.moreLoadingBox .moreLoadingImg{margin:0 5px;display:inline-block;vertical-align:middle;padding-top:3px}.moreLoadingBox .moreLoadingTxt{margin:0 5px;display:inline-block;vertical-align:middle;line-height:22px}.moreLoadingFloat{position:absolute;bottom:0;left:0;width:100%;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}.moreLoadingUp{top:0;bottom:auto}
 

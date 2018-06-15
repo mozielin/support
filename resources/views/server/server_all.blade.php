@@ -84,7 +84,7 @@
 				<span>Type</span>
 			</div>
 			<div class="col-md-2" style="border-right:1px solid black;">
-				<span>公司名稱</span>
+				<span>主機名稱</span>
 			</div>
 			<div class="col-md-6" style="border-right:1px solid black;">
 				<span>站台位置</span>

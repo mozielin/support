@@ -33,8 +33,9 @@
 							<p id="IDESK_FOOTER_footerDesc1">調整舒適的螢幕大小比例。</p>
                         </div>
                         <div class="Rcom" style="padding-left:20px;">
-                            <p id="IDESK_FOOTER_footerDesc1">客服專線：分機直播362</p>
-                            <p id="IDESK_FOOTER_footerDesc2">客服信箱：peter@teamplus.com.tw</p>
+                        	<img src="/pic/ryan.gif" style="position:relative;width:25px;height:30px;" alt="">
+                            <B id="IDESK_FOOTER_footerDesc1">Powered By Ryan</B>
+                            <p id="IDESK_FOOTER_footerDesc2">客服信箱：support@teamplus.com.tw</p>
                             <p id="IDESK_FOOTER_footerDesc3">地址：新北市新店區北新路三段207-3號11樓(互動資通)</p>
                         </div>
                         <div class="clear"></div>

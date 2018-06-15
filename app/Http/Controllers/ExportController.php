@@ -20,6 +20,7 @@ use App\temp;
 use App\manager;
 use App\company_area;
 use App\k_value;
+use App\version;
 
 class ExportController extends Controller
 {
@@ -121,9 +122,10 @@ class ExportController extends Controller
               //$manager = manager::orderBy('user_id','DESC')->get();
               $tlc = seadmin::orderBy('id','DESC')->get();
 
+              $vdata = version::all();
 			
 
-			\Excel::create('總表_'.$time, function($excel)use($company,$applicant,$users,$contract,$license,$server,$tlc,$manager,$contractf) {
+			\Excel::create('Total_'.$time, function($excel)use($company,$applicant,$users,$contract,$license,$server,$tlc,$manager,$contractf,$vdata) {
 
 	    	$excel->sheet('Company', function($sheet)use($company,$applicant,$users,$contract,$license,$manager) {
 	    		//return dd($contract);
@@ -158,11 +160,12 @@ class ExportController extends Controller
 	        		->with('users',$users); 
 	    	});
 
-	    	$excel->sheet('Server', function($sheet)use($server,$users) {
+	    	$excel->sheet('Server', function($sheet)use($server,$users,$vdata) {
 
 	        $sheet->loadView('export.server')
 	        		->with('server',$server)
-	        		->with('users',$users);
+	        		->with('users',$users)
+	        		->with('vdata',$vdata);
 	    	});
 
 	    	$excel->sheet('TLC', function($sheet)use($tlc,$users) {
@@ -173,10 +176,38 @@ class ExportController extends Controller
 	    	});
 
 
-	    	$excel->export('xls');
+	    	$excel->store('xls',storage_path('/app/public/export'));
 
 	    });
 
+			 $user = User::where('user_group','=','3')->get();
+            //return dd($user);
+            foreach ($user as $udata) {
+
+                $from = ['email'=> 'support@teamplus.com.tw',
+                'name'=>'Team+ Support',
+                'subject'=> '每日總表備份'];
+                $to = ['email'=> $udata->email,
+                'name'=> $udata->name];
+                //信件的內容(即表單填寫的資料)
+                $content = ['FYI'];
+                //$time = Carbon::now();  
+
+                //\View::share('time', $time);
+                //寄出信件
+                \Mail::send('email.test',$content, function($message) use ($from, $to) {
+                    $message->from($from['email'], $from['name']);
+                    $message->to($to['email'], $to['name'])->subject($from['subject']);
+                    $time = Carbon::now()->toDateString();
+                    $path = storage_path('app/public/export/Total_'.$time.'.xls');
+                    $message->attach($path);
+                }); 
+
+            }
+
+            \Storage::delete('/public/export/Total_'.$time.'.xls');
+
+            return redirect()->route('export_all');
 	}
 
 	public function download_total(){
