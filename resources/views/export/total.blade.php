@@ -4,11 +4,11 @@
 		<tr>
 		    <!-- Headings -->
 		    <td>序號</td>
-		    <td>統一編號</td>
-		    <td>客戶名稱</td>
-		    <td>英文名稱</td>
 		    <td>申請日</td>
 		    <td>申請方案</td>
+		    <td>統一編號</td>
+		    <td>客戶名稱</td>
+		    <td>英文名稱</td>		    
 		    <td>公司資本</td>
 		    <td>公司產業別</td>
 		    <td>公司型態</td>
@@ -40,12 +40,12 @@
 	    @foreach($company as $cdata)
 	    	<tr>
 		    <!-- Headings -->
-		    	<td>{{$cdata->id}}</td>
+		    	<td>{{$cdata->id}}</td> 
+		    	<td>{{$cdata->created_at}}</td>
+			    <td>{{$cdata->plan_name}}</td>
 		    	<td>{{$cdata->company_EIN}}</td>
 			    <td>{{$cdata->company_name}}</td>
 			    <td>{{$cdata->company_engname}}</td>
-			    <td>{{$cdata->created_at}}</td>
-			    <td>{{$cdata->plan_name}}</td>
 			    <td>{{$cdata->company_capital}}</td>
 			    <td>{{$cdata->company_industry_name}}</td>
 			    <td>{{$cdata->company_type_name}}</td>

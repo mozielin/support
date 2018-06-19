@@ -111,6 +111,29 @@ class ExportController extends Controller
               						->select('company_contract.*','company.company_name','status.status_name','plan.plan_name')
               						->orderBy('company_contract.id','DESC')->first();
 
+               //掃一遍license_function有SYNC挑出來存EXCEL
+            //千呼萬喚使出來得SQL
+                //      抓LIC表--結合--LIC&FUN關連表------用LIC表的ID-等於----LIC&FUN關連表---的LID-----
+                $ldata = license::join('license_function','license.id','=','license_function.license_id')
+                                ->join('company','license.company_id','=','company.id')
+                                ->join('license_mac','license_mac.license_id','=','license.id')
+                               //->join('company_user','company_user.company_id','=','company.id')
+                               //->join('users','company_user.company_id','=','users.id')
+                                //神奇語法-排除重複且最新!
+                                ->whereIn('license.id',function($query){
+                                   $query->select(DB::raw('max(id)'))
+                                         ->from('license')
+                                         //排除重複公司
+                                         ->groupBy('company_id'); 
+                                })
+                                //找出ID=SYNC的
+                                ->where('function_id','=','3')
+                                
+                                ->select('license.company_id','company.company_name','license_function.*','license_mac.mac')
+                                ->get();
+
+                                
+
           
               //server資料		
               //$servernum = server::where('company_server','=',$company_id)->count();
@@ -124,8 +147,8 @@ class ExportController extends Controller
 
               $vdata = version::all();
 			
-
-			\Excel::create('Total_'.$time, function($excel)use($company,$applicant,$users,$contract,$license,$server,$tlc,$manager,$contractf,$vdata) {
+			return dd($server,$ldata);
+			\Excel::create('Total_'.$time, function($excel)use($company,$applicant,$users,$contract,$license,$server,$tlc,$manager,$contractf,$vdata,$ldata) {
 
 	    	$excel->sheet('Company', function($sheet)use($company,$applicant,$users,$contract,$license,$manager) {
 	    		//return dd($contract);
@@ -173,6 +196,15 @@ class ExportController extends Controller
 	        $sheet->loadView('export.tlc')
 	        		->with('tlc',$tlc)
 	        		->with('users',$users);
+	    	});
+
+	    	$excel->sheet('SyncDaemon', function($sheet)use($ldata,$users,$server,$vdata) {
+
+	        $sheet->loadView('export.SyncDaemon')
+	        		->with('ldata',$ldata)
+	        		->with('server',$server)
+	        		->with('users',$users)
+	        		->with('vdata',$vdata);
 	    	});
 
 
