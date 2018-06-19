@@ -13,12 +13,7 @@
 		<div class="panel-heading" style="height:62px;display:flex;justify-content:center;text-align:center;"><!--東西置中-->
 		<!--左邊的搜尋區塊-->
 		<div class="left-side" style="width:360px;height:57px;float:right;display:flex;justify-content:center;text-align:center;margin-top:3px;">
-			<form class="form-horizontal" method="POST" action="{{ route('company_industry_store') }}">
-				{{ csrf_field() }}
-				<div class="form-group{{ $errors->has('company_industry_name') ? ' has-error' : '' }}">
-					<input id="company_industry_name" type="text" class="form-control" name="company_industry_name" value="{{ old('company_industry_name') }}" placeholder="請輸入ip" required autofocus style="width:240px;float:left;margin-right:10px;"></input>
-				</div>
-			</form>
+			
 		</div>
 		@if ($errors->any())
 		<div class="alert alert-danger" style="height:52px;position:absolute;right:781px;top:300px;">

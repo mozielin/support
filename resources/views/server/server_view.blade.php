@@ -145,28 +145,33 @@
                   }   
 
                 </script>
+              @permission('server_delete')
               <div class="col-md-3" style="text-align:center;">
                 <button type="button" class="btn btn-primary" onclick="return Confirm();">
                 <i class="glyphicon glyphicon-trash"></i>
                 刪除
                 </button>
               </div>
+              @endpermission
 
-
+              @permission('server_func')
               <div class="col-md-3" style="text-align:center;">
                 <button type="button" class="btn btn-primary" onclick="location.href='{{route('function_view', $data->id)}}'">
                 <i class="glyphicon glyphicon-cog"></i>
                 功能
                 </button>
               </div>
-
+              @endpermission
+              
+              @permission('server_edit')
               <div class="col-md-3" style="text-align:center;">
                 <button type="button" class="btn btn-primary" onclick="location.href='{{route('server_edit', $data->id)}}'">
                 <i class="glyphicon glyphicon-pencil"></i>
                 修改
                 </button>
               </div>
-
+              @endpermission
+              
               <div class="col-md-3" style="text-align:center;">
                 <button type="button" class="btn btn-primary" onclick="location.href='{{route('server_index')}}'">
                 <i class="glyphicon glyphicon-backward"></i>

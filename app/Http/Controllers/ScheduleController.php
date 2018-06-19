@@ -416,8 +416,9 @@ class ScheduleController extends Controller
 			        	//API
 			        	//return $udata->name;
 			        	$account_list = json_encode([$udata->email]);
+                        //API內容
 			        	$content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->company_name.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
-			        	//return $array;
+			        	//API
 			            $client = new Client();
 			            $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
 			                'form_params' => [
@@ -457,8 +458,9 @@ class ScheduleController extends Controller
 			        	//return $udata->name;
 			        	$account_list = json_encode([$udata->email]);
 			        	//信件的內容(即表單填寫的資料)
+                        //API內容
 			        	$content = 'Hi,'.$udata->name.'，您於'.$udata->company_contract_start.'簽署之'.$udata->company_name.'即將於'.$udata->company_contract_end.'約滿到期，特發此提醒，敬請把握續約黃金時機。預祝您一切順利！此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
-			        		//return $array;
+			        		//API
 			            $client = new Client();
 			            $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
 			                'form_params' => [
@@ -523,9 +525,10 @@ class ScheduleController extends Controller
     			foreach ($license as $udata) {
 
         		$account_list = json_encode([$udata->email]);
+                //API內容
         		$content = $udata->company_name.'License授權時間將於'.$udata->expir_at.'到期，特發此提醒，如需申請展延，敬請提早洽談續約事宜並預留申請作業時間。預祝您一切順利！此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 
-        		//return $array;
+        		//API
                 $client = new Client();
                 $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
                     'form_params' => [
@@ -558,9 +561,10 @@ class ScheduleController extends Controller
     			foreach ($license as $udata) {
 
         		$account_list = json_encode([$udata->email]);
+                //API內容
         		$content = $udata->company_name.'License授權時間將於'.$udata->expir_at.'到期，特發此提醒，如需申請展延，敬請提早洽談續約事宜並預留申請作業時間。預祝您一切順利！此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 
-        		//return $array;
+        		//API
                 $client = new Client();
                 $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
                     'form_params' => [
@@ -644,6 +648,27 @@ class ScheduleController extends Controller
 
     }
 
+      public function tlcchecknow(){
+        //30天後到期
+        $time = Carbon::now()->toDateString();
+        //----取得系統時間---加減(現在時間1天前)--轉為日期去掉分秒
+        $alerttime = Carbon::now()->addDays(-1)->toDateString();
+        //return dd($alerttime);
+        //$alerttime = Carbon::now()->modify('14 days')->toDateString();
+
+        $data = seadmin::where('company_tlc_end','=',$alerttime)
+                         ->join('company_user','seadmin.text','=','company_user.company_id')
+                         ->join('users','company_user.user_id','=','users.id')
+                         ->select('seadmin.*','users.email','users.name','company_user.*')->get();
+        //return dd($data);
+        if(!$data->isEmpty()){
+            return $this->tlcalert($data);
+        }
+        \Session::flash('checkno_message', 'No Expire!');
+        return redirect()->action('ToolController@index');
+
+    }
+
     public function tlcalert($data){
 
     	//return dd($data);
@@ -658,7 +683,7 @@ class ScheduleController extends Controller
 				//$se_list = json_encode([$cdata->email]);
 				
            		$account_list = json_encode([$seadmin->email]);
-
+                //API內容
         		$content = $seadmin->company_name.'「視訊會議」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 
         		//API
@@ -697,7 +722,7 @@ class ScheduleController extends Controller
 				//$se_list = json_encode([$cdata->email]);
 				
            		$account_list = json_encode([$seadmin->email]);
-
+                //API內容
         		$content = $seadmin->company_name.'「視訊會議」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 
         		//API
