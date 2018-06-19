@@ -26,7 +26,7 @@
 	    </tr>
 	@foreach($server as $sdata)
 	    @foreach($ldata as $ldda)
-	    	@if($sdata->company_server_mac == $ldda->mac)
+	    	@if($sdata->company_server_mac == $ldda->mac && $sdata->company_server_type == 'Team+')
 
 	    	<tr>
 		    <!-- Headings -->
