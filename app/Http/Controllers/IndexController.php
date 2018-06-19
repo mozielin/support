@@ -49,6 +49,11 @@ class IndexController extends Controller
                          ->select('bulletin.*','users.name')
                          ->orderby('bulletin.id','DESC')->first();   
 
+         //doris
+        if(Auth::user()->id == '6')    {
+           $data = bulletin::withTrashed()->where('id', 1)->get(); 
+        }       
+
         return view('home')
                     ->with('data',$data);
 
