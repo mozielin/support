@@ -97,9 +97,13 @@
         <div class="form-group col-md-12 form-horizontal">
 
             <label for="vip" class="col-md-2 control-label" style="text-align:right;">很重要嗎?</label>
-            <div class="col-md-4">
+            <div class="col-md-2">
             <label for="vip" class="col-md-2 control-label" style="text-align:right;">YES</label>  
               <input type="radio" name="vip" id="vip" class=" col-md-2 form-control ColorOrange" style="text-align: center; width:60%;"  value="1">    
+            </div>
+            <div class="col-md-2">
+            <label for="vip" class="col-md-2 control-label" style="text-align:right;">NO</label>  
+              <input type="radio" name="vip" id="vip" class=" col-md-2 form-control ColorOrange" style="text-align: center; width:60%;"  value="0">    
             </div>
 
             <label for="applicant_note" class="col-md-2 control-label" style="text-align:right;">備註:</label>

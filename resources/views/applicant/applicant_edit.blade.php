@@ -96,10 +96,27 @@
         <div class="form-group col-md-12 form-horizontal">
 
             <label for="vip" class="col-md-2 control-label" style="text-align:right;">很重要嗎?</label>
-            <div class="col-md-4">
-            <label for="vip" class="col-md-2 control-label" style="text-align:right;">YES</label>  
-              <input type="radio" name="vip" id="vip" class=" col-md-2 form-control ColorOrange" style="text-align: center; width:60%;"  value="1">    
+            @if($data->vip == 1 ) 
+            <div class="col-md-2">
+            <label for="vip" class="col-md-2 control-label" style="text-align:right;">YES</label>
+              <input type="radio" name="vip" id="vip" class=" col-md-2 form-control ColorOrange" style="text-align: center; width:60%;"  value="1" checked="checked"> 
             </div>
+
+             <div class="col-md-2">
+            <label for="vip" class="col-md-2 control-label" style="text-align:right;">NO</label>
+              <input type="radio" name="vip" id="vip" class=" col-md-2 form-control ColorOrange" style="text-align: center; width:60%;"  value="0" checked=""> 
+            </div>
+            @else
+            <div class="col-md-2">
+            <label for="vip" class="col-md-2 control-label" style="text-align:right;">YES</label>
+              <input type="radio" name="vip" id="vip" class=" col-md-2 form-control ColorOrange" style="text-align: center; width:60%;"  value="1" checked=""> 
+            </div>
+
+             <div class="col-md-2">
+            <label for="vip" class="col-md-2 control-label" style="text-align:right;">NO</label>
+              <input type="radio" name="vip" id="vip" class=" col-md-2 form-control ColorOrange" style="text-align: center; width:60%;"  value="0" checked="checked"> 
+            </div>
+            @endif
 
             <label for="applicant_note" class="col-md-2 control-label" style="text-align:right;">備註:</label>
             <div class="col-md-4">

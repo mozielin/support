@@ -123,7 +123,9 @@ class ApplicantController extends Controller
             $data->company_applicant_phone = $request->company_applicant_phone;
             $data->company_applicant_mobile = $request->company_applicant_mobile;
             $data->applicant_note = $request->applicant_note;
-            $data->vip = $request->vip;
+            if ($request->has('vip')) {
+                $data->vip = $request->vip;
+              } 
             
             $data->save();
 
@@ -151,7 +153,12 @@ class ApplicantController extends Controller
         $data->company_applicant_phone = $request->company_applicant_phone;
         $data->company_applicant_mobile = $request->company_applicant_mobile;
         $data->applicant_note = $request->applicant_note;
-        $data->vip = $request->vip;
+        if ($request->has('vip')){
+                $data->vip = $request->vip;
+        }
+        else{
+           $data->vip = '0'; 
+        }
         
         $data -> save();
 

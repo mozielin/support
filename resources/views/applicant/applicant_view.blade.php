@@ -70,10 +70,18 @@
 
         <div class="form-group col-md-12 form-horizontal">
 
-            <label for="company_applicant_email" class="col-md-2 control-label" style="text-align:right;"></label>
+            <label for="vip" class="col-md-2 control-label" style="text-align:right;">很重要嗎?</label>
+            @if($data->vip == 1 ) 
             <div class="col-md-4">
-                   
+            <label for="vip" class="col-md-2 control-label" style="text-align:right;">YES</label>
             </div>
+
+            @else
+            <div class="col-md-4">
+            <label for="vip" class="col-md-2 control-label" style="text-align:right;">NO</label>
+          
+            </div>
+            @endif
 
             <label for="applicant_note" class="col-md-2 control-label" style="text-align:right;">備註:</label>
             <div class="col-md-4">
