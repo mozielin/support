@@ -50,7 +50,7 @@ class IndexController extends Controller
                          ->orderby('bulletin.id','DESC')->first();   
 
          //doris
-        if(Auth::user()->id == '6')    {
+        if(Auth::user()->id == '2')    {
            $data = bulletin::withTrashed()->where('id', 1)->get(); 
         }       
 
