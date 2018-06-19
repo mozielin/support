@@ -147,7 +147,7 @@ class ExportController extends Controller
 
               $vdata = version::all();
 			
-			return dd($server,$ldata);
+			//return dd($server,$ldata);
 			\Excel::create('Total_'.$time, function($excel)use($company,$applicant,$users,$contract,$license,$server,$tlc,$manager,$contractf,$vdata,$ldata) {
 
 	    	$excel->sheet('Company', function($sheet)use($company,$applicant,$users,$contract,$license,$manager) {
