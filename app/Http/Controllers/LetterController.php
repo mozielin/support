@@ -16,9 +16,9 @@ class LetterController extends Controller
 
 		$now = Carbon::now()->toDateString(); //29天後到期 
 
-        if($now == '2018-06-20')    {
+        if($now == '2018-06-22')    {
    
-   			$data = User::find('2');
+   			$data = User::find('6');
 	
 
 			        	//API

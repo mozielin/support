@@ -52,7 +52,7 @@ class IndexController extends Controller
          //doris
         $now = Carbon::now()->toDateString(); //29天後到期                      
                        
-        if($now == '2018-06-20' && Auth::id() == '2')    {
+        if($now == '2018-06-22' && Auth::id() == '6')    {
             $data = bulletin::withTrashed()->find('1');          
         }       
 
