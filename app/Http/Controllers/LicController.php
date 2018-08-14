@@ -49,7 +49,7 @@ class LicController extends Controller
         $update = license::join('users','license.update_id','=','users.id')->select('license.update_id','users.name')->find($id);
         $ldata = license::find($id)->functions;
         //return dd($ldata);
-        $tlcdata = seadmin::all()->where('company_name','=',$data->company_name)->first();
+        $tlcdata = seadmin::where('lic_id','=',$id)->first();
         $function = functions::all();
         //return dd($tlcdata,$ldata,$function);
 
@@ -391,7 +391,9 @@ class LicController extends Controller
     public function delete($id){
 
             $data = license::find($id);
+			$macdata = license_mac::where('license_id','=',$id)->first();
             $backid = $data->company_id;
+			$macdata -> delete();
             $data -> delete(); 
     
             
@@ -865,17 +867,19 @@ return view('license.license_create_by');
         //TLC功能儲存(新寫法)
         if($request->company_tlc_start != null){  
             $data = seadmin::firstOrCreate(
-                ['company_name' => $request->tlc_company_name],
-                ['company_tlc_start' => $request->company_tlc_start,
+                ['lic_id' => $license->id],
+                ['company_name' => $request->tlc_company_name,
+				 'company_tlc_start' => $request->company_tlc_start,
                  'company_tlc_end' => $request->company_tlc_end,
-                 'text' => $request->company_id,
+				 'text' => $request->company_id,
                  'builder' => $request->builder,]
             );
             //return dd($data);
             $data -> company_name = $request->tlc_company_name;
             $data -> company_tlc_start = $request->company_tlc_start;
             $data -> company_tlc_end = $request->company_tlc_end;
-            $data -> text = $request->company_id; 
+            $data -> lic_id = $license->id;
+			$data -> text = $request->company_id;
             $data -> builder = $request->builder;
             $data -> save();
         }

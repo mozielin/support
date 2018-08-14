@@ -308,7 +308,7 @@ Route::group(['prefix'=>'seadmin','middleware' => ['permission:seadmin_view']], 
 
       Route::name('seadmin_search')->get('/seadminsearch','SeController@seadminsearch');
 
-      Route::name('seadmin_create')->get('create',['middleware' => ['permission:seadmin_create'], 'uses' => 'SeController@create']);
+      Route::name('seadmin_create')->get('create/{id}',['middleware' => ['permission:seadmin_create'], 'uses' => 'SeController@create']);
 
       Route::name('seadmin_store')->post('store',['middleware' => ['permission:seadmin_create'], 'uses' => 'SeController@store']);
 
@@ -360,7 +360,7 @@ Route::group(['prefix'=>'applicant','middleware' => ['permission:applicant_view'
 
       Route::post('update/{id}', ['middleware' => ['permission:applicant_edit'], 'uses' =>'ApplicantController@update'])->name('applicant_update');
 
-      Route::name('applicant_delete')->get('/delete/{id}', 'ApplicantController@delete');
+      Route::name('applicant_delete')->get('/delete/{id}', ['middleware' => ['permission:applicant_delete'], 'uses' =>'ApplicantController@delete']);
 
       Route::name('applicant_filedelete')->get('/filedelete/{id}','ApplicantController@filedelete');
 
@@ -537,7 +537,7 @@ Route::group(['prefix'=>'tool','middleware' => ['permission:toolbox']], function
 
 });
 
-Route::group(['prefix'=>'interview','middleware' => ['permission:interview_view']], function(){
+Route::group(['prefix'=>'interviewinterview','middleware' => ['permission:interview_view']], function(){
 
       Route::name('interview_index')->get('/', 'InterviewController@index');
 

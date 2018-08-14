@@ -50,9 +50,9 @@ class Kernel extends ConsoleKernel
         ->dailyAt('09:10');
         $schedule->call('App\Http\Controllers\ScheduleController@servercatch')
         ->twiceDaily(07,12);
-        $schedule->call('App\Http\Controllers\ScheduleController@contractalert')
+        $schedule->call('App\Http\Controllers\ScheduleController@contractcheck')
         ->dailyAt('09:20');
-        $schedule->call('App\Http\Controllers\ScheduleController@licensealert')
+        $schedule->call('App\Http\Controllers\ScheduleController@licensecheck')
         ->dailyAt('09:30');
         $schedule->call('App\Http\Controllers\ScheduleController@licenseend')
         ->dailyAt('08:30');                    

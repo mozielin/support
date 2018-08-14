@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
 
 use Auth;
 
+use App\company;
+
 use Carbon\Carbon;
 
 use App\seadmin;
@@ -153,9 +155,13 @@ class SeController extends Controller
 
 
 
-	public function create(){
+	public function create($id){
 		
-	return view('seadmin.seadmin_create');
+		$company = company::find($id);
+		
+		//return dd($id);
+		
+	return view('seadmin.seadmin_create',['company' => $company]);
 
 	}	
 
@@ -188,12 +194,16 @@ class SeController extends Controller
             //儲存USER
 			$data = new seadmin;
 			$data -> company_name = $request->company_name;
+			$data -> com_id = $request->com_id;
+			$data -> title = $request->alert_title;
+			$data -> type = $request->alert_type;
+			$data -> note = $request->alert_note;
 			$data -> company_tlc_start = $request->company_tlc_start;
 			$data -> company_tlc_end = $request->company_tlc_end;
 			$data -> builder = $request->builder;
 			$data -> save();
            
-			return redirect()->action('SeController@index');
+			return redirect()->action('CompanyController@view',$request->com_id);
         
        
     }

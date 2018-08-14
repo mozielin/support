@@ -103,18 +103,23 @@
                   }   
 
                 </script>
+			  
               <div class="col-md-2" style="text-align:center;">
+			  @permission('applicant_delete')
                 <button type="button" class="btn btn-primary" onclick="return Confirm();">
                 <i class="glyphicon glyphicon-trash"></i>
                 刪除
                 </button>
+			  @endpermission
               </div>
-
+			  
               <div class="col-md-2 col-md-offset-3" style="text-align:center;">
+			  @permission('applicant_edit')
               <button type="button" class="btn btn-primary" onclick="location.href='{{route('applicant_edit', $data->id)}}'">
                 <i class="glyphicon glyphicon-pencil"></i>
                 修改
-                </button>     
+                </button>
+			  @endpermission
               </div>
 
               <div class="col-md-2 col-md-offset-3" style="text-align:center;">

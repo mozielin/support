@@ -636,7 +636,7 @@ class ScheduleController extends Controller
         //$alerttime = Carbon::now()->modify('14 days')->toDateString();
 
         $data = seadmin::where('company_tlc_end','=',$alerttime)
-                         ->join('company_user','seadmin.text','=','company_user.company_id')
+                         ->join('company_user','seadmin.com_id','=','company_user.company_id')
                          ->join('users','company_user.user_id','=','users.id')
                          ->select('seadmin.*','users.email','users.name','company_user.*')->get();
         //return dd($data);
@@ -657,7 +657,7 @@ class ScheduleController extends Controller
         //$alerttime = Carbon::now()->modify('14 days')->toDateString();
 
         $data = seadmin::where('company_tlc_end','=',$alerttime)
-                         ->join('company_user','seadmin.text','=','company_user.company_id')
+                         ->join('company_user','seadmin.com_id','=','company_user.company_id')
                          ->join('users','company_user.user_id','=','users.id')
                          ->select('seadmin.*','users.email','users.name','company_user.*')->get();
         //return dd($data);
@@ -684,7 +684,7 @@ class ScheduleController extends Controller
 				
            		$account_list = json_encode([$seadmin->email]);
                 //API內容
-        		$content = $seadmin->company_name.'「視訊會議」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
+        		$content = $seadmin->company_name.'「'.$seadmin->title.'」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 
         		//API
                 $client = new Client();
@@ -723,7 +723,7 @@ class ScheduleController extends Controller
 				
            		$account_list = json_encode([$seadmin->email]);
                 //API內容
-        		$content = $seadmin->company_name.'「視訊會議」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
+        		$content = $seadmin->company_name.'「'.$seadmin->title.'」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
 
         		//API
                 $client = new Client();
@@ -750,24 +750,15 @@ class ScheduleController extends Controller
                 //$time = Carbon::now();  
 
                 //\View::share('time', $time);
-                //寄出信件
-                \Mail::send('email.seadmin',$content, function($message) use ($from,$cdata) {
-
-                $message->from($from['email'], $from['name']);
-
-                $message->subject($from['subject']);
-
-                //foreach ($tdata as $to) {
-                //    $message->to($to['email'], $to['name']); 
-                //}
                 
-                foreach ($cdata as $cc) {
-                    $message->cc($cc['email'],$cc['name']);
-                }
-                //->cc('jasper@teamplus.com.tw','Jasper')->cc('henry@teamplus.com.tw','Henry')
-                });
                 
             } 
+			
+				//寄出信件
+				foreach ($data as $seadmin) {
+    				//mail# code...
+    				Mail::to($seadmin->email)->send(new TLCAlert($seadmin));
+    			}
     			break;
     	}
 

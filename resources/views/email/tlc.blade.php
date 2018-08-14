@@ -6,10 +6,11 @@
     <body>
     	<h2>Hi,{{$tlc->name}}</h2>
         <font size="4" style="color:#FF6600;">{{$tlc->company_name}}</font>
-        <font size="4">視訊會議功能將於
+        <font size="4">{{$tlc->title}}</font>
         <font size="4" style="color:#0000CC;">{{$tlc->company_tlc_end}}</font>
         到期並關閉此功能，
         </font>       
+		<p>備忘事項:{{$tlc->note}}</p>
         <P>特發此提醒， 如需申請續開，敬請提早洽談續約事宜。</P>
         <P>預祝您一切順利！</P>
         <P>

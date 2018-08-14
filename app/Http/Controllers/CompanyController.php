@@ -18,6 +18,7 @@ use App\license;
 use App\manager;
 use App\company_area;
 use App\interview;
+use App\seadmin;
 use Entrust;
    
 class CompanyController extends Controller
@@ -153,6 +154,11 @@ class CompanyController extends Controller
                           ->join('users','company_user.user_id','=','users.id')
                           ->join('user_group','users.user_group','=','user_group.id')
                           ->orderBy('user_id','DESC')->get();
+						  
+				$seadminnum = seadmin::where('com_id','=',$company_id)->count();
+				$seadmin = seadmin::where('com_id','=',$company_id)
+							->orderBy('id','DESC')->get();
+						   
 
            //return dd($company); 
            return view('company.company_view')
@@ -171,7 +177,9 @@ class CompanyController extends Controller
                   ->with('manager',$manager)
                   ->with('managernum',$managernum)
                   ->with('interview',$interview)
-                  ->with('interviewnum',$interviewnum);
+                  ->with('interviewnum',$interviewnum)
+				  ->with('seadmin',$seadmin)
+                  ->with('seadminnum',$seadminnum);
 			
 		}
     else{

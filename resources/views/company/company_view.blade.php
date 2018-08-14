@@ -176,7 +176,7 @@
                   </div>
                   
                   <div class="col-md-2 col-md-offset-4" style="text-align:center;">
-                  @permission('company_delete')
+                  @permission('company_edit')
                     <button type="button" class="btn btn-primary" onclick="location.href='{{route('company_edit', $data->id)}}'">
                       <i class="glyphicon glyphicon-pencil"></i>
                         修改
@@ -726,6 +726,96 @@
         </div>
   </div><!--第7區塊結束--> </div>
   @endpermission
+  
+  <!--第8區塊-->
+  @permission('interview_view')
+  <div id="accordion8"> 
+    <h3 style="text-align:left;">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        Total:{{$seadminnum}}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+        提醒列表
+    </h3>
+
+    <div class="panel-heading" >
+      <div class="panel panel-default" >
+        <div class="panel-heading" style="text-align:center; height:40px; padding-top:2px">
+
+          <!--區塊標題-->
+          <label for="id" class="col-md-3" style="text-align:left; padding-top:10px;">Total:
+            {{$seadminnum}}</label>
+          <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px">
+            提醒列表一覽</label>
+               @permission('seadmin_create')
+              <a href="{{route('seadmin_create',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-pencil"></i> 新增 </button></a>    
+              @endpermission
+        </div>
+          <!--區塊內容-->
+          <div class="panel-body" style="height:100%">
+            <div class="container" style="width:100%;height:100%;margin-right:218px;">
+              <div class="panel panel-default">
+                <div class="panel-heading" style="height:100%;">        
+                  <div class="row" style="text-align:center;"">
+
+                    <div class="col-md-3" style="border-right:1px solid black;">  
+                        提醒類別
+                      </div>
+                    
+                    <div class="col-md-3" style="border-right:1px solid black;">  
+                        標題
+                      </div>  
+
+                    <div class="col-md-3" style="border-right:1px solid black;">  
+                        開始時間
+                      </div> 
+
+					<div class="col-md-3" style="border-right:1px solid black;">  
+                        結束時間
+                      </div> 
+                </div>                      
+              </div>    
+            </div>
+          </div>
+          <div class="container" style="width:100%;height:100%;margin-right:218px;">
+            @foreach($seadmin as $sedata)
+            <div class="panel panel-default test" style="cursor:pointer;" onclick="location.href='{{route('seadmin_edit', $sedata->id)}}'">
+              <div class="panel-heading " style="height:100%;">       
+                <div class="row" style="text-align:center;">
+
+                  <div class="col-md-3">  
+                    {{$sedata->type}}
+                  </div>
+
+                  <div class="col-md-3">  
+                    {{$sedata->title}} 
+                  </div>
+
+                  <div class="col-md-3">  
+                    {{$sedata->company_tlc_start}}  
+                  </div>
+				  
+				  <div class="col-md-3">  
+                    {{$sedata->company_tlc_end}}  
+                  </div>
+
+                </div>                      
+              </div>    
+            </div>
+            @endforeach
+          </div>
+
+          </div><!--區塊內容結束-->    
+        </div>
+  </div><!--第8區塊結束--> </div>
+  @endpermission
+  
+  
 
   </div><!--最外框結束-->
 </div>
@@ -795,7 +885,14 @@
                 active:false,
                 collapsible: true
 
-              });            
+              });    
+
+			  $( "#accordion8" ).accordion({
+
+                active:false,
+                collapsible: true
+
+              });  
             </script>
 
 

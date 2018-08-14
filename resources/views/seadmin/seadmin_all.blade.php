@@ -82,12 +82,7 @@
 					@role('devenlope')
 						<button type="button"  class="btn btn-primary" onclick="location.href='{{route('tlcalert')}}'"><i class="glyphicon glyphicon-info"></i> Scan </button>
 					@endrole
-					@role('SE')
-					<button type="button" class="btn btn-primary" style="float: right;" onclick="location.href='{{route('seadmin_create')}}'">
-					<i class="glyphicon glyphicon-plus"></i>
-                		新增
-                	</button>
-                	@endrole				    			        
+								    			        
 		    	</div>
 			</div>	    
 		</div>
