@@ -268,7 +268,7 @@ class LicController extends Controller
             $data -> company_name = $request->tlc_company_name;
             $data -> company_tlc_start = $request->company_tlc_start;
             $data -> company_tlc_end = $request->company_tlc_end;
-            $data -> text = $request->company_id;
+            $data -> com_id = $request->company_id;
             $data -> builder = $request->builder;
             $data -> save();
         }
