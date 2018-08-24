@@ -261,7 +261,6 @@ class LicController extends Controller
                 ['company_name' => $request->tlc_company_name],
                 ['company_tlc_start' => $request->company_tlc_start,
                  'company_tlc_end' => $request->company_tlc_end,
-                 'text' => $request->company_id,
                  'builder' => $request->builder,]
             );
             //return dd($data);
