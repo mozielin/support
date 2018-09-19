@@ -870,7 +870,7 @@ return view('license.license_create_by');
                 ['company_name' => $request->tlc_company_name,
 				 'company_tlc_start' => $request->company_tlc_start,
                  'company_tlc_end' => $request->company_tlc_end,
-				 'text' => $request->company_id,
+                 'com_id' => $request->company_id,
                  'builder' => $request->builder,]
             );
             //return dd($data);
@@ -878,7 +878,7 @@ return view('license.license_create_by');
             $data -> company_tlc_start = $request->company_tlc_start;
             $data -> company_tlc_end = $request->company_tlc_end;
             $data -> lic_id = $license->id;
-			$data -> text = $request->company_id;
+			$data -> com_id = $request->company_id;
             $data -> builder = $request->builder;
             $data -> save();
         }
