@@ -880,6 +880,8 @@ return view('license.license_create_by');
             $data -> lic_id = $license->id;
 			$data -> com_id = $request->company_id;
             $data -> builder = $request->builder;
+            $data -> type = '視訊會議';
+            $data -> title = $request->lic_name;
             $data -> save();
         }
 

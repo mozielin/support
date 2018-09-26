@@ -162,6 +162,8 @@
 								})
 
 							</script>
+							<!--以下程式碼導致資料傳遞錯誤再修正...
+
 							<script type="text/javascript">
 
 							$('#loadbytime').click(function(){
@@ -197,6 +199,6 @@
 				               }
 							})
 									
-							</script>
+							</script>-->
 
 @endsection

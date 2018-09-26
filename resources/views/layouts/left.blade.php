@@ -32,7 +32,11 @@
         </li>
         @endpermission
         @permission('contract_view')
-        <li><a href="/contract"><i class="glyphicon glyphicon-file" style="margin-right:10px;"></i> 合約與發票</a>
+        <li><a href="/contract"><i class="glyphicon glyphicon-file" style="margin-right:10px;"></i> 合約管理</a>
+        </li>
+        @endpermission
+        @permission('contract_view')
+        <li><a href="/receipt"><i class="glyphicon glyphicon-barcode" style="margin-right:10px;"></i> 發票管理</a>
         </li>
         @endpermission
         @permission('license_view')

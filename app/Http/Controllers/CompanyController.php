@@ -402,6 +402,7 @@ class CompanyController extends Controller
 
 			$data = company::find($id);
       $data->manager()->detach($data->com_sales_id);
+      $data->manager()->detach($request->company_sales);
       $data -> company_name = $request->company_name;
 			$data -> company_cel = $request->company_cel;
 			$data -> company_url = $request->company_url;

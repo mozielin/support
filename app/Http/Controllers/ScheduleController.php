@@ -677,14 +677,51 @@ class ScheduleController extends Controller
 
     	switch ($APIswitch->mode) {
     		case 'API':
-    			foreach ($data as $seadmin) {
-           		//return dd($seadmin);
-				$cdata = User::where('user_group','=','4')->get();
-				//$se_list = json_encode([$cdata->email]);
-				
-           		$account_list = json_encode([$seadmin->email]);
+
+                //通知SE用
+                $cdata = User::where('user_group','=','4')->get();
+                foreach ($cdata as $seadmin) {
+                //return dd($seadmin);
+                
+                //$se_list = json_encode([$cdata->email]);
+                
+                $account_list = json_encode([$seadmin->email]);
+                
                 //API內容
-        		$content = $seadmin->company_name.'「'.$seadmin->title.'」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
+                $content = $seadmin->company_name.'「'.$seadmin->type.'」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 請SE協助關閉此客戶TLC功能。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
+
+                $msg_push = $seadmin->type.'到期提醒';
+
+                //API
+                $client = new Client();
+                $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
+                    'form_params' => [
+                        'ch_sn' => '6104',
+                        'api_key' => '726522eba8654146a7f9588fa0a97dfb',
+                        'content_type' => '1',
+                        'text_content' => $content,
+                        'media_content' => 'API test',
+                        'file_show_name' => '',
+                        'msg_push' => $msg_push,
+                        'account_list' => $account_list,
+                    ]
+                ]);
+
+                $body = $res->getBody();
+                $stringbody = string($body);
+                $body = json_decode($res->getBody());
+                //return dd($body);
+                } 
+
+                //通知相關人員
+    			foreach ($data as $seadmin) {
+
+           		$account_list = json_encode([$seadmin->email]);
+
+                //API內容
+        		$content = $seadmin->company_name.'「'.$seadmin->type.'」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
+
+                $msg_push = $seadmin->type.'到期提醒';
 
         		//API
                 $client = new Client();
@@ -696,7 +733,7 @@ class ScheduleController extends Controller
                         'text_content' => $content,
                         'media_content' => 'API test',
                         'file_show_name' => '',
-                        'msg_push' => '視訊會議到期通知',
+                        'msg_push' => $msg_push,
                         'account_list' => $account_list,
                     ]
                 ]);
@@ -709,6 +746,13 @@ class ScheduleController extends Controller
     			break;
     		
     		case 'Email':
+                //通知SE用
+                $cdata = User::where('user_group','=','4')->get();
+                foreach ($cdata as $seadmin) {
+                    //mail# code...
+                    Mail::to($seadmin->email)->send(new TLCAlert($seadmin));
+                }
+
     			foreach ($data as $seadmin) {
     				//mail# code...
     				Mail::to($seadmin->email)->send(new TLCAlert($seadmin));
@@ -716,6 +760,42 @@ class ScheduleController extends Controller
     			break;
 
     		case 'Both':
+                //通知SE用
+                $cdata = User::where('user_group','=','4')->get();
+                foreach ($cdata as $seadmin) {
+                //return dd($seadmin);
+                
+                //$se_list = json_encode([$cdata->email]);
+                
+                $account_list = json_encode([$seadmin->email]);
+                
+                //API內容
+                $content = $seadmin->company_name.'「'.$seadmin->type.'」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 請SE協助關閉此客戶TLC功能。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
+
+                $msg_push = $seadmin->type.'到期提醒';
+
+                //API
+                $client = new Client();
+                $res = $client->request('POST', 'http://cloud.teamplus.com.tw/Community/API/SuperHubService.ashx?ask=sendMessage', [
+                    'form_params' => [
+                        'ch_sn' => '6104',
+                        'api_key' => '726522eba8654146a7f9588fa0a97dfb',
+                        'content_type' => '1',
+                        'text_content' => $content,
+                        'media_content' => 'API test',
+                        'file_show_name' => '',
+                        'msg_push' => $msg_push,
+                        'account_list' => $account_list,
+                    ]
+                ]);
+
+                $body = $res->getBody();
+                $stringbody = string($body);
+                $body = json_decode($res->getBody());
+                //return dd($body);
+                } 
+
+                //通知相關人員
     			foreach ($data as $seadmin) {
            		//return dd($seadmin);
 				$cdata = User::where('user_group','=','4')->get();
@@ -723,7 +803,9 @@ class ScheduleController extends Controller
 				
            		$account_list = json_encode([$seadmin->email]);
                 //API內容
-        		$content = $seadmin->company_name.'「'.$seadmin->title.'」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
+        		$content = $seadmin->company_name.'「'.$seadmin->type.'」功能將於：'.$seadmin->company_tlc_end.'到期並關閉此功能，特發此提醒， 如需申請續開，敬請提早洽談續約事宜。此為系統自動發送，請勿回覆。您若要聯絡我們，請傳送到 support@teamplus.com.tw 我們便會回覆您。';
+
+                $msg_push = $seadmin->type.'到期提醒';
 
         		//API
                 $client = new Client();
@@ -735,7 +817,7 @@ class ScheduleController extends Controller
                         'text_content' => $content,
                         'media_content' => 'API test',
                         'file_show_name' => '',
-                        'msg_push' => '視訊會議到期通知',
+                        'msg_push' => $msg_push,
                         'account_list' => $account_list,
                     ]
                 ]);
@@ -755,6 +837,13 @@ class ScheduleController extends Controller
             } 
 			
 				//寄出信件
+                //通知SE用
+                $cdata = User::where('user_group','=','4')->get();
+                foreach ($cdata as $seadmin) {
+                    //mail# code...
+                    Mail::to($seadmin->email)->send(new TLCAlert($seadmin));
+                }
+                //通知相關人員
 				foreach ($data as $seadmin) {
     				//mail# code...
     				Mail::to($seadmin->email)->send(new TLCAlert($seadmin));
