@@ -20,7 +20,7 @@ class server extends Model
 
     protected static $logOnlyDirty = true;
 
-     protected static $ignoreChangedAttributes = ['sync_at','updated_at'];
+    protected static $ignoreChangedAttributes = ['sync_at','updated_at'];
 
     protected $fillable = ['company_server_name', 'company_server_type','company_server_mac','company_server_interip','company_server_extip','company_server','company_server_builder','company_server_update','URL','company_version_num','com_builder_id','company_business_code','server_name','sync_at'];
 

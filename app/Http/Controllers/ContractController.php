@@ -16,6 +16,7 @@ use App\contract_file;
 use Input;
 use App\plan;
 use App\status;
+use App\Receipt;
 use App\manager;
 
 use DB;
@@ -51,6 +52,10 @@ class ContractController extends Controller
 
         $filenum = contract_file::where('contract_id','=',$id)->count();
 
+        $receipt = receipt::where('contract_id','=',$id)->orderBy('id','desc')->get();
+
+        $receiptnum = receipt::where('contract_id','=',$id)->count();
+
         //return dd($update);
 
         if($update==null){
@@ -64,7 +69,9 @@ class ContractController extends Controller
                 ->with('data',$data)
                 ->with('updateby',$updateby)
                 ->with('contract_file',$contract_file)
-                ->with('filenum',$filenum);
+                ->with('filenum',$filenum)
+                ->with('receipt',$receipt)
+                ->with('receiptnum',$receiptnum);
     }
 
     public function edit($id){

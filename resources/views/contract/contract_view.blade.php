@@ -191,7 +191,7 @@
           <div class="container" style="width:100%;height:100%;margin-right:218px;">
               <div class="panel panel-default">
                 <div class="panel-heading" style="height:100%;">        
-                  <div class="row" style="text-align:center;"">
+                  <div class="row" style="text-align:center;">
 
                     <div class="col-md-2" style="border-right:1px solid black;">  
                         ID
@@ -248,8 +248,89 @@
 
         </div><!--區塊內容結束-->
         </div>
-      </div><!--第二區塊結束-->
-    </div>
+      </div>
+    </div><!--第二區塊結束-->
+
+          <!--第三區塊-->
+    <div id="accordion3">
+    <h3 style="text-align:left;">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        Total:{{$receiptnum}}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        發票列表
+    </h3>
+    <div class="panel-heading" >
+      <div class="panel panel-default" >
+        <div class="panel-heading" style="text-align:center; height:40px;padding-top:2px;">
+          <!--區塊標題-->
+          <label for="id" class="col-md-3" style="text-align:left;padding-top:10px;"></label>
+          <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px; ">
+          發票列表</label>
+              @permission('contract_create')
+              <a href="{{route('receipt_create',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-pencil"></i> 新增 </button></a>    
+              @endpermission
+              
+        </div>
+        <!--區塊內容-->
+        <div class="panel-body" style="height:100%">
+          <div class="container" style="width:100%;height:100%;margin-right:218px;">
+              <div class="panel panel-default">
+                <div class="panel-heading" style="height:100%;">        
+                  <div class="row" style="text-align:center;">
+
+                    <div class="col-md-4" style="border-right:1px solid black;">  
+                        發票號碼
+                    </div>
+                    
+                    <div class="col-md-4" style="border-right:1px solid black;">  
+                        發票金額
+                    </div>  
+
+                    <div class="col-md-4" style="border-right:1px solid black;">  
+                        發票日期
+                    </div>
+                    
+                </div>                      
+              </div>    
+            </div>
+          </div>
+          <div class="container col-md-12" style="width:100%;height:100%;margin-right:218px;">
+            @foreach($receipt as $data)
+            <div class="panel panel-default test" style="cursor:pointer;" onclick="location.href='{{route('receipt_view', $data->id)}}'" >
+            
+              <div class="panel-heading " style="height:100%;">       
+                <div class="row" style="text-align:center;">
+
+                  <div class="col-md-4" style="border-right:1px solid black;" >  
+                    {{$data->rcpnum}}
+                  </div>
+
+                  <div class="col-md-4" style="border-right:1px solid black;">  
+                    {{$data->price}} 
+                  </div>
+
+                  <div class="col-md-4" style="border-right:1px solid black;">  
+                    {{$data->rcpdate}}  
+                  </div>   
+
+                  </div>                      
+              </div>
+                 
+            </div>
+    
+            @endforeach
+          </div>
+
+        </div><!--區塊內容結束-->
+        </div>
+      </div>
+    </div><!--第三區塊結束-->
 
             <script>
 
@@ -272,6 +353,7 @@
 
               $( "#accordion2" ).accordion({
 
+                active:false,
                 collapsible: true
 
               });
