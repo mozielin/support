@@ -16,6 +16,7 @@ class User extends Authenticatable
     use EntrustUserTrait; 
     use LogsActivity;
   
+    protected static $logOnlyDirty = true;
 
     protected $table = 'users';
 

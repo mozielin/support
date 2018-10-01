@@ -109,11 +109,11 @@ class ActivityController extends Controller
                                  $customer->log_name.
                                 '</div>'.
                             
-                            '<div class="col-md-3" style="border-right:1px solid black;">'. 
+                            '<div class="col-md-2">'. 
                                 $customer->subject_id.
                                 '</div>'.   
 
-                            '<div class="col-md-2">'.   
+                            '<div class="col-md-3" style="border-left:1px solid black;">'.   
                                     $customer->description.
                                 '</div>'.   
 
@@ -154,6 +154,9 @@ class ActivityController extends Controller
             $customers = Activity::join('users','activity_log.causer_id','=','users.id')
                                 ->select('activity_log.*','users.name')
                                 ->where('subject_id','=',$request->activitysearch)
+                                ->orWhere('name','LIKE','%'.$request->activitysearch.'%')
+                                ->orWhere('description','LIKE','%'.$request->activitysearch.'%')
+                                ->orWhere('log_name','LIKE','%'.$request->activitysearch.'%')
 			   			        ->orderBy('id','desc')
                                 ->take(1000)
 			   			        ->get();
@@ -181,11 +184,11 @@ class ActivityController extends Controller
                                  $customer->log_name.
                                 '</div>'.
                             
-                            '<div class="col-md-3" style="border-right:1px solid black;">'. 
+                            '<div class="col-md-2" >'. 
                                 $customer->subject_id.
                                 '</div>'.   
 
-                            '<div class="col-md-2">'.   
+                            '<div class="col-md-3" style="border-left:1px solid black;">'.   
                                     $customer->description.
                                 '</div>'.   
 

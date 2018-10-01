@@ -42,7 +42,7 @@ class Kernel extends ConsoleKernel
         
         $schedule->call('App\Http\Controllers\ScheduleController@matchtime')
         ->dailyAt('08:30');
-        $schedule->call('App\Http\Controllers\ExportController@total')
+        $schedule->call('App\Http\Controllers\ExportController@autotal')
          ->dailyAt('19:30');
         $schedule->call('App\Http\Controllers\ScheduleController@tlccheck')
         ->dailyAt('09:05');
@@ -56,8 +56,8 @@ class Kernel extends ConsoleKernel
         ->dailyAt('09:30');
         $schedule->call('App\Http\Controllers\ScheduleController@licenseend')
         ->dailyAt('08:30');                    
-        $schedule->call('App\Http\Controllers\LetterController@letter')
-        ->weekly()->fridays()->at('09:30');
+        //$schedule->call('App\Http\Controllers\LetterController@letter')
+        //->weekly()->fridays()->at('09:30');
         
         
 

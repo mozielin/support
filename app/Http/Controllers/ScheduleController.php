@@ -117,8 +117,6 @@ class ScheduleController extends Controller
 
     public function servercatch(){
 
-
-
         $time = Carbon::now()->toDateString();
 
         $server = server::where('company_server_type','=','Team+')->get();
@@ -377,6 +375,7 @@ class ScheduleController extends Controller
                 $body = json_decode($res->getBody());
                 //return dd($body);*/
              \Session::flash('check_message', 'Check Done!');
+             activity()->log('同步版號完成');
             return redirect()->action('ToolController@index');
         
     }
@@ -396,10 +395,12 @@ class ScheduleController extends Controller
                             ->where('company_contract_end','=',$time)->get();
         //return dd($contract);
         if(!$contract->isEmpty()){
+            activity()->log('合約到期檢查D90Y');
             return $this->contractalert($contract);
         }
 
         \Session::flash('checkno_message', 'No Expire!');
+        activity()->log('合約到期檢查D90N'); 
         return redirect()->action('ToolController@index');
 
           
@@ -436,9 +437,10 @@ class ScheduleController extends Controller
 			            $body = $res->getBody();
 			            $stringbody = string($body);
 			            $body = json_decode($res->getBody());
-			            //return dd($body);    
+			            //return dd($body);
+                           
 			        }
-                             
+                       activity()->log('合約到期通知By_API');       
                     break;
 
                 case 'Email':
@@ -448,6 +450,8 @@ class ScheduleController extends Controller
 			            //mail# code...   
 			            Mail::to($udata->email)->send(new ContractAlert($udata));          
 			        }
+
+                    activity()->log('合約到期通知By_Mail'); 
                     
                     break;
 
@@ -485,6 +489,8 @@ class ScheduleController extends Controller
                 		Mail::to($udata->email)->send(new ContractAlert($udata));
 			             
 			        }
+
+                    activity()->log('合約到期通知BOTH'); 
          
                     break;
 
@@ -507,9 +513,11 @@ class ScheduleController extends Controller
                             ->where('expir_at','=',$time)->get();
         //return dd($license);
         if(!$license->isEmpty()){
+            activity()->log('LIC到期檢查D30Y');
             return $this->licensealert($license);
         }
         \Session::flash('checkno_message', 'No Expire!');
+        activity()->log('LIC到期檢查D30N');
         return redirect()->action('ToolController@index');
 
     }
@@ -548,6 +556,7 @@ class ScheduleController extends Controller
                 $body = json_decode($res->getBody());
 
                }
+                    activity()->log('LIC到期通知By_API');
     			break;
 
     		case 'Email':
@@ -555,6 +564,7 @@ class ScheduleController extends Controller
     				//mail# code...
     				Mail::to($udata->email)->send(new LicenseAlert($udata));
     			}
+                    activity()->log('LIC到期通知By_Mail');
     			break;
 
     		case 'Both':
@@ -588,6 +598,7 @@ class ScheduleController extends Controller
                 Mail::to($udata->email)->send(new LicenseAlert($udata));
              
                }
+                activity()->log('LIC到期通知BOTH');
     			break;
 
     	}
@@ -611,6 +622,7 @@ class ScheduleController extends Controller
                 $udata->status_id = "17";
                 
                 $udata -> save();
+                activity()->log($udata->id.'LIC到期自動轉失效');
                }
 
         $contract = contract::join('company','company.id','=','company_contract.company_contract')
@@ -624,6 +636,7 @@ class ScheduleController extends Controller
                 $cdata->contract_status = "4";
                 
                 $cdata -> save();
+                activity()->log($cdata->id.'合約到期自動轉失效');
                }
 
     }
@@ -641,9 +654,11 @@ class ScheduleController extends Controller
                          ->select('seadmin.*','users.email','users.name','company_user.*')->get();
         //return dd($data);
         if(!$data->isEmpty()){
+            activity()->log('提醒到期檢查D30Y');
             return $this->tlcalert($data);
         }
         \Session::flash('checkno_message', 'No Expire!');
+        activity()->log('提醒到期檢查D30N');
         return redirect()->action('ToolController@index');
 
     }
@@ -665,6 +680,7 @@ class ScheduleController extends Controller
             return $this->tlcalert($data);
         }
         \Session::flash('checkno_message', 'No Expire!');
+        activity()->log('提醒到期檢查1D');
         return redirect()->action('ToolController@index');
 
     }
@@ -743,6 +759,7 @@ class ScheduleController extends Controller
                 $body = json_decode($res->getBody());
 				//return dd($body);
             	} 
+                    activity()->log('提醒到期通知By_API');
     			break;
     		
     		case 'Email':
@@ -757,6 +774,7 @@ class ScheduleController extends Controller
     				//mail# code...
     				Mail::to($seadmin->email)->send(new TLCAlert($seadmin));
     			}
+                    activity()->log('提醒到期通知By_Mail');
     			break;
 
     		case 'Both':
@@ -848,6 +866,7 @@ class ScheduleController extends Controller
     				//mail# code...
     				Mail::to($seadmin->email)->send(new TLCAlert($seadmin));
     			}
+                    activity()->log('提醒到期通知BOTH');
     			break;
     	}
 

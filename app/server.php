@@ -25,5 +25,5 @@ class server extends Model
     protected $fillable = ['company_server_name', 'company_server_type','company_server_mac','company_server_interip','company_server_extip','company_server','company_server_builder','company_server_update','URL','company_version_num','com_builder_id','company_business_code','server_name','sync_at'];
 
  
-    protected static $logAttributes = ['company_server_name', 'company_server_type','company_server_mac','company_server_interip','company_server_extip','company_server','company_server_builder','company_server_update','URL','company_version_num','com_builder_id','company_business_code','server_name','sync_at'];
+    protected static $logAttributes = ['company_server_name', 'company_server_type','company_server_mac','company_server_interip','company_server_extip','company_server','company_server_builder','company_server_update','URL','company_version_num','com_builder_id','company_business_code','server_name'];
 }

@@ -13,7 +13,7 @@ class k_value extends Model
 
     use LogsActivity;
 
-    protected static $logName = '產出發版';
+    protected static $logName = '發版K值';
 
     protected static $logOnlyDirty = true;
 

@@ -71,10 +71,10 @@
 			<div class="col-md-2" style="border-right:1px solid black;">
 				<span>異動資料</span>
 			</div>
-			<div class="col-md-3" style="border-right:1px solid black;">
+			<div class="col-md-2" style="border-right:1px solid black;">
 				<span>資料名稱</span>
 			</div>
-			<div class="col-md-2" style="border-right:1px solid black;">
+			<div class="col-md-3" style="border-right:1px solid black;">
 				<span>行為</span>
 			</div>
 			<div class="col-md-2" style="border-right:1px solid black;">
