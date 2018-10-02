@@ -8,6 +8,8 @@ use App\interview;
 
 use App\company;
 
+use App\User;
+
 class InterviewController extends Controller
 {
     public function __construct(){
@@ -21,7 +23,11 @@ class InterviewController extends Controller
 	}
 
 	public function view($id){
-           $interview = interview::join('company','interview.company_id','=','company.id')->where('interview.id','=',$id)->select('interview.*','company.company_name')->first();
+           $interview = interview::join('company','interview.company_id','=','company.id')
+                                 ->join('users','users.id','=','interview.builder')
+                                 ->where('interview.id','=',$id)
+                                 ->select('interview.*','company.company_name','users.name')
+                                 ->first();
            //return dd($interview);
 
            return view('interview.interview_views',['data' => $interview]);

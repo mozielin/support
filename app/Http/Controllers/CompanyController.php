@@ -626,6 +626,7 @@ class CompanyController extends Controller
                 ->where('company_name','LIKE','%'.$request->companysearch.'%')
                 ->orWhere('company_EIN','LIKE','%'.$request->companysearch.'%')
                 ->orWhere('company_engname','LIKE','%'.$request->companysearch.'%')
+                ->orWhere('company.id','=',$request->companysearch)
                 ->orderBy('company.id','desc')
                 ->get();
             }              

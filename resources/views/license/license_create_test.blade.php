@@ -207,7 +207,7 @@
                     @foreach($modarray as $mkey => $modata)
                       @if($modata['mod'] == $pedata->code)
                       {{$modata['mod']}}
-                        <input type="hidden" name="{{$pedata->id}}" id="{{$pedata->id}}" class=" col-md-2 form-control ColorOrange"  value="{{$pedata->id}}">
+                        <input type="hidden" name="{{$pedata->code}}" id="{{$pedata->code}}" class=" col-md-2 form-control ColorOrange"  value="{{$pedata->code}}">
                         <i class="glyphicon glyphicon-ok-sign" style="margin-right:10px;"></i>
                         @break
                       @else 
@@ -246,10 +246,10 @@
                     @foreach($modarray as $mkey => $modata)
                       @if($modata['mod'] == $pedata->code)
                         <div class="col-md-6" style="text-align:center;border-left:1px solid black;">
-                          {{$modata['0']}}
+                          <input id="start[{{$modata['mod']}}]" type="text" class="form-control" style="padding-left: 0px;" name=start[{{$modata['mod']}}]"" value="{{$modata['0']}}" readonly>
                         </div>
                         <div class="col-md-6" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
-                          {{$modata['1']}}
+                          <input id="end[{{$modata['mod']}}]" type="text" class="form-control" style="padding-left: 0px;" name="end[{{$modata['mod']}}]" value="{{$modata['1']}}" readonly>
                         </div>
                         @break
                       @else 

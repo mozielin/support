@@ -146,10 +146,10 @@
 
                   @elseif($pedata->id == $lic->id)
                         <div class="col-md-3" style="text-align:center;">
-                            <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$data->start_at}}"  readonly>
+                            <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$lic->pivot->start_at}}"  readonly>
                         </div>
                         <div class="col-md-3" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
-                            <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$data->expir_at}}"  readonly>
+                            <input id="company_tlc_start" type="text" class="form-control"  name="company_tlc_start" value="{{$lic->pivot->end_at}}"  readonly>
                         </div>
                     @break    
                   @else

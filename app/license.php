@@ -26,6 +26,11 @@ class license extends Model
 
      public function functions()
     {
-        return $this->belongsToMany('App\functions','license_function','license_id','function_id');
+        return $this->belongsToMany('App\functions','license_function','license_id','function_id')->withPivot('start_at', 'end_at');;
     }
+
+    // public function lic_fun()
+   // {
+    //    return $this->ManyToMany('App\license_fun','license_function','license_id','function_id','start_at','end_at');
+    //}
 }

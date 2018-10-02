@@ -853,9 +853,11 @@ return view('license.license_create_by');
         foreach ($function as $data)  
             {
 
-                if($request->has($data->id)){
+                if($request->has($data->code)){
+                	//return dd("code~",$data);
                     $license->functions()->detach($data->id);
-                    $license->functions()->attach($data->id);
+                    //$license->functions()->attach($data->id);
+                    $license->functions()->attach([$data->id => ['start_at'=>$request->start[$data->code], 'end_at'=>$request->end[$data->code]]]);
                 }
                 else{
                     $license->functions()->detach($data->id);

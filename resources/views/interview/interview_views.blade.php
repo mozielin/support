@@ -19,7 +19,7 @@
           </label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; "><a href="{{route('company_view',$data->company_id)}}">
                     {{$data->company_name}}</a></label>
-          <label for="nothing" class="col-md-3" style="text-align:right;">Createby_{{Auth::user()->name}}</label>
+          <label for="nothing" class="col-md-3" style="text-align:right;">Createby_{{$data->name}}</label>
         </div>
         <!--區塊內容-->
         <div class="panel-body" style="height:100%">
