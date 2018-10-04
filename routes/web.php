@@ -537,7 +537,7 @@ Route::group(['prefix'=>'tool','middleware' => ['permission:toolbox']], function
 
 });
 
-Route::group(['prefix'=>'interviewinterview','middleware' => ['permission:interview_view']], function(){
+Route::group(['prefix'=>'interview','middleware' => ['permission:interview_view']], function(){
 
       Route::name('interview_index')->get('/', 'InterviewController@index');
 
