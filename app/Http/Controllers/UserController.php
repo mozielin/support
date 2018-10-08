@@ -13,6 +13,7 @@ use App\Role;
 use App\role_user;
 use Carbon\Carbon;
 use App\group;
+use App\company;
 
 class UserController extends Controller
 {
@@ -221,6 +222,8 @@ class UserController extends Controller
 
 	
 	public function update(Request $request,$id){
+
+        //return dd($request);
 		$user = User::find($id);
         $user -> name = $request->name;
         $user -> email = $request->email;
@@ -238,12 +241,29 @@ class UserController extends Controller
         }
 
         if(Entrust::hasRole('admin') or Entrust::hasRole('devenlope')){
-
+            if ($request->user_group != '3' && $user -> user_group == '3') {
+                //return dd('123456');
+                //刪除舊有公司相關人員
+                $user->Group()->detach();
+            }
+            elseif($request->user_group == '3' && $user -> user_group != '3'){
+                //return dd('123456');
+                //先移除中介表避免重複
+                $user->Group()->detach();
+                //新增所有公司相關人員
+                $company = company::all();
+                foreach ($company as $data) {
+                    $data->manager()->attach($id);
+                }
+                
+            }
         $user -> user_group = $request->user_group;       
         //先刪除舊Role關聯
         $user -> detachRoles($user -> roles);
         //再新增role角色
         $user -> attachRole($request -> user_role);
+            
+        
         }
         
               

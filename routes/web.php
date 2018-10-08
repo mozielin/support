@@ -533,6 +533,12 @@ Route::group(['prefix'=>'tool','middleware' => ['permission:toolbox']], function
       Route::name('tool_index')->get('/', 'ToolController@index');
 
       Route::name('APIswitch')->get('/APIswitch',['middleware' => ['role:admin|devenlope'], 'uses' =>  'ToolController@APIswitch']);
+
+      Route::name('APItest')->get('/APItest',['middleware' => ['role:admin|devenlope'], 'uses' =>  'ToolController@APItest']);
+
+      Route::name('Mailtest')->get('/Mailtest',['middleware' => ['role:admin|devenlope'], 'uses' =>  'ToolController@Mailtest']);
+
+      Route::name('Bothtest')->get('/Bothtest',['middleware' => ['role:admin|devenlope'], 'uses' =>  'ToolController@Bothtest']);
   
 
 });

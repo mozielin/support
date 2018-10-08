@@ -39,4 +39,8 @@ class User extends Authenticatable
     ];
 
 
+    public function Group()
+    {
+        return $this->belongsToMany('App\company','company_user','user_id','company_id');
+    }
 }

@@ -56,7 +56,7 @@
                   </div>
                   @role('admin','devenlope')
                   <div class="col-md-3" style="text-align: center;">
-                    <button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('APIswitch')}}'"><i class="glyphicon glyphicon-refresh"></i> {{$data->mode}} </button>
+                    <button type="button"  class="btn btn-primary"  onclick="location.href='{{route('version_index')}}'"><i class="glyphicon glyphicon-list-alt"></i> 版號管理 </button>
                   </div> 
                   <div class="col-md-3" style="text-align: center;">
                     <a href="{{route('function_all')}}"><button type="submit" class="btn btn-primary" ><i class="glyphicon glyphicon-plus"></i> Fun </button></a>
@@ -72,24 +72,27 @@
 
                   <div class="col-md-3" style="text-align: center;">
                   @role('admin','devenlope')
-                    <button type="button"  class="btn btn-primary"  onclick="location.href='{{route('version_index')}}'"><i class="glyphicon glyphicon-list-alt"></i> 版號管理 </button>
+                  <button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('APIswitch')}}'"><i class="glyphicon glyphicon-refresh"></i> {{$data->mode}} </button>
                   @endrole
                   </div>
+                  
+                  <div class="col-md-3" style="text-align: center;">
                   @role('admin','devenlope')
-                  <div class="col-md-3" style="text-align: center;">
-                   
-                  </div> 
-                  <div class="col-md-3" style="text-align: center;">
-                    
-                  </div> 
-                  <div class="col-md-3" style="text-align: center;">
-                    
-                  </div>   
+                    <button type="button"  class="btn btn-primary"  onclick="location.href='{{route('version_index')}}'"><i class="glyphicon glyphicon-flash"></i> API測試 </button>
                   @endrole
+                  </div> 
+                  <div class="col-md-3" style="text-align: center;">
+                  @role('admin','devenlope')
+                    <button type="button"  class="btn btn-primary"  onclick="location.href='{{route('version_index')}}'"><i class="glyphicon glyphicon-envelope"></i> Mail測試 </button>
+                  @endrole  
+                  </div> 
+                  <div class="col-md-3" style="text-align: center;">
+                  @role('admin','devenlope')
+                    <button type="button"  class="btn btn-primary"  onclick="location.href='{{route('version_index')}}'"><i class="glyphicon glyphicon-bold"></i> Both測試 </button>
+                  @endrole  
+                  </div>   
 
             </div>
-
-            
             
 			  </div>
 			</div>

@@ -23,6 +23,7 @@ use App\k_value;
 use App\version;
 use App\Receipt;
 use Auth;
+use Response;
 
 
 class ExportController extends Controller
@@ -232,21 +233,23 @@ class ExportController extends Controller
 			activity()->log('每日總表備份');
 
 			//寄給客服&管理群組
-			$user = User::where('user_group','=','3')
-			            ->orWhere('user_group','=','1')->get();
+			//$user = User::where('user_group','=','3')
+			//            ->orWhere('user_group','=','1')->get();
+      //寄給DORIS
+      $user = User::where('id','=','33')->get();
 			//寄給按下按鈕的人
 			//$login = Auth::user();
 
             //return dd($login->email,$login->name);
-            foreach ($login as $udata) {
+            //foreach ($user as $udata) {
 
                 $from = ['email'=> 'support@teamplus.com.tw',
                 'name'=>'Team+ Support',
                 'subject'=> '每日總表備份'];
-                $to = ['email'=> $login->email,
-                'name'=> $login->name];
+                $to = ['email'=> $user->email,
+                'name'=> $user->name];
                 //信件的內容(即表單填寫的資料)
-                $content = ['FYI'];
+                $content = ['Best Regard by_Ryan'];
                 //$time = Carbon::now();  
 
                 //\View::share('time', $time);
@@ -259,7 +262,7 @@ class ExportController extends Controller
                     $message->attach($path);
                 }); 
 
-            }
+            //}
 
             \Storage::delete('/public/export/Total_'.$time.'.xls');
 
@@ -434,8 +437,14 @@ class ExportController extends Controller
 	    	$excel->store('xls',storage_path('/app/public/export'));
 
 	    });
-			activity()->log('總表匯出');
 
+
+      $path = storage_path('app/public/export/Total_'.$time.'.xls');
+
+			activity()->log('總表匯出');
+      //直接下載
+      return Response::download($path);
+      /*
 			//寄給客服&管理群組
 			$user = User::where('user_group','=','3')
 			            ->orWhere('user_group','=','1')->get();
@@ -468,7 +477,7 @@ class ExportController extends Controller
 
             \Storage::delete('/public/export/Total_'.$time.'.xls');
 
-            return redirect()->route('export_all');
+            return redirect()->route('export_all');*/
 	}
 
 	public function download_total(){

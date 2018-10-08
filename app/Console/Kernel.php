@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
         //->dailyAt('08:30');
         
         $schedule->call('App\Http\Controllers\ScheduleController@matchtime')
-        ->dailyAt('08:30');
+        ->dailyAt('23:30');
         $schedule->call('App\Http\Controllers\ExportController@autotal')
          ->dailyAt('19:30');
         $schedule->call('App\Http\Controllers\ScheduleController@tlccheck')

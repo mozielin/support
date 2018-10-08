@@ -39,7 +39,7 @@ class company extends Model
 
     public function manager()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User','company_user','company_id','user_id');
     }
 
     public function applicant()
