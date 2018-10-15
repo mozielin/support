@@ -526,6 +526,7 @@ class CompanyController extends Controller
                 ->join('status','company.company_status','=','status.id')
                 ->select('company.*','plan.plan_name','users.name','status.status_name')
                 ->orderBy('company.id','desc')
+                ->limit(500)
                 ->get();
                 //return dd($customers);
             }
@@ -539,6 +540,7 @@ class CompanyController extends Controller
                    // ->where('comapny_user','comapny_user.user_id','=',$auth)
                     ->select('company.*','plan.plan_name','users.name','status.status_name')
                     ->orderBy('company.id','desc')
+                    ->limit(500)
                     ->get();
 
             }

@@ -54,5 +54,13 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'bulletin_edit', 'display_name' => 'Bulletin_Edit','description' => '允許修改Bulletin']);
         Permission::create(['name' => 'bulletin_delete', 'display_name' => 'Bulletin_Delete','description' => '允許刪除Bulletin']);
 
+        Permission::create(['name' => 'interview_view', 'display_name' => 'Interview_View','description' => '允許檢視Interview']);
+        Permission::create(['name' => 'interview_create', 'display_name' => 'Interview_Create','description' => '允許新增Interview']);
+        Permission::create(['name' => 'interview_edit', 'display_name' => 'Interview_Edit','description' => '允許修改Interview']);
+        Permission::create(['name' => 'interview_delete', 'display_name' => 'Interview_Delete','description' => '允許刪除Interview']);
+
+        Permission::create(['name' => 'toolbox', 'display_name' => 'ToolBox','description' => '允許使用ToolBox']);
+        Permission::create(['name' => 'unlimited', 'display_name' => 'Unlimited','description' => '查看不受相關人員限制']);
+
     }
 }
