@@ -97,7 +97,8 @@ class ReceiptController extends Controller
 	public function create($id){
 		
 		$contract = contract::join('company','company_contract.company_contract','=','company.id')
-								->select('company_contract.*','company.company_name')->find($id);
+		                        ->where('company_contract.id','=',$id)
+								->select('company_contract.*','company.company_name')->first();
 		
 		//return dd($contract);
 		

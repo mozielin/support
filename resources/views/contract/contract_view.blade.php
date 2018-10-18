@@ -213,25 +213,25 @@
             </div>
           </div>
           <div class="container col-md-12" style="width:100%;height:100%;margin-right:218px;">
-            @foreach($contract_file as $data)
+            @foreach($contract_file as $cfdata)
             <div class="panel panel-default test" style="cursor:pointer;" >
             
               <div class="panel-heading " style="height:100%;">       
                 <div class="row" style="text-align:center;">
 
                   <div class="col-md-2" style="border-right:1px solid black;height:36px;padding-top:8px;"onclick="window.open('/storage/contract/{{$data->origin_file}}','合約內容',config = 'height=900,width=1200,location=no');">  
-                    {{$data->id}}
+                    {{$cfdata->id}}
                   </div>
 
                   <div class="col-md-6" style="border-right:1px solid black;height:36px;padding-top:8px;"onclick="window.open('/storage/contract/{{$data->origin_file}}','合約內容',config = 'height=900,width=1200,location=no');">  
-                    {{$data->file_name}} 
+                    {{$cfdata->file_name}} 
                   </div>
 
-                  <div class="col-md-2" style="border-right:1px solid black; height:36px;padding-top:8px;"onclick="window.open('/storage/contract/{{$data->origin_file}}','合約內容',config = 'height=900,width=1200,location=no');">  
-                    {{$data->name}}  
+                  <div class="col-md-2" style="border-right:1px solid black; height:36px;padding-top:8px;"onclick="window.open('/storage/contract/{{$cfdata->origin_file}}','合約內容',config = 'height=900,width=1200,location=no');">  
+                    {{$cfdata->name}}  
                   </div>
                   <div class="col-md-2" style="text-align:center;border-right:1px solid black;z-index:100;">
-                <a href="/storage/contract/{{$data->origin_file}}" download="{{$data->file_name}}" data-toggle="tooltip" data-placement="bottom" title="點此下載附件">
+                <a href="/storage/contract/{{$cfdata->origin_file}}" download="{{$cfdata->file_name}}" data-toggle="tooltip" data-placement="bottom" title="點此下載附件">
                 <button type="button" style="width:80px;" class="btn btn-primary" onclick="return Download();">
                 <i class="glyphicon glyphicon-download-alt"></i>
                 </button>
