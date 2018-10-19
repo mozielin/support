@@ -219,11 +219,11 @@
               <div class="panel-heading " style="height:100%;">       
                 <div class="row" style="text-align:center;">
 
-                  <div class="col-md-2" style="border-right:1px solid black;height:36px;padding-top:8px;"onclick="window.open('/storage/contract/{{$data->origin_file}}','合約內容',config = 'height=900,width=1200,location=no');">  
+                  <div class="col-md-2" style="border-right:1px solid black;height:36px;padding-top:8px;"onclick="window.open('/storage/contract/{{$cfdata->origin_file}}','合約內容',config = 'height=900,width=1200,location=no');">  
                     {{$cfdata->id}}
                   </div>
 
-                  <div class="col-md-6" style="border-right:1px solid black;height:36px;padding-top:8px;"onclick="window.open('/storage/contract/{{$data->origin_file}}','合約內容',config = 'height=900,width=1200,location=no');">  
+                  <div class="col-md-6" style="border-right:1px solid black;height:36px;padding-top:8px;"onclick="window.open('/storage/contract/{{$cfdata->origin_file}}','合約內容',config = 'height=900,width=1200,location=no');">  
                     {{$cfdata->file_name}} 
                   </div>
 
