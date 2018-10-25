@@ -202,7 +202,7 @@
               <div class="row" style="text-align:center;">
                 <div class="col-md-2" style="border-left:1px solid black;">
                   @if($pedata->select == '1')
-                    <input type="radio" name="{{$pedata->id}}" id="{{$pedata->id}}" class=" col-md-2 form-control ColorOrange"  value="{{$pedata->id}}">  
+                    <input type="radio" name="{{$pedata->code}}" id="{{$pedata->code}}" class=" col-md-2 form-control ColorOrange"  value="{{$pedata->code}}">  
                   @else
                     @foreach($modarray as $mkey => $modata)
                       @if($modata['mod'] == $pedata->code)
@@ -219,26 +219,19 @@
                 <div class="col-md-4" style="border-left:1px solid black;">
                   <input type="text" name="display_name_{{$pedata->id}}" class=" col-md-4 form-control ColorOrange"  value="{{$pedata->function_name}}" readonly required>  
                 </div>
-                
-                  @if($pedata->select == '1' && $pedata->code == 'F01')
-                  <div id="TLC" class="col-md-6" style="display:none;" >
+
+                  @if($pedata->select == '1' ) 
+                  <div id="{{$pedata->code}}ALT" class="col-md-6" style="display:none;" >
                     <input id="tlc_company_name" type="hidden" class="form-control" name="tlc_company_name" value="{{$company_name}}" readonly>
                     <input type="hidden" name="builder" value="{{Auth::user()->id}}" readonly>
                     <div class="col-md-6" style="text-align:center;border-left:1px solid black;">
-                      <input id="company_tlc_start" type="text" class="form-control" style="padding-left: 0px;" name="company_tlc_start" value="{{ old('company_tlc_start') }}" maxDate="" placeholder="請選擇開始日期" >
-                        @if ($errors->has('company_tlc_start'))
-                          <span class="help-block">
-                            <strong>{{ $errors->first('company_tlc_start') }}</strong>
-                          </span>
-                        @endif
+                      <input id="start[{{$pedata->code}}]" type="text" class="form-control" style="padding-left: 0px;" name="start[{{$pedata->code}}]" value="" maxDate="" placeholder="請選擇開始日期" >
+                       
                     </div>
+
                     <div class="col-md-6" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
-                      <input id="company_tlc_end" type="text" class="form-control" style="padding-left: 0px;" name="company_tlc_end" value="{{ old('company_tlc_end') }}" placeholder="請選擇關閉日期" >
-                        @if ($errors->has('company_tlc_end'))
-                          <span class="help-block">
-                            <strong>{{ $errors->first('company_tlc_end') }}</strong>
-                          </span>
-                        @endif
+                      <input id="end[{{$pedata->code}}]" type="text" class="form-control" style="padding-left: 0px;" name="end[{{$pedata->code}}]" value="" placeholder="請選擇關閉日期" >
+                        
                     </div>
                   </div>
                   @else
@@ -246,7 +239,7 @@
                     @foreach($modarray as $mkey => $modata)
                       @if($modata['mod'] == $pedata->code)
                         <div class="col-md-6" style="text-align:center;border-left:1px solid black;">
-                          <input id="start[{{$modata['mod']}}]" type="text" class="form-control" style="padding-left: 0px;" name=start[{{$modata['mod']}}]"" value="{{$modata['0']}}" readonly>
+                          <input id="start[{{$modata['mod']}}]" type="text" class="form-control" style="padding-left: 0px;" name="start[{{$modata['mod']}}]" value="{{$modata['0']}}" readonly>
                         </div>
                         <div class="col-md-6" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
                           <input id="end[{{$modata['mod']}}]" type="text" class="form-control" style="padding-left: 0px;" name="end[{{$modata['mod']}}]" value="{{$modata['1']}}" readonly>
@@ -343,19 +336,77 @@ $('#status_name').val(ui.item.status_name);
                    $(this).attr('checkSelect', 'Y');
                }
 
-               if ($('#1').attr('checkSelect') == 'Y'){
-                  $('#TLC').fadeIn(500);
+               if ($('#F01').attr('checkSelect') == 'Y'){
+                  $('#F01ALT').fadeIn(500);
                   $('#tlc_company_name').attr('required', true);
-                  $('#company_tlc_start').attr('required', true);
-                  $('#company_tlc_end').attr('required', true);
+                  $('#start[F01]').attr('required', true);
+                  $('#end[F01]').attr('required', true);
 
                }
                else{
-                  $('#TLC').fadeOut(300);
+                  $('#F01ALT').fadeOut(300);
                   $('#tlc_company_name').attr('required', false);
-                  $('#company_tlc_start').attr('required', false);
-                  $('#company_tlc_end').attr('required', false);
+                  $('#start[F01]').attr('required', false);
+                  $('#end[F01]').attr('required', false);
                }
+
+               if ($('#F03').attr('checkSelect') == 'Y'){
+                  $('#F03ALT').fadeIn(500);
+                  $('#tlc_company_name').attr('required', true);
+                  $('#start[F03]').attr('required', true);
+                  $('#end[F03]').attr('required', true);
+
+               }
+               else{
+                  $('#F03ALT').fadeOut(300);
+                  $('#tlc_company_name').attr('required', false);
+                  $('#start[F03]').attr('required', false);
+                  $('#end[F03]').attr('required', false);
+               }
+
+               if ($('#F07').attr('checkSelect') == 'Y'){
+                  $('#F07ALT').fadeIn(500);
+                  $('#tlc_company_name').attr('required', true);
+                  $('#start[F07]').attr('required', true);
+                  $('#end[F07]').attr('required', true);
+
+               }
+               else{
+                  $('#F07ALT').fadeOut(300);
+                  $('#tlc_company_name').attr('required', false);
+                  $('#start[F07]').attr('required', false);
+                  $('#end[F07]').attr('required', false);
+               }
+
+               if ($('#F08').attr('checkSelect') == 'Y'){
+                  $('#F08ALT').fadeIn(500);
+                  $('#tlc_company_name').attr('required', true);
+                  $('#start[F08]').attr('required', true);
+                  $('#end[F08]').attr('required', true);
+
+               }
+               else{
+                  $('#F08ALT').fadeOut(300);
+                  $('#tlc_company_name').attr('required', false);
+                  $('#start[F08]').attr('required', false);
+                  $('#end[F08]').attr('required', false);
+               }
+
+               if ($('#F09').attr('checkSelect') == 'Y'){
+                  $('#F09ALT').fadeIn(500);
+                  $('#tlc_company_name').attr('required', true);
+                  $('#start[F09]').attr('required', true);
+                  $('#end[F09]').attr('required', true);
+
+               }
+               else{
+                  $('#F09ALT').fadeOut(300);
+                  $('#tlc_company_name').attr('required', false);
+                  $('#start[F09]').attr('required', false);
+                  $('#end[F09]').attr('required', false);
+               }
+
+
            });
 
        });
@@ -366,13 +417,45 @@ $('#status_name').val(ui.item.status_name);
 
             
             $('#expir_at').datepicker();
-            $('#company_tlc_end').datepicker();
+            $('#end[F01]').datepicker();
+            $('#end[F03]').datepicker();
+            $('#end[F07]').datepicker();
+            $('#end[F08]').datepicker();
+            $('#end[F09]').datepicker();
 
-            $('#company_tlc_start').datepicker({
+            $('#start[F01]').datepicker({
             //minDate: 0, //從今天後日期才可選
               //minDate: 0, //從明天日期才可選
                 onSelect: function (dat, inst) {
-                  $('#company_tlc_end').datepicker('option', 'minDate', dat);
+                  $('#end[F01]').datepicker('option', 'minDate', dat);
+                }
+            });
+            $('#start[F03]').datepicker({
+            //minDate: 0, //從今天後日期才可選
+              //minDate: 0, //從明天日期才可選
+                onSelect: function (dat, inst) {
+                  $('#end[F03]').datepicker('option', 'minDate', dat);
+                }
+            });
+            $('#start[F07]').datepicker({
+            //minDate: 0, //從今天後日期才可選
+              //minDate: 0, //從明天日期才可選
+                onSelect: function (dat, inst) {
+                  $('#end[F07]').datepicker('option', 'minDate', dat);
+                }
+            });
+            $('#start[F08]').datepicker({
+            //minDate: 0, //從今天後日期才可選
+              //minDate: 0, //從明天日期才可選
+                onSelect: function (dat, inst) {
+                  $('#end[F08]').datepicker('option', 'minDate', dat);
+                }
+            });
+            $('#start[F09]').datepicker({
+            //minDate: 0, //從今天後日期才可選
+              //minDate: 0, //從明天日期才可選
+                onSelect: function (dat, inst) {
+                  $('#end[F09]').datepicker('option', 'minDate', dat);
                 }
             });
 

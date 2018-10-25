@@ -212,6 +212,7 @@ class LicController extends Controller
     
     public function upload(Request $request)
     {
+        return dd($request); 
 
         $license = new license;
         $license->lic_name = $request->lic_name;
@@ -855,8 +856,11 @@ return view('license.license_create_by');
 
                 if($request->has($data->code)){
                 	//return dd("code~",$data);
+                    $code = 'start'.$data->code;
+                    
                     $license->functions()->detach($data->id);
                     //$license->functions()->attach($data->id);
+                   // return dd($data,$request);
                     $license->functions()->attach([$data->id => ['start_at'=>$request->start[$data->code], 'end_at'=>$request->end[$data->code]]]);
                 }
                 else{
@@ -866,19 +870,19 @@ return view('license.license_create_by');
         
             }
         //TLC功能儲存(新寫法)
-        if($request->company_tlc_start != null){  
-            $data = seadmin::firstOrCreate(
+        if($request->start['F01'] != null){  
+            $data = seadmin::firstOrCreate( 
                 ['lic_id' => $license->id],
                 ['company_name' => $request->tlc_company_name,
-				 'company_tlc_start' => $request->company_tlc_start,
-                 'company_tlc_end' => $request->company_tlc_end,
+				 'company_tlc_start' => $request->start['F01'],
+                 'company_tlc_end' => $request->end['F01'],
                  'com_id' => $request->company_id,
                  'builder' => $request->builder,]
             );
             //return dd($data);
             $data -> company_name = $request->tlc_company_name;
-            $data -> company_tlc_start = $request->company_tlc_start;
-            $data -> company_tlc_end = $request->company_tlc_end;
+            $data -> company_tlc_start = $request->start['F01'];
+            $data -> company_tlc_end = $request->end['F01'];
             $data -> lic_id = $license->id;
 			$data -> com_id = $request->company_id;
             $data -> builder = $request->builder;
