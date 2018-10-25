@@ -225,12 +225,12 @@
                     <input id="tlc_company_name" type="hidden" class="form-control" name="tlc_company_name" value="{{$company_name}}" readonly>
                     <input type="hidden" name="builder" value="{{Auth::user()->id}}" readonly>
                     <div class="col-md-6" style="text-align:center;border-left:1px solid black;">
-                      <input id="start[{{$pedata->code}}]" type="text" class="form-control" style="padding-left: 0px;" name="start[{{$pedata->code}}]" value="" maxDate="" placeholder="請選擇開始日期" >
+                      <input id="start[{{$pedata->code}}]" type="text" date="start{{$pedata->code}}" class="form-control" style="padding-left: 0px;" name="start[{{$pedata->code}}]" value="" maxDate="" placeholder="請選擇開始日期" autofocus>
                        
                     </div>
 
                     <div class="col-md-6" style="text-align:center;border-right:1px solid black;border-left:1px solid black;">
-                      <input id="end[{{$pedata->code}}]" type="text" class="form-control" style="padding-left: 0px;" name="end[{{$pedata->code}}]" value="" placeholder="請選擇關閉日期" >
+                      <input id="end[{{$pedata->code}}]" type="text" date="end{{$pedata->code}}" class="form-control" style="padding-left: 0px;" name="end[{{$pedata->code}}]" value="" placeholder="請選擇關閉日期" autofocus>
                         
                     </div>
                   </div>
@@ -325,6 +325,7 @@ $('#status_name').val(ui.item.status_name);
        $().ready(function () {
        //radio點擊2次取消
            //請幫radioButton加入checkSelect='N' 的屬性，若是已被選取的加上checkSelect='Y'
+
            $('input[type=radio]').click(function () {
                
                if ($(this).attr('checkSelect') == 'Y') {
@@ -339,71 +340,69 @@ $('#status_name').val(ui.item.status_name);
                if ($('#F01').attr('checkSelect') == 'Y'){
                   $('#F01ALT').fadeIn(500);
                   $('#tlc_company_name').attr('required', true);
-                  $('#start[F01]').attr('required', true);
-                  $('#end[F01]').attr('required', true);
-
+                  $('input[date=startF01]').attr('required', true);
+                  $('input[date=endF01]').attr('required', true);
                }
                else{
                   $('#F01ALT').fadeOut(300);
                   $('#tlc_company_name').attr('required', false);
-                  $('#start[F01]').attr('required', false);
-                  $('#end[F01]').attr('required', false);
+                  $('input[date=startF01]').attr('required', false);
+                  $('input[date=endF01]').attr('required', false);
                }
 
                if ($('#F03').attr('checkSelect') == 'Y'){
                   $('#F03ALT').fadeIn(500);
                   $('#tlc_company_name').attr('required', true);
-                  $('#start[F03]').attr('required', true);
-                  $('#end[F03]').attr('required', true);
-
+                  $('input[date=startF03]').attr('required', true);
+                  $('input[date=endF03]').attr('required', true);
                }
                else{
                   $('#F03ALT').fadeOut(300);
                   $('#tlc_company_name').attr('required', false);
-                  $('#start[F03]').attr('required', false);
-                  $('#end[F03]').attr('required', false);
+                  $('input[date=startF03]').attr('required', false);
+                  $('input[date=endF03]').attr('required', false);
                }
 
                if ($('#F07').attr('checkSelect') == 'Y'){
                   $('#F07ALT').fadeIn(500);
                   $('#tlc_company_name').attr('required', true);
-                  $('#start[F07]').attr('required', true);
-                  $('#end[F07]').attr('required', true);
+                  $('input[date=startF07]').attr('required', true);
+                  $('input[date=endF07]').attr('required', true);
 
                }
                else{
                   $('#F07ALT').fadeOut(300);
                   $('#tlc_company_name').attr('required', false);
-                  $('#start[F07]').attr('required', false);
-                  $('#end[F07]').attr('required', false);
+                  $('input[date=startF07]').attr('required', false);
+                  $('input[date=endF07]').attr('required', false);
                }
 
                if ($('#F08').attr('checkSelect') == 'Y'){
                   $('#F08ALT').fadeIn(500);
                   $('#tlc_company_name').attr('required', true);
-                  $('#start[F08]').attr('required', true);
-                  $('#end[F08]').attr('required', true);
+                  $('input[date=startF08]').attr('required', true);
+                  $('input[date=endF08]').attr('required', true);
 
                }
                else{
                   $('#F08ALT').fadeOut(300);
                   $('#tlc_company_name').attr('required', false);
-                  $('#start[F08]').attr('required', false);
-                  $('#end[F08]').attr('required', false);
+                  $('input[date=startF08]').attr('required', false);
+                  $('input[date=endF08]').attr('required', false);
                }
 
                if ($('#F09').attr('checkSelect') == 'Y'){
                   $('#F09ALT').fadeIn(500);
                   $('#tlc_company_name').attr('required', true);
-                  $('#start[F09]').attr('required', true);
-                  $('#end[F09]').attr('required', true);
+                  $('input[date=startF09]').attr('required', true);
+                  $('input[date=endtF09]').attr('required', true);
 
                }
                else{
                   $('#F09ALT').fadeOut(300);
                   $('#tlc_company_name').attr('required', false);
-                  $('#start[F09]').attr('required', false);
-                  $('#end[F09]').attr('required', false);
+                  $('input[date=startF09]').attr('required', false);
+                  $('input[date=endF09]').attr('required', false);
                }
 
 
@@ -417,45 +416,49 @@ $('#status_name').val(ui.item.status_name);
 
             
             $('#expir_at').datepicker();
-            $('#end[F01]').datepicker();
-            $('#end[F03]').datepicker();
-            $('#end[F07]').datepicker();
-            $('#end[F08]').datepicker();
-            $('#end[F09]').datepicker();
+            $('input[date=endF01]').datepicker();
+            $('input[date=endF03]').datepicker();
+            $('input[date=endF07]').datepicker();
+            $('input[date=endF08]').datepicker();
+            $('input[date=endF09]').datepicker();
 
-            $('#start[F01]').datepicker({
+            $('input[date=startF01]').datepicker({
             //minDate: 0, //從今天後日期才可選
               //minDate: 0, //從明天日期才可選
                 onSelect: function (dat, inst) {
-                  $('#end[F01]').datepicker('option', 'minDate', dat);
+                  $('input[date=endF01]').datepicker('option', 'minDate', dat);
                 }
             });
-            $('#start[F03]').datepicker({
+
+            $('input[date=startF03]').datepicker({
             //minDate: 0, //從今天後日期才可選
               //minDate: 0, //從明天日期才可選
                 onSelect: function (dat, inst) {
-                  $('#end[F03]').datepicker('option', 'minDate', dat);
+                  $('input[date=endF03]').datepicker('option', 'minDate', dat);
                 }
             });
-            $('#start[F07]').datepicker({
+
+            $('input[date=startF07]').datepicker({
             //minDate: 0, //從今天後日期才可選
               //minDate: 0, //從明天日期才可選
                 onSelect: function (dat, inst) {
-                  $('#end[F07]').datepicker('option', 'minDate', dat);
+                  $('input[date=endF07]').datepicker('option', 'minDate', dat);
                 }
             });
-            $('#start[F08]').datepicker({
+
+            $('input[date=startF08]').datepicker({
             //minDate: 0, //從今天後日期才可選
               //minDate: 0, //從明天日期才可選
                 onSelect: function (dat, inst) {
-                  $('#end[F08]').datepicker('option', 'minDate', dat);
+                  $('input[date=endF08]').datepicker('option', 'minDate', dat);
                 }
             });
-            $('#start[F09]').datepicker({
+
+            $('input[date=startF09]').datepicker({
             //minDate: 0, //從今天後日期才可選
               //minDate: 0, //從明天日期才可選
                 onSelect: function (dat, inst) {
-                  $('#end[F09]').datepicker('option', 'minDate', dat);
+                  $('input[date=endF09]').datepicker('option', 'minDate', dat);
                 }
             });
 
