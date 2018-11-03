@@ -391,13 +391,14 @@ class LicController extends Controller
     public function delete($id){
 
             $data = license::find($id);
-			$macdata = license_mac::where('license_id','=',$id)->first();
-            $backid = $data->company_id;
-			$macdata -> delete();
-            $data -> delete(); 
-    
+            $macdata = license_mac::where('license_id','=',$id)->delete();
+            $tlcdata = seadmin::where('lic_id','=',$id)->delete();
+            $backid = $data->company_id;            
+            $deletename = $data->origin_file;
+            $data ->delete();
+            //return dd($deletename);
+            Storage::delete("/public/license/$deletename");
             
-
         //return redirect()->action('LicController@index');
 
         return redirect()->route('company_view', [$backid]);

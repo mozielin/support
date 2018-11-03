@@ -12,8 +12,9 @@ class PermissionSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   
         DB::table('permissions')->delete();
+        //DB::table('permissions')->truncate();
         Permission::create(['name' => 'user_view', 'display_name' => 'User_View','description' => '允許檢視User']);
         Permission::create(['name' => 'user_create', 'display_name' => 'User_Create','description' => '允許新增User']);
         Permission::create(['name' => 'user_edit', 'display_name' => 'User_Edit','description' => '允許修改User']);
@@ -62,5 +63,9 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'toolbox', 'display_name' => 'ToolBox','description' => '允許使用ToolBox']);
         Permission::create(['name' => 'unlimited', 'display_name' => 'Unlimited','description' => '查看不受相關人員限制']);
 
+        Permission::create(['name' => 'receipt_view', 'display_name' => 'Receipt_View','description' => '允許檢視Receipt']);
+        Permission::create(['name' => 'receipt_create', 'display_name' => 'Receipt_Create','description' => '允許新增Receipt']);
+        Permission::create(['name' => 'receipt_edit', 'display_name' => 'Receipt_Edit','description' => '允許修改Receipt']);
+        Permission::create(['name' => 'receipt_delete', 'display_name' => 'Receipt_Delete','description' => '允許刪除Receipt']);
     }
 }

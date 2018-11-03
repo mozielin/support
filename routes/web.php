@@ -582,7 +582,7 @@ Route::group(['prefix'=>'version','middleware' => ['role:admin|devenlope']], fun
       Route::get('delete/{version_id}', 'VerController@delete')->name('version_delete');
 });
 
-Route::group(['prefix'=>'receipt','middleware' => ['permission:contract_view']], function(){
+Route::group(['prefix'=>'receipt','middleware' => ['permission:receipt_view']], function(){
 
       Route::name('receipt_index')->get('/','ReceiptController@index'); 
 
@@ -592,15 +592,17 @@ Route::group(['prefix'=>'receipt','middleware' => ['permission:contract_view']],
 
       Route::name('receipt_search')->get('/receiptsearch','ReceiptController@receiptsearch');
 
-      Route::name('receipt_create')->get('create/{id}',['middleware' => ['permission:contract_create'], 'uses' => 'ReceiptController@create']);
+      Route::name('receipt_create')->get('create/{id}',['middleware' => ['permission:receipt_create'], 'uses' => 'ReceiptController@create']);
 
-      Route::name('receipt_store')->post('store',['middleware' => ['permission:contract_create'], 'uses' => 'ReceiptController@store']);
+      Route::name('receipt_store')->post('store',['middleware' => ['permission:receipt_create'], 'uses' => 'ReceiptController@store']);
 
-      Route::name('receipt_edit')->get('edit/{id}',['middleware' => ['permission:contract_edit'], 'uses' => 'ReceiptController@edit']);
+      Route::name('receipt_edit')->get('edit/{id}',['middleware' => ['permission:receipt_edit'], 'uses' => 'ReceiptController@edit']);
 
-      Route::name('receipt_update')->post('update/{id}',['middleware' => ['permission:contract_edit'], 'uses' => 'ReceiptController@update']);
+      Route::name('receipt_update')->post('update/{id}',['middleware' => ['permission:receipt_edit'], 'uses' => 'ReceiptController@update']);
 
-      Route::name('receipt_delete')->get('delete/{id}',['middleware' => ['permission:contract_delete'], 'uses' => 'ReceiptController@delete']);   
+      Route::name('receipt_delete')->get('delete/{id}',['middleware' => ['permission:receipt_delete'], 'uses' => 'ReceiptController@delete']);  
+
+      Route::name('receiptsearch')->get('/receiptsearch','ReceiptController@receiptsearch'); 
       
 });
 

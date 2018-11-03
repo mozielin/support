@@ -192,7 +192,7 @@ class ReceiptController extends Controller
 		return redirect()->action('ContractController@view',$backid);
         }
 
-	public function seadminsearch(Request $request)
+	public function receiptsearch(Request $request)
 		{
 				
 
@@ -202,46 +202,45 @@ class ReceiptController extends Controller
 				$output="";
 
 				
-				$customers = seadmin::where('company_name','LIKE','%'.$request->seadminsearch.'%')
-		                 ->join('users','seadmin.builder','=','users.id')
-		                 ->select('seadmin.*','users.name')->get();		                 	
+				$customers = receipt::join('company','receipt.company_id','=','company.id')
+						 ->join('company_contract','company_contract.id','=','receipt.contract_id')
+						 ->where('company_name','LIKE','%'.$request->receiptsearch.'%')
+						 ->orWhere('rcpnum','LIKE','%'.$request->receiptsearch.'%')
+		                 ->select('receipt.*','company.company_name','company_contract.contract_title')->orderBy('id','DESC')->get();	   
 				
 				if($customers)
+			{	
+				foreach($customers as $key => $customer)
 				{
-					foreach($customers as $key => $customer)
-					{
-						$output.= 
-						  
-						'<div class= " panel panel-default test " style="cursor:pointer; width:100%;"'.'onclick="location.href=\'../seadmin/edit/'.$customer->id.'\' ">'.
-						
+					$output.=
+					'<div class= " panel panel-default test " style="cursor:pointer; width:100%;"'.'onclick="location.href=\'../receipt/view/'.$customer->id.'\' ">'.
 
+						'<div class="panel-heading " style="height:100%;">'.				
+							'<div class="row" style="text-align:center;">'.
 
-							'<div class="panel-heading " style="height:100%;">'.				
-								'<div class="row" style="text-align:center;">'.
-
-								'<div class="col-md-4" style="border-right:1px solid black; border-left:1px solid black;">'.	
-									 $customer->company_name.
-									'</div>'.
-								
-								'<div class="col-md-3" style="border-right:1px solid black;">'.	
-									$customer->company_tlc_start.
-									'</div>'.	
-
-								'<div class="col-md-3">'.	
-										$customer->company_tlc_end.
-									'</div>'.	
-
-								'<div class="col-md-2" style="border-right:1px solid black; border-left:1px solid black;">'.	
-										$customer->name.
+							'<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.	
+								 $customer->company_name.
 								'</div>'.
-										
-								'</div>'.              				
-							'</div>'.		
-						'</div>';
-					
-
 							
-					}
+							'<div class="col-md-3" style="border-right:1px solid black;">'.	
+								$customer->contract_title.
+								'</div>'.	
+
+							'<div class="col-md-3">'.	
+									$customer->rcpnum.
+								'</div>'.	
+
+							'<div class="col-md-3" style="border-right:1px solid black; border-left:1px solid black;">'.	
+									$customer->rcpdate.
+							'</div>'.
+									
+							'</div>'.              				
+						'</div>'.		
+					'</div>';
+				
+
+						
+				}
 						return Response($output);
 						
 				}else

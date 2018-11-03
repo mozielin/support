@@ -36,8 +36,8 @@
 				<!--左邊的搜尋區塊-->
 		    	<div class="left-side" style="height:57px;text-align:center;margin-top:3px;">
 					<div class="form-horizontal">
-						<div class="input-group{{ $errors->has('seadminsearch') ? ' has-error' : '' }}">
-							<input id="seadminsearch" type="text" class="form-control" name="seadminsearch" value="" placeholder="請輸入搜尋目標" autofocus style="width:240px;float:left;"/>
+						<div class="input-group{{ $errors->has('receiptsearch') ? ' has-error' : '' }}">
+							<input id="receiptsearch" type="text" class="form-control" name="receiptsearch" value="" placeholder="請輸入搜尋目標" autofocus style="width:240px;float:left;"/>
 							<div class="input-group-btn">
 			        		<button class="btn btn-primary" id="searchBTN" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 			      		</div>                     

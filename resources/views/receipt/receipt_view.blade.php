@@ -6,7 +6,7 @@
 
 <!--中間選單-->
 <div class="container" style="width:780px;height:75px;margin-right:218px;">
-    @include('layouts.user_center_block')
+    @include('layouts.center_block')
 </div>
 
 <div class="container" style="width:780px;height:100%;margin-right:218px;">
@@ -68,7 +68,7 @@
 
                         <div class="form-group">
                               <div class="col-md-2" style="text-align:center;">
-                              @permission('contract_delete')
+                              @permission('receipt_delete')
                                 <button type="button" class="btn btn-primary" onclick="return Confirm();">
                                 <i class="glyphicon glyphicon-trash"></i>
                                 刪除
@@ -88,7 +88,7 @@
                               </script>
                                 
                               <div class="col-md-2 col-md-offset-3" style="text-align:center;">
-                              @permission('contract_edit')
+                              @permission('receipt_edit')
                                 <button type="button" class="btn btn-primary" onclick="location.href='{{route('receipt_edit', $data->id)}}'">
                                 <i class="glyphicon glyphicon-pencil"></i>
                                 修改

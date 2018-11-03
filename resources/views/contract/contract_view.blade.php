@@ -252,6 +252,7 @@
     </div><!--第二區塊結束-->
 
           <!--第三區塊-->
+    @permission('receipt_view')
     <div id="accordion3">
     <h3 style="text-align:left;">
         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -272,7 +273,7 @@
           <label for="id" class="col-md-3" style="text-align:left;padding-top:10px;"></label>
           <label for="company_name" class="col-md-6 " style="text-align:center; border-bottom:2px solid; border-bottom-color:#d3e0e9; padding-top:10px; ">
           發票列表</label>
-              @permission('contract_create')
+              @permission('receipt_create')
               <a href="{{route('receipt_create',$data->id)}}"><button type="submit" class="btn btn-primary" style="float:right;" ><i class="glyphicon glyphicon-pencil"></i> 新增 </button></a>    
               @endpermission
               
@@ -331,6 +332,7 @@
         </div>
       </div>
     </div><!--第三區塊結束-->
+    @endpermission
 
             <script>
 
