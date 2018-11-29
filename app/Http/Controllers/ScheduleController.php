@@ -617,10 +617,13 @@ class ScheduleController extends Controller
                          ->join('company_user','seadmin.com_id','=','company_user.company_id')
                          ->join('users','company_user.user_id','=','users.id')
                          ->select('seadmin.*','users.email','users.name','company_user.*')->get();
-        //return dd($data);
+						 
+        $forse = seadmin::where('company_tlc_end','=',$alerttime)->get();
+		
+		//return dd($data);
         if(!$data->isEmpty()){
             activity()->log('提醒到期檢查D30Y');
-            return $this->tlcalert($data);
+            return $this->tlcalert($data,$forse);
         }
         \Session::flash('checkno_message', 'No Expire!');
         activity()->log('提醒到期檢查D14N');
@@ -640,10 +643,12 @@ class ScheduleController extends Controller
                          ->join('company_user','seadmin.com_id','=','company_user.company_id')
                          ->join('users','company_user.user_id','=','users.id')
                          ->select('seadmin.*','users.email','users.name','company_user.*')->get();
-
+		
+		$forse = seadmin::where('company_tlc_end','=',$alerttime)->get();
+		
         //return dd($data);
         if(!$data->isEmpty()){
-            return $this->tlcalert($data);
+            return $this->tlcalert($data,$forse);
         }
         \Session::flash('checkno_message', 'No Expire!');
         activity()->log('提醒到期檢查1D');
@@ -651,7 +656,7 @@ class ScheduleController extends Controller
 
     }
 
-    public function tlcalert($data){
+    public function tlcalert($data,$forse){
 
     	//return dd($data);
 
@@ -660,7 +665,7 @@ class ScheduleController extends Controller
     	switch ($APIswitch->mode) {
     		case 'API':
                
-                foreach ($data as $seadmin) {
+                foreach ($forse as $seadmin) {
                 //return dd($seadmin);
                 
                 //$se_list = json_encode([$cdata->email]);
@@ -733,7 +738,7 @@ class ScheduleController extends Controller
     		
     		case 'Email':
                 
-                foreach ($data as $seadmin) {
+                foreach ($forse as $seadmin) {
                     //通知SE用
                     $cdata = User::where('user_group','=','4')->get();
                     foreach ($cdata as $user) {
@@ -751,7 +756,7 @@ class ScheduleController extends Controller
     			break;
 
     		case 'Both':
-                foreach ($data as $seadmin) {
+                foreach ($forse as $seadmin) {
                 //return dd($seadmin);
                 
                 //$se_list = json_encode([$cdata->email]);
@@ -831,7 +836,7 @@ class ScheduleController extends Controller
             } 
 			
 				//寄出信件
-                foreach ($data as $seadmin) {
+                foreach ($forse as $seadmin) {
                     //通知SE用
                     $cdata = User::where('user_group','=','4')->get();
                     foreach ($cdata as $user) {
