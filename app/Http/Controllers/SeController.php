@@ -16,7 +16,9 @@ use App\company;
 
 use Carbon\Carbon;
 
-use App\seadmin;
+
+use App\seadmin,
+		App\group;
 
 use View;
 
@@ -158,10 +160,12 @@ class SeController extends Controller
 	public function create($id){
 		
 		$company = company::find($id);
+
+		$groups = group::all();
 		
 		//return dd($id);
 		
-	return view('seadmin.seadmin_create',['company' => $company]);
+	return view('seadmin.seadmin_create',['company' => $company,'groups' => $groups]);
 
 	}	
 
@@ -201,6 +205,9 @@ class SeController extends Controller
 			$data -> company_tlc_start = $request->company_tlc_start;
 			$data -> company_tlc_end = $request->company_tlc_end;
 			$data -> builder = $request->builder;
+			if ($request->groups) {
+				$data -> groups = implode(',',$request->groups);
+			}
 			$data -> save();
            
 			return redirect()->action('CompanyController@view',$request->com_id);

@@ -55,6 +55,19 @@
 							  </div>
 
 						</div>
+
+                        <div class="form-group col-md-12 form-horizontal" >
+                            <label class="col-md-12 control-label" style="text-align:left;">選擇通知群組:</label>
+                            <div class="col-md-10 col-md-offset-2">
+                                @foreach($groups as $group)
+                                    <label for="groups{{$group->id}}" class="col-md-2 control-label" style="text-align:right;">{{$group->user_group_name}}</label>
+                                    <div class="col-md-1">
+                                        <input type="checkbox" id="groups{{$group->id}}" name="groups[]" class="form-control" value="{{$group->id}}">
+                                    </div>
+                                    @endforeach    
+                            </div>
+                            
+                        </div>
 						  
 						<div class="form-group col-md-12 form-horizontal" >
         

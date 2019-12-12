@@ -223,7 +223,7 @@ class LicController extends Controller
         $license->builder_id = $request->builder_id;
                
         $license->save();
-
+	
         if ($request->hasFile('lic')){
             //取得附件檔名
             $filename = $request->lic->getClientOriginalName();
@@ -269,6 +269,7 @@ class LicController extends Controller
             $data -> company_tlc_start = $request->company_tlc_start;
             $data -> company_tlc_end = $request->company_tlc_end;
             $data -> com_id = $request->company_id;
+			$data -> lic_id = $id;
             $data -> builder = $request->builder;
             $data -> save();
         }
@@ -353,6 +354,7 @@ class LicController extends Controller
                         $data -> company_tlc_start = $request->company_tlc_start;
                         $data -> company_tlc_end = $request->company_tlc_end;
                         $data -> builder = $request->builder;
+						$data -> lic_id = $id;  
                         $data -> save();
                         }
                         else{
@@ -361,6 +363,7 @@ class LicController extends Controller
                         $data -> company_tlc_start = $request->company_tlc_start;
                         $data -> company_tlc_end = $request->company_tlc_end;
                         $data -> builder = $request->builder;
+						$data -> lic_id = $id;
                         $data -> save();
                         }
                         

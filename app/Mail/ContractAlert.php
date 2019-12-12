@@ -32,6 +32,7 @@ class ContractAlert extends Mailable
     {
         //return dd($this);
         return $this->view('email.contract')
+		->subject($this->contract->contract_title.'-到期通知')
         ->with([
             'contract' => $this->contract,
             ]);

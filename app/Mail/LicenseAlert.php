@@ -35,6 +35,7 @@ class LicenseAlert extends Mailable
     {   
         //return dd($this);
         return $this->view('email.license')
+		->subject($this->license->lic_name.'-到期通知')
         ->with([
             'license' => $this->license,
             ]);

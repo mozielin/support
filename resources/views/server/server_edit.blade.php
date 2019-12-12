@@ -142,7 +142,8 @@
             <div class="col-md-10">
 
               <textarea name="note" style="height:100px;" id="note" class=" col-md-4 form-control noresize " value="" >
-              </textarea>
+              {{$data->note}}
+			  </textarea>
               <script type="text/javascript"> 
                 autosize($('#note'));
               </script>

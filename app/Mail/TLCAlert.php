@@ -32,6 +32,7 @@ class TLCAlert extends Mailable
     {   
     //return dd($this);
         return $this->view('email.tlc')
+		->subject($this->seadmin->title.'-到期通知')
         ->with([
             'tlc' => $this->seadmin,
             ]);

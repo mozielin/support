@@ -55,7 +55,9 @@ class Kernel extends ConsoleKernel
         $schedule->call('App\Http\Controllers\ScheduleController@licensecheck')
         ->dailyAt('09:30');
         $schedule->call('App\Http\Controllers\ScheduleController@licenseend')
-        ->dailyAt('08:30');                    
+        ->dailyAt('08:30');         
+		$schedule->call('App\Http\Controllers\ScheduleController@customecheck')
+        ->dailyAt('09:30');
         //$schedule->call('App\Http\Controllers\LetterController@letter')
         //->weekly()->fridays()->at('09:30');
         

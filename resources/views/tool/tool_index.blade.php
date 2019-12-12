@@ -35,16 +35,19 @@
 
         		<div class="form-group col-md-12 form-horizontal"> 
                 @role('admin','devenlope')
-                	<div class="col-md-3" style="text-align: center;">
+                	<div class="col-md-2" style="text-align: center;">
                     <button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('contractcheck')}}'"><i class="glyphicon glyphicon-file"></i> 合約-Scan </button>
                 	</div>
-                  <div class="col-md-3" style="text-align: center;">
+                  <div class="col-md-2" style="text-align: center;">
                     <button type="button" style="" class="btn btn-primary" onclick="location.href='{{route('licensecheck')}}'"><i class="glyphicon glyphicon-lock"></i> Lic-Scan </button>
                   </div> 
-                  <div class="col-md-3" style="text-align: center;">
+                  <div class="col-md-2" style="text-align: center;">
                     <button type="button"  class="btn btn-primary" onclick="location.href='{{route('tlccheck')}}'"><i class="glyphicon glyphicon-facetime-video"></i> TLC-Scan </button>
                   </div> 
-                  <div class="col-md-3" style="text-align: center;">
+				  <div class="col-md-2" style="text-align: center;">
+                    <button type="button"  class="btn btn-primary" onclick="location.href='{{route('customecheck')}}'"><i class="glyphicon glyphicon-facetime-video"></i> CLC-Scan </button>
+                  </div>
+                  <div class="col-md-2" style="text-align: center;">
                     <button type="button" style="float:left;" class="btn btn-primary" onclick="location.href='{{route('servercatch')}}'"><i class="glyphicon glyphicon-th"></i> Ver-Scan </button>
                   </div>   
                 @endrole

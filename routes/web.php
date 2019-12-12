@@ -324,9 +324,11 @@ Route::group(['prefix'=>'seadmin','middleware' => ['permission:seadmin_view']], 
       Route::name('tlcalert')->post('/tlcalert',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@tlcalert']);
 
       Route::name('tlccheck')->get('/tlccheck',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@tlccheck']);
-
+	
       Route::name('tlcchecknow')->get('/tlcchecknow',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@tlcchecknow']);
-
+	  
+	  Route::name('customecheck')->get('/customecheck',['middleware' => ['role:admin|devenlope'], 'uses' =>'ScheduleController@customecheck']);
+			
       Route::name('seadmin_lic')->post('/licscan','SeController@licscan'); 
 
       Route::name('seadmin_uploadlic')->get('/uploadlic','SeController@uploadlic');
